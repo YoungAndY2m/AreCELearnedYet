@@ -18,3 +18,7 @@ lecarb.egg-info
 *.tar
 poetry.lock
 quicksel/
+
+# uv migration additions
+data.tar.gz
+output/
