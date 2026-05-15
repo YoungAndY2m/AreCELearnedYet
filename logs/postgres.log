@@ -1,0 +1,38 @@
+uv run python -m lecarb test -s123 -dcensus13 -voriginal -wbase -epostgres --params "{'version': 'original', 'stat_target': 10000}" --overwrite
+Uninstalled 1 package in 0.86ms
+Installed 1 package in 3ms
+/home/student.unimelb.edu.au/yli16636/Desktop/AreCELearnedYet/.venv/lib/python3.8/site-packages/dask/dataframe/utils.py:15: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+  import pandas.util.testing as tm
+[2026-05-15 14:43:13,110 INFO] lecarb.dataset.dataset: table exists, load...
+[2026-05-15 14:43:13,113 INFO] lecarb.dataset.dataset: load finished: Table census13_original (48842 rows, 4.84MB, columns:
+Column(age, type=int64, vocab size=74, min=17, max=90, has NaN=False)
+Column(workclass, type=category, vocab size=9, min=?, max=Without-pay, has NaN=False)
+Column(education, type=category, vocab size=16, min=10th, max=Some-college, has NaN=False)
+Column(education_num, type=int64, vocab size=16, min=1, max=16, has NaN=False)
+Column(marital_status, type=category, vocab size=7, min=Divorced, max=Widowed, has NaN=False)
+Column(occupation, type=category, vocab size=15, min=?, max=Transport-moving, has NaN=False)
+Column(relationship, type=category, vocab size=6, min=Husband, max=Wife, has NaN=False)
+Column(race, type=category, vocab size=5, min=Amer-Indian-Eskimo, max=White, has NaN=False)
+Column(sex, type=category, vocab size=2, min=Female, max=Male, has NaN=False)
+Column(capital_gain, type=int64, vocab size=123, min=0, max=99999, has NaN=False)
+Column(capital_loss, type=int64, vocab size=99, min=0, max=4356, has NaN=False)
+Column(hours_per_week, type=int64, vocab size=96, min=1, max=99, has NaN=False)
+Column(native_country, type=category, vocab size=42, min=?, max=Yugoslavia, has NaN=False))
+[2026-05-15 14:43:13,113 INFO] lecarb.estimator.postgres: construct postgres estimator...
+[2026-05-15 14:43:13,291 INFO] lecarb.estimator.postgres: construct statistics finished, using 0.0028 minutes, All statistics consumes 0.01 MBs
+[2026-05-15 14:43:13,291 INFO] lecarb.estimator.postgres: built postgres estimator: postgres-version=original;stat=10000;seed=123
+[2026-05-15 14:43:13,291 INFO] lecarb.estimator.utils: torch threads: 16
+[2026-05-15 14:43:13,291 INFO] lecarb.estimator.utils: Start loading queryset:base and labels for version original of dataset census13...
+[2026-05-15 14:43:14,607 INFO] lecarb.estimator.utils: Start test estimator on test queries...
+[2026-05-15 14:43:14,805 INFO] lecarb.estimator.utils: 1000 queries finished
+[2026-05-15 14:43:15,018 INFO] lecarb.estimator.utils: 2000 queries finished
+[2026-05-15 14:43:15,214 INFO] lecarb.estimator.utils: 3000 queries finished
+[2026-05-15 14:43:15,403 INFO] lecarb.estimator.utils: 4000 queries finished
+[2026-05-15 14:43:15,600 INFO] lecarb.estimator.utils: 5000 queries finished
+[2026-05-15 14:43:15,809 INFO] lecarb.estimator.utils: 6000 queries finished
+[2026-05-15 14:43:16,008 INFO] lecarb.estimator.utils: 7000 queries finished
+[2026-05-15 14:43:16,203 INFO] lecarb.estimator.utils: 8000 queries finished
+[2026-05-15 14:43:16,398 INFO] lecarb.estimator.utils: 9000 queries finished
+[2026-05-15 14:43:16,589 INFO] lecarb.estimator.utils: 10000 queries finished
+[2026-05-15 14:43:16,589 INFO] lecarb.estimator.utils: Test finished, 0.14126486778259278 ms/query in average
+[2026-05-15 14:43:16,593 INFO] lecarb.estimator.utils: {'max': 1635.0, '99th': 58.0, '95th': 18.551515151515066, '90th': 10.220652173913056, 'median': 1.4025182134938232, 'mean': 5.246509912636797, 'gmean': 2.206212409035411}

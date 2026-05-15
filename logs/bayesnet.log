@@ -1,0 +1,402 @@
+uv run python -m lecarb test -s123 -dcensus13 -voriginal -wbase -ebayesnet --params "{'version': 'original', 'samples': 200, 'discretize': 100, 'parallelism': 50}"
+Uninstalled 1 package in 0.87ms
+Installed 1 package in 4ms
+/home/student.unimelb.edu.au/yli16636/Desktop/AreCELearnedYet/.venv/lib/python3.8/site-packages/dask/dataframe/utils.py:15: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+  import pandas.util.testing as tm
+[2026-05-15 14:58:59,741 INFO] lecarb.dataset.dataset: table exists, load...
+[2026-05-15 14:58:59,744 INFO] lecarb.dataset.dataset: load finished: Table census13_original (48842 rows, 4.84MB, columns:
+Column(age, type=int64, vocab size=74, min=17, max=90, has NaN=False)
+Column(workclass, type=category, vocab size=9, min=?, max=Without-pay, has NaN=False)
+Column(education, type=category, vocab size=16, min=10th, max=Some-college, has NaN=False)
+Column(education_num, type=int64, vocab size=16, min=1, max=16, has NaN=False)
+Column(marital_status, type=category, vocab size=7, min=Divorced, max=Widowed, has NaN=False)
+Column(occupation, type=category, vocab size=15, min=?, max=Transport-moving, has NaN=False)
+Column(relationship, type=category, vocab size=6, min=Husband, max=Wife, has NaN=False)
+Column(race, type=category, vocab size=5, min=Amer-Indian-Eskimo, max=White, has NaN=False)
+Column(sex, type=category, vocab size=2, min=Female, max=Male, has NaN=False)
+Column(capital_gain, type=int64, vocab size=123, min=0, max=99999, has NaN=False)
+Column(capital_loss, type=int64, vocab size=99, min=0, max=4356, has NaN=False)
+Column(hours_per_week, type=int64, vocab size=96, min=1, max=99, has NaN=False)
+Column(native_country, type=category, vocab size=42, min=?, max=Yugoslavia, has NaN=False))
+2026-05-15 14:58:59,746	INFO resource_spec.py:223 -- Starting Ray with 34.67 GiB memory available for workers and up to 17.34 GiB for objects. You can adjust these settings with ray.init(memory=<bytes>, object_store_memory=<bytes>).
+2026-05-15 14:59:00,178	INFO services.py:1191 -- View the Ray dashboard at [1m[32mlocalhost:8265[39m[22m
+[2026-05-15 14:59:02,260 INFO] lecarb.estimator.bayesnet: construct 50 bayesian network workers...
+[2026-05-15 14:59:03,092 INFO] lecarb.estimator.bayesnet: built bayesian network estimator: bayes-version=original;samples=200;discretize=100
+[2026-05-15 14:59:03,093 INFO] lecarb.estimator.utils: torch threads: 16
+[2026-05-15 14:59:03,093 INFO] lecarb.estimator.utils: Start loading queryset:base and labels for version original of dataset census13...
+[2m[36m(pid=1260709)[0m [2026-05-15 14:59:03,691 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260711)[0m [2026-05-15 14:59:03,865 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+2026-05-15 14:59:03,881	WARNING worker.py:1134 -- WARNING: 48 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+[2m[36m(pid=1260718)[0m [2026-05-15 14:59:03,957 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260713)[0m [2026-05-15 14:59:03,951 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260716)[0m [2026-05-15 14:59:04,072 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260714)[0m [2026-05-15 14:59:04,079 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260712)[0m [2026-05-15 14:59:04,173 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260717)[0m [2026-05-15 14:59:04,161 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260710)[0m [2026-05-15 14:59:04,270 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260719)[0m [2026-05-15 14:59:04,262 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+2026-05-15 14:59:04,421	WARNING worker.py:1134 -- WARNING: 49 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,421	WARNING worker.py:1134 -- WARNING: 50 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,421	WARNING worker.py:1134 -- WARNING: 51 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,421	WARNING worker.py:1134 -- WARNING: 52 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,421	WARNING worker.py:1134 -- WARNING: 53 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,421	WARNING worker.py:1134 -- WARNING: 54 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,421	WARNING worker.py:1134 -- WARNING: 55 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,421	WARNING worker.py:1134 -- WARNING: 56 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,433	WARNING worker.py:1134 -- WARNING: 57 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,434	WARNING worker.py:1134 -- WARNING: 58 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+[2m[36m(pid=1260708)[0m [2026-05-15 14:59:04,398 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+2026-05-15 14:59:04,484	WARNING worker.py:1134 -- WARNING: 59 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,506	WARNING worker.py:1134 -- WARNING: 60 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,610	WARNING worker.py:1134 -- WARNING: 61 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,610	WARNING worker.py:1134 -- WARNING: 62 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:04,657	WARNING worker.py:1134 -- WARNING: 63 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+2026-05-15 14:59:05,286	WARNING worker.py:1134 -- WARNING: 64 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+[2m[36m(pid=1260705)[0m [2026-05-15 14:59:04,779 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260715)[0m [2026-05-15 14:59:04,874 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260706)[0m [2026-05-15 14:59:04,959 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260707)[0m [2026-05-15 14:59:05,020 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260704)[0m [2026-05-15 14:59:05,179 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+2026-05-15 14:59:05,363	WARNING worker.py:1134 -- WARNING: 65 PYTHON workers have been started. This could be a result of using a large number of actors, or it could be a consequence of using nested tasks (see https://github.com/ray-project/ray/issues/3644) for some a discussion of workarounds.
+[2m[36m(pid=1261392)[0m [2026-05-15 14:59:05,778 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261378)[0m [2026-05-15 14:59:06,031 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261406)[0m [2026-05-15 14:59:06,105 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261391)[0m [2026-05-15 14:59:06,111 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261393)[0m [2026-05-15 14:59:06,143 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261410)[0m [2026-05-15 14:59:06,207 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261571)[0m [2026-05-15 14:59:06,182 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261514)[0m [2026-05-15 14:59:06,292 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261364)[0m [2026-05-15 14:59:06,372 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261426)[0m [2026-05-15 14:59:06,350 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261525)[0m [2026-05-15 14:59:06,483 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261487)[0m [2026-05-15 14:59:06,505 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261457)[0m [2026-05-15 14:59:06,522 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261601)[0m [2026-05-15 14:59:06,581 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261986)[0m [2026-05-15 14:59:06,643 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262159)[0m [2026-05-15 14:59:06,764 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261365)[0m [2026-05-15 14:59:06,785 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261569)[0m [2026-05-15 14:59:06,851 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262259)[0m [2026-05-15 14:59:06,849 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262168)[0m [2026-05-15 14:59:06,894 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261968)[0m [2026-05-15 14:59:06,994 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262012)[0m [2026-05-15 14:59:07,059 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262273)[0m [2026-05-15 14:59:07,061 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262230)[0m [2026-05-15 14:59:07,025 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262095)[0m [2026-05-15 14:59:07,080 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262113)[0m [2026-05-15 14:59:07,192 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261980)[0m [2026-05-15 14:59:07,147 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261947)[0m [2026-05-15 14:59:07,278 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262243)[0m [2026-05-15 14:59:07,272 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262352)[0m [2026-05-15 14:59:07,301 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1262056)[0m [2026-05-15 14:59:07,398 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1261998)[0m [2026-05-15 14:59:07,392 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2026-05-15 14:59:07,498 INFO] lecarb.estimator.utils: Start test estimator asynchronously...
+[2m[36m(pid=1262536)[0m [2026-05-15 14:59:07,676 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260713)[0m [2026-05-15 14:59:07,669 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1260714)[0m [2026-05-15 14:59:07,640 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1260711)[0m [2026-05-15 14:59:07,847 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1262592)[0m [2026-05-15 14:59:07,878 INFO] lecarb.estimator.bayesnet: calling BayesianNetwork.from_samples...
+[2m[36m(pid=1260712)[0m [2026-05-15 14:59:08,022 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1260718)[0m [2026-05-15 14:59:08,065 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260717)[0m [2026-05-15 14:59:08,155 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260709)[0m [2026-05-15 14:59:08,247 INFO] lecarb.estimator.bayesnet: done! took 0.08 mins
+[2m[36m(pid=1260716)[0m [2026-05-15 14:59:08,553 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260710)[0m [2026-05-15 14:59:08,539 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260708)[0m [2026-05-15 14:59:08,636 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260719)[0m [2026-05-15 14:59:08,688 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260705)[0m [2026-05-15 14:59:08,923 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260715)[0m [2026-05-15 14:59:08,937 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260706)[0m [2026-05-15 14:59:08,935 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260707)[0m [2026-05-15 14:59:08,984 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1261378)[0m [2026-05-15 14:59:09,167 INFO] lecarb.estimator.bayesnet: done! took 0.05 mins
+[2m[36m(pid=1260704)[0m [2026-05-15 14:59:09,262 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1261392)[0m [2026-05-15 14:59:09,335 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1261391)[0m [2026-05-15 14:59:09,455 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1261426)[0m [2026-05-15 14:59:09,545 INFO] lecarb.estimator.bayesnet: done! took 0.05 mins
+[2m[36m(pid=1261514)[0m [2026-05-15 14:59:09,679 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2026-05-15 14:59:09,785 INFO] lecarb.estimator.utils: Waiting for queries to finish...
+[2m[36m(pid=1261410)[0m [2026-05-15 14:59:09,815 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1262259)[0m [2026-05-15 14:59:09,781 INFO] lecarb.estimator.bayesnet: done! took 0.05 mins
+[2m[36m(pid=1261406)[0m [2026-05-15 14:59:09,839 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1261364)[0m [2026-05-15 14:59:09,844 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1261986)[0m [2026-05-15 14:59:09,905 INFO] lecarb.estimator.bayesnet: done! took 0.05 mins
+[2m[36m(pid=1262095)[0m [2026-05-15 14:59:09,984 INFO] lecarb.estimator.bayesnet: done! took 0.05 mins
+[2m[36m(pid=1261571)[0m [2026-05-15 14:59:09,953 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1261487)[0m [2026-05-15 14:59:10,010 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1261393)[0m [2026-05-15 14:59:10,100 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1262113)[0m [2026-05-15 14:59:10,157 INFO] lecarb.estimator.bayesnet: done! took 0.05 mins
+[2m[36m(pid=1261601)[0m [2026-05-15 14:59:10,166 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1261457)[0m [2026-05-15 14:59:10,233 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1261569)[0m [2026-05-15 14:59:10,234 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1261525)[0m [2026-05-15 14:59:10,637 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1262159)[0m [2026-05-15 14:59:10,709 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1261980)[0m [2026-05-15 14:59:10,869 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1260713)[0m [2026-05-15 14:59:10,866 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261365)[0m [2026-05-15 14:59:10,897 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260714)[0m [2026-05-15 14:59:10,948 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261968)[0m [2026-05-15 14:59:11,019 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1261947)[0m [2026-05-15 14:59:11,064 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1262012)[0m [2026-05-15 14:59:11,083 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1262168)[0m [2026-05-15 14:59:11,115 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1262230)[0m [2026-05-15 14:59:11,120 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260711)[0m [2026-05-15 14:59:11,172 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262352)[0m [2026-05-15 14:59:11,237 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1262056)[0m [2026-05-15 14:59:11,337 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1262592)[0m [2026-05-15 14:59:11,337 INFO] lecarb.estimator.bayesnet: done! took 0.06 mins
+[2m[36m(pid=1262273)[0m [2026-05-15 14:59:11,479 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260712)[0m [2026-05-15 14:59:11,458 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261998)[0m [2026-05-15 14:59:11,609 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1262243)[0m [2026-05-15 14:59:11,584 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1262536)[0m [2026-05-15 14:59:11,675 INFO] lecarb.estimator.bayesnet: done! took 0.07 mins
+[2m[36m(pid=1260717)[0m [2026-05-15 14:59:11,827 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260710)[0m [2026-05-15 14:59:12,043 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260707)[0m [2026-05-15 14:59:12,046 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260718)[0m [2026-05-15 14:59:12,128 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260708)[0m [2026-05-15 14:59:12,181 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260716)[0m [2026-05-15 14:59:12,326 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260709)[0m [2026-05-15 14:59:12,357 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260705)[0m [2026-05-15 14:59:12,512 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261391)[0m [2026-05-15 14:59:12,557 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260715)[0m [2026-05-15 14:59:12,632 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262259)[0m [2026-05-15 14:59:12,747 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260706)[0m [2026-05-15 14:59:12,820 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260704)[0m [2026-05-15 14:59:12,853 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261392)[0m [2026-05-15 14:59:12,876 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260719)[0m [2026-05-15 14:59:12,881 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261378)[0m [2026-05-15 14:59:12,925 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261426)[0m [2026-05-15 14:59:13,040 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261487)[0m [2026-05-15 14:59:13,311 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261457)[0m [2026-05-15 14:59:13,256 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261364)[0m [2026-05-15 14:59:13,370 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261986)[0m [2026-05-15 14:59:13,354 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262095)[0m [2026-05-15 14:59:13,523 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262056)[0m [2026-05-15 14:59:13,640 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261406)[0m [2026-05-15 14:59:13,610 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261514)[0m [2026-05-15 14:59:13,890 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262113)[0m [2026-05-15 14:59:13,939 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261601)[0m [2026-05-15 14:59:13,930 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261393)[0m [2026-05-15 14:59:13,969 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261571)[0m [2026-05-15 14:59:14,046 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261410)[0m [2026-05-15 14:59:14,101 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260713)[0m [2026-05-15 14:59:14,265 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260713)[0m [2026-05-15 14:59:14,265 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260713)[0m [2026-05-15 14:59:14,265 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260713)[0m [2026-05-15 14:59:14,265 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260713)[0m [2026-05-15 14:59:14,265 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260714)[0m [2026-05-15 14:59:14,339 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260714)[0m [2026-05-15 14:59:14,339 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260714)[0m [2026-05-15 14:59:14,339 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260714)[0m [2026-05-15 14:59:14,339 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260714)[0m [2026-05-15 14:59:14,339 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261365)[0m [2026-05-15 14:59:14,397 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261980)[0m [2026-05-15 14:59:14,404 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261968)[0m [2026-05-15 14:59:14,564 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262230)[0m [2026-05-15 14:59:14,473 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261947)[0m [2026-05-15 14:59:14,566 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261569)[0m [2026-05-15 14:59:14,674 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262012)[0m [2026-05-15 14:59:14,967 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262168)[0m [2026-05-15 14:59:14,992 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262352)[0m [2026-05-15 14:59:14,954 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262243)[0m [2026-05-15 14:59:15,084 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1261525)[0m [2026-05-15 14:59:15,069 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262159)[0m [2026-05-15 14:59:15,052 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262536)[0m [2026-05-15 14:59:15,090 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260711)[0m [2026-05-15 14:59:15,062 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260711)[0m [2026-05-15 14:59:15,062 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260711)[0m [2026-05-15 14:59:15,062 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260711)[0m [2026-05-15 14:59:15,062 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260711)[0m [2026-05-15 14:59:15,062 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261998)[0m [2026-05-15 14:59:15,145 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1262592)[0m [2026-05-15 14:59:15,194 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260717)[0m [2026-05-15 14:59:15,253 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260717)[0m [2026-05-15 14:59:15,253 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260717)[0m [2026-05-15 14:59:15,253 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260717)[0m [2026-05-15 14:59:15,253 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260717)[0m [2026-05-15 14:59:15,253 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260708)[0m [2026-05-15 14:59:15,322 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260708)[0m [2026-05-15 14:59:15,322 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260708)[0m [2026-05-15 14:59:15,322 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260708)[0m [2026-05-15 14:59:15,322 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260708)[0m [2026-05-15 14:59:15,322 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260707)[0m [2026-05-15 14:59:15,426 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260707)[0m [2026-05-15 14:59:15,426 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260707)[0m [2026-05-15 14:59:15,426 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260707)[0m [2026-05-15 14:59:15,426 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260707)[0m [2026-05-15 14:59:15,426 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1262273)[0m [2026-05-15 14:59:15,519 INFO] lecarb.estimator.bayesnet: model size is 0.81MB
+[2m[36m(pid=1260712)[0m [2026-05-15 14:59:15,516 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260712)[0m [2026-05-15 14:59:15,516 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260712)[0m [2026-05-15 14:59:15,516 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260712)[0m [2026-05-15 14:59:15,516 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260712)[0m [2026-05-15 14:59:15,516 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260718)[0m [2026-05-15 14:59:15,576 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260718)[0m [2026-05-15 14:59:15,576 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260718)[0m [2026-05-15 14:59:15,576 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260718)[0m [2026-05-15 14:59:15,576 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260718)[0m [2026-05-15 14:59:15,577 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260716)[0m [2026-05-15 14:59:15,791 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260716)[0m [2026-05-15 14:59:15,792 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260716)[0m [2026-05-15 14:59:15,792 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260716)[0m [2026-05-15 14:59:15,792 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260716)[0m [2026-05-15 14:59:15,792 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1262259)[0m [2026-05-15 14:59:16,062 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1262259)[0m [2026-05-15 14:59:16,062 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1262259)[0m [2026-05-15 14:59:16,062 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1262259)[0m [2026-05-15 14:59:16,062 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1262259)[0m [2026-05-15 14:59:16,062 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260710)[0m [2026-05-15 14:59:16,115 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260710)[0m [2026-05-15 14:59:16,115 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260710)[0m [2026-05-15 14:59:16,115 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260710)[0m [2026-05-15 14:59:16,115 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260710)[0m [2026-05-15 14:59:16,115 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260709)[0m [2026-05-15 14:59:16,200 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260709)[0m [2026-05-15 14:59:16,200 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260709)[0m [2026-05-15 14:59:16,200 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260709)[0m [2026-05-15 14:59:16,200 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260709)[0m [2026-05-15 14:59:16,200 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260704)[0m [2026-05-15 14:59:16,167 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260704)[0m [2026-05-15 14:59:16,167 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260704)[0m [2026-05-15 14:59:16,167 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260704)[0m [2026-05-15 14:59:16,167 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260704)[0m [2026-05-15 14:59:16,167 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261487)[0m [2026-05-15 14:59:16,501 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261487)[0m [2026-05-15 14:59:16,501 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261487)[0m [2026-05-15 14:59:16,501 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261487)[0m [2026-05-15 14:59:16,501 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261487)[0m [2026-05-15 14:59:16,501 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261391)[0m [2026-05-15 14:59:16,505 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261391)[0m [2026-05-15 14:59:16,505 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261391)[0m [2026-05-15 14:59:16,505 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261391)[0m [2026-05-15 14:59:16,505 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261391)[0m [2026-05-15 14:59:16,505 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260705)[0m [2026-05-15 14:59:16,572 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260705)[0m [2026-05-15 14:59:16,572 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260705)[0m [2026-05-15 14:59:16,572 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260705)[0m [2026-05-15 14:59:16,572 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260705)[0m [2026-05-15 14:59:16,572 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261986)[0m [2026-05-15 14:59:16,654 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261986)[0m [2026-05-15 14:59:16,655 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261986)[0m [2026-05-15 14:59:16,655 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261986)[0m [2026-05-15 14:59:16,655 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261986)[0m [2026-05-15 14:59:16,655 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260715)[0m [2026-05-15 14:59:16,696 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260715)[0m [2026-05-15 14:59:16,696 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260715)[0m [2026-05-15 14:59:16,696 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260715)[0m [2026-05-15 14:59:16,696 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260715)[0m [2026-05-15 14:59:16,696 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260706)[0m [2026-05-15 14:59:16,702 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260706)[0m [2026-05-15 14:59:16,705 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260706)[0m [2026-05-15 14:59:16,705 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260706)[0m [2026-05-15 14:59:16,705 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260706)[0m [2026-05-15 14:59:16,705 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261378)[0m [2026-05-15 14:59:16,853 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261378)[0m [2026-05-15 14:59:16,853 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261378)[0m [2026-05-15 14:59:16,853 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261378)[0m [2026-05-15 14:59:16,853 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261378)[0m [2026-05-15 14:59:16,853 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261392)[0m [2026-05-15 14:59:16,882 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261392)[0m [2026-05-15 14:59:16,882 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261392)[0m [2026-05-15 14:59:16,882 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261392)[0m [2026-05-15 14:59:16,882 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261392)[0m [2026-05-15 14:59:16,882 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1260719)[0m [2026-05-15 14:59:16,890 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1260719)[0m [2026-05-15 14:59:16,890 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1260719)[0m [2026-05-15 14:59:16,890 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1260719)[0m [2026-05-15 14:59:16,890 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1260719)[0m [2026-05-15 14:59:16,890 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261426)[0m [2026-05-15 14:59:16,997 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261426)[0m [2026-05-15 14:59:16,997 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261426)[0m [2026-05-15 14:59:16,997 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261426)[0m [2026-05-15 14:59:16,997 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261426)[0m [2026-05-15 14:59:16,997 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261514)[0m [2026-05-15 14:59:17,077 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261514)[0m [2026-05-15 14:59:17,077 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261514)[0m [2026-05-15 14:59:17,077 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261514)[0m [2026-05-15 14:59:17,077 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261514)[0m [2026-05-15 14:59:17,077 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1262056)[0m [2026-05-15 14:59:17,293 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1262056)[0m [2026-05-15 14:59:17,293 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1262056)[0m [2026-05-15 14:59:17,293 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1262056)[0m [2026-05-15 14:59:17,293 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1262056)[0m [2026-05-15 14:59:17,293 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261410)[0m [2026-05-15 14:59:17,283 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261410)[0m [2026-05-15 14:59:17,283 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261410)[0m [2026-05-15 14:59:17,284 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261410)[0m [2026-05-15 14:59:17,284 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261410)[0m [2026-05-15 14:59:17,284 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261364)[0m [2026-05-15 14:59:17,275 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261364)[0m [2026-05-15 14:59:17,281 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261364)[0m [2026-05-15 14:59:17,281 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261364)[0m [2026-05-15 14:59:17,281 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261364)[0m [2026-05-15 14:59:17,281 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261457)[0m [2026-05-15 14:59:17,394 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261457)[0m [2026-05-15 14:59:17,394 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261457)[0m [2026-05-15 14:59:17,394 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261457)[0m [2026-05-15 14:59:17,395 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261457)[0m [2026-05-15 14:59:17,395 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261406)[0m [2026-05-15 14:59:17,450 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261406)[0m [2026-05-15 14:59:17,450 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261406)[0m [2026-05-15 14:59:17,450 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261406)[0m [2026-05-15 14:59:17,450 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261406)[0m [2026-05-15 14:59:17,450 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1262095)[0m [2026-05-15 14:59:17,469 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1262095)[0m [2026-05-15 14:59:17,469 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1262095)[0m [2026-05-15 14:59:17,469 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1262095)[0m [2026-05-15 14:59:17,469 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1262095)[0m [2026-05-15 14:59:17,469 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261980)[0m [2026-05-15 14:59:17,522 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261980)[0m [2026-05-15 14:59:17,522 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261980)[0m [2026-05-15 14:59:17,522 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261980)[0m [2026-05-15 14:59:17,522 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261980)[0m [2026-05-15 14:59:17,522 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261947)[0m [2026-05-15 14:59:17,695 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261947)[0m [2026-05-15 14:59:17,695 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261947)[0m [2026-05-15 14:59:17,695 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261947)[0m [2026-05-15 14:59:17,695 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261947)[0m [2026-05-15 14:59:17,695 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1262113)[0m [2026-05-15 14:59:17,673 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1262113)[0m [2026-05-15 14:59:17,678 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1262113)[0m [2026-05-15 14:59:17,678 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1262113)[0m [2026-05-15 14:59:17,678 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1262113)[0m [2026-05-15 14:59:17,678 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261601)[0m [2026-05-15 14:59:17,779 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261601)[0m [2026-05-15 14:59:17,779 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261601)[0m [2026-05-15 14:59:17,779 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261601)[0m [2026-05-15 14:59:17,779 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261601)[0m [2026-05-15 14:59:17,779 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261571)[0m [2026-05-15 14:59:17,839 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261571)[0m [2026-05-15 14:59:17,839 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261571)[0m [2026-05-15 14:59:17,839 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261571)[0m [2026-05-15 14:59:17,839 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261571)[0m [2026-05-15 14:59:17,839 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1262230)[0m [2026-05-15 14:59:18,036 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1262230)[0m [2026-05-15 14:59:18,039 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1262230)[0m [2026-05-15 14:59:18,039 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1262230)[0m [2026-05-15 14:59:18,039 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1262230)[0m [2026-05-15 14:59:18,039 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1262352)[0m [2026-05-15 14:59:18,248 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1262352)[0m [2026-05-15 14:59:18,249 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1262352)[0m [2026-05-15 14:59:18,249 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1262352)[0m [2026-05-15 14:59:18,249 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1262352)[0m [2026-05-15 14:59:18,249 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261365)[0m [2026-05-15 14:59:18,229 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261365)[0m [2026-05-15 14:59:18,229 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261365)[0m [2026-05-15 14:59:18,229 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261365)[0m [2026-05-15 14:59:18,229 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261365)[0m [2026-05-15 14:59:18,229 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1262159)[0m [2026-05-15 14:59:18,309 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1262159)[0m [2026-05-15 14:59:18,309 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1262159)[0m [2026-05-15 14:59:18,309 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1262159)[0m [2026-05-15 14:59:18,309 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1262159)[0m [2026-05-15 14:59:18,309 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261393)[0m [2026-05-15 14:59:18,294 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261393)[0m [2026-05-15 14:59:18,294 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261393)[0m [2026-05-15 14:59:18,294 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261393)[0m [2026-05-15 14:59:18,294 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261393)[0m [2026-05-15 14:59:18,294 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1261968)[0m [2026-05-15 14:59:18,452 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]
+[2m[36m(pid=1261968)[0m [2026-05-15 14:59:18,452 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5]
+[2m[36m(pid=1261968)[0m [2026-05-15 14:59:18,452 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12]
+[2m[36m(pid=1261968)[0m [2026-05-15 14:59:18,452 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7]
+[2m[36m(pid=1261968)[0m [2026-05-15 14:59:18,452 INFO] lecarb.estimator.bayesnet: Using sampling order [0, 4, 6, 8, 9, 10, 11, 5, 1, 3, 12, 2, 7] bn-chow-liu-200-topo-854276-bytes-100-equal_freq-pomegranate
+[2m[36m(pid=1262243)[0m [2026-05-15 14:59:18,618 DEBUG] lecarb.estimator.bayesnet: Building sampling order [0, 4, 6, 8, 9, 10, 11]

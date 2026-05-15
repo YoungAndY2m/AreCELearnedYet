@@ -1,0 +1,48 @@
+uv run python -m lecarb test -s123 -dcensus13 -voriginal -wbase -emhist --params "{'version': 'original', 'num_bins': 1000}"
+Uninstalled 1 package in 1ms
+Installed 1 package in 5ms
+/home/student.unimelb.edu.au/yli16636/Desktop/AreCELearnedYet/.venv/lib/python3.8/site-packages/dask/dataframe/utils.py:15: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+  import pandas.util.testing as tm
+[2026-05-15 14:14:37,842 INFO] lecarb.dataset.dataset: table exists, load...
+[2026-05-15 14:14:37,845 INFO] lecarb.dataset.dataset: load finished: Table census13_original (48842 rows, 4.84MB, columns:
+Column(age, type=int64, vocab size=74, min=17, max=90, has NaN=False)
+Column(workclass, type=category, vocab size=9, min=?, max=Without-pay, has NaN=False)
+Column(education, type=category, vocab size=16, min=10th, max=Some-college, has NaN=False)
+Column(education_num, type=int64, vocab size=16, min=1, max=16, has NaN=False)
+Column(marital_status, type=category, vocab size=7, min=Divorced, max=Widowed, has NaN=False)
+Column(occupation, type=category, vocab size=15, min=?, max=Transport-moving, has NaN=False)
+Column(relationship, type=category, vocab size=6, min=Husband, max=Wife, has NaN=False)
+Column(race, type=category, vocab size=5, min=Amer-Indian-Eskimo, max=White, has NaN=False)
+Column(sex, type=category, vocab size=2, min=Female, max=Male, has NaN=False)
+Column(capital_gain, type=int64, vocab size=123, min=0, max=99999, has NaN=False)
+Column(capital_loss, type=int64, vocab size=99, min=0, max=4356, has NaN=False)
+Column(hours_per_week, type=int64, vocab size=96, min=1, max=99, has NaN=False)
+Column(native_country, type=category, vocab size=42, min=?, max=Yugoslavia, has NaN=False))
+[2026-05-15 14:14:37,845 INFO] lecarb.estimator.mhist: Construct MHist with at most 1000 bins...
+[2026-05-15 14:14:39,345 INFO] lecarb.estimator.mhist: Constructed 100 partitions!
+[2026-05-15 14:14:40,768 INFO] lecarb.estimator.mhist: Constructed 200 partitions!
+[2026-05-15 14:14:42,200 INFO] lecarb.estimator.mhist: Constructed 300 partitions!
+[2026-05-15 14:14:43,667 INFO] lecarb.estimator.mhist: Constructed 400 partitions!
+[2026-05-15 14:14:45,147 INFO] lecarb.estimator.mhist: Constructed 500 partitions!
+[2026-05-15 14:14:46,562 INFO] lecarb.estimator.mhist: Constructed 600 partitions!
+[2026-05-15 14:14:48,022 INFO] lecarb.estimator.mhist: Constructed 700 partitions!
+[2026-05-15 14:14:49,467 INFO] lecarb.estimator.mhist: Constructed 800 partitions!
+[2026-05-15 14:14:50,910 INFO] lecarb.estimator.mhist: Constructed 900 partitions!
+[2026-05-15 14:14:52,654 INFO] lecarb.estimator.mhist: Construct MaxDiff Hist (MHIST-2) finished, use 1000 partitions (0.16MB)! Time spent since start: 0.25 mins
+[2026-05-15 14:14:52,699 INFO] lecarb.estimator.mhist: MHist saved to output/model/census13/original-mhist_bin1000.pkl
+[2026-05-15 14:14:52,720 INFO] lecarb.estimator.mhist: Built MHist estimator: mhist-bins=1000
+[2026-05-15 14:14:52,720 INFO] lecarb.estimator.utils: torch threads: 16
+[2026-05-15 14:14:52,720 INFO] lecarb.estimator.utils: Start loading queryset:base and labels for version original of dataset census13...
+[2026-05-15 14:14:53,908 INFO] lecarb.estimator.utils: Start test estimator on test queries...
+[2026-05-15 14:14:56,837 INFO] lecarb.estimator.utils: 1000 queries finished
+[2026-05-15 14:14:59,854 INFO] lecarb.estimator.utils: 2000 queries finished
+[2026-05-15 14:15:02,891 INFO] lecarb.estimator.utils: 3000 queries finished
+[2026-05-15 14:15:05,837 INFO] lecarb.estimator.utils: 4000 queries finished
+[2026-05-15 14:15:08,728 INFO] lecarb.estimator.utils: 5000 queries finished
+[2026-05-15 14:15:11,687 INFO] lecarb.estimator.utils: 6000 queries finished
+[2026-05-15 14:15:14,635 INFO] lecarb.estimator.utils: 7000 queries finished
+[2026-05-15 14:15:17,598 INFO] lecarb.estimator.utils: 8000 queries finished
+[2026-05-15 14:15:20,509 INFO] lecarb.estimator.utils: 9000 queries finished
+[2026-05-15 14:15:23,423 INFO] lecarb.estimator.utils: 10000 queries finished
+[2026-05-15 14:15:23,423 INFO] lecarb.estimator.utils: Test finished, 2.196363401412964 ms/query in average
+[2026-05-15 14:15:23,429 INFO] lecarb.estimator.utils: {'max': 789.0, '99th': 221.01000000000022, '95th': 76.0, '90th': 41.0, 'median': 3.288333333333333, 'mean': 17.155993785950447, 'gmean': 4.712780355757606}
