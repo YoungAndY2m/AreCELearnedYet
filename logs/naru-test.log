@@ -1,0 +1,102 @@
+uv run python -m lecarb test -s123 -dcensus13 -voriginal -wbase -enaru --params "{'psample':2000, 'model':'original-resmade_hid32,32,32,32_emb4_ep100_embedInembedOut_warm0-123'}"
+Uninstalled 1 package in 1ms
+Installed 1 package in 4ms
+/home/student.unimelb.edu.au/yli16636/Desktop/AreCELearnedYet/.venv/lib/python3.8/site-packages/dask/dataframe/utils.py:15: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+  import pandas.util.testing as tm
+[2026-05-16 07:26:48,196 INFO] lecarb.estimator.naru.naru: torch threads: 16
+[2026-05-16 07:26:48,196 INFO] lecarb.estimator.naru.naru: load model from output/model/census13/original-resmade_hid32,32,32,32_emb4_ep100_embedInembedOut_warm0-123.pt ...
+[2026-05-16 07:26:48,199 INFO] lecarb.dataset.dataset: table exists, load...
+[2026-05-16 07:26:48,201 INFO] lecarb.dataset.dataset: load finished: Table census13_original (48842 rows, 4.84MB, columns:
+Column(age, type=int64, vocab size=74, min=17, max=90, has NaN=False)
+Column(workclass, type=category, vocab size=9, min=?, max=Without-pay, has NaN=False)
+Column(education, type=category, vocab size=16, min=10th, max=Some-college, has NaN=False)
+Column(education_num, type=int64, vocab size=16, min=1, max=16, has NaN=False)
+Column(marital_status, type=category, vocab size=7, min=Divorced, max=Widowed, has NaN=False)
+Column(occupation, type=category, vocab size=15, min=?, max=Transport-moving, has NaN=False)
+Column(relationship, type=category, vocab size=6, min=Husband, max=Wife, has NaN=False)
+Column(race, type=category, vocab size=5, min=Amer-Indian-Eskimo, max=White, has NaN=False)
+Column(sex, type=category, vocab size=2, min=Female, max=Male, has NaN=False)
+Column(capital_gain, type=int64, vocab size=123, min=0, max=99999, has NaN=False)
+Column(capital_loss, type=int64, vocab size=99, min=0, max=4356, has NaN=False)
+Column(hours_per_week, type=int64, vocab size=96, min=1, max=99, has NaN=False)
+Column(native_country, type=category, vocab size=42, min=?, max=Yugoslavia, has NaN=False))
+[2026-05-16 07:26:48,202 INFO] lecarb.estimator.naru.made: fixed_ordering: None, seed: 0, natural_ordering: True
+[2026-05-16 07:26:48,202 INFO] lecarb.estimator.naru.made: encoded_bins (output): [4, 4, 4, 4, 4, 4, 4, 4, 2, 4, 4, 4, 4]
+[2026-05-16 07:26:48,202 INFO] lecarb.estimator.naru.made: encoded_bins (input): [4, 4, 4, 4, 4, 4, 4, 4, 2, 4, 4, 4, 4]
+[2026-05-16 07:26:48,205 INFO] lecarb.estimator.utils: Number of model parameters: 14250 (~= 0.05MB)
+[2026-05-16 07:26:48,205 INFO] lecarb.estimator.utils: MADE(
+  (net): Sequential(
+    (0): MaskedLinear(in_features=50, out_features=32, bias=True)
+    (1): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=32, out_features=32, bias=True)
+        (1): MaskedLinear(in_features=32, out_features=32, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (2): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=32, out_features=32, bias=True)
+        (1): MaskedLinear(in_features=32, out_features=32, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (3): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=32, out_features=32, bias=True)
+        (1): MaskedLinear(in_features=32, out_features=32, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (4): MaskedLinear(in_features=32, out_features=50, bias=True)
+  )
+  (embeddings): ModuleList(
+    (0): Embedding(74, 4)
+    (1): Embedding(9, 4)
+    (2): Embedding(16, 4)
+    (3): Embedding(16, 4)
+    (4): Embedding(7, 4)
+    (5): Embedding(15, 4)
+    (6): Embedding(6, 4)
+    (7): Embedding(5, 4)
+    (8): None
+    (9): Embedding(123, 4)
+    (10): Embedding(99, 4)
+    (11): Embedding(96, 4)
+    (12): Embedding(42, 4)
+  )
+  (unk_embeddings): ParameterList(
+      (0): Parameter containing: [torch.FloatTensor of size 1x4]
+      (1): Parameter containing: [torch.FloatTensor of size 1x4]
+      (2): Parameter containing: [torch.FloatTensor of size 1x4]
+      (3): Parameter containing: [torch.FloatTensor of size 1x4]
+      (4): Parameter containing: [torch.FloatTensor of size 1x4]
+      (5): Parameter containing: [torch.FloatTensor of size 1x4]
+      (6): Parameter containing: [torch.FloatTensor of size 1x4]
+      (7): Parameter containing: [torch.FloatTensor of size 1x4]
+      (8): Parameter containing: [torch.FloatTensor of size 1x2]
+      (9): Parameter containing: [torch.FloatTensor of size 1x4]
+      (10): Parameter containing: [torch.FloatTensor of size 1x4]
+      (11): Parameter containing: [torch.FloatTensor of size 1x4]
+      (12): Parameter containing: [torch.FloatTensor of size 1x4]
+  )
+  (direct_io_layer): MaskedLinear(in_features=50, out_features=50, bias=True)
+)
+[2026-05-16 07:26:48,207 INFO] lecarb.estimator.naru.naru: Setting masked_weight in MADE, do not retrain!
+[2026-05-16 07:26:48,207 INFO] lecarb.estimator.naru.naru: Setting masked_weight in MADE, do not retrain!
+[2026-05-16 07:26:48,209 INFO] lecarb.estimator.naru.naru: load and built naru estimator: naru-model=original-resmade_hid32,32,32,32_emb4_ep100_embedInembedOut_warm0-123;psample=2000
+[2026-05-16 07:26:48,210 INFO] lecarb.estimator.utils: torch threads: 16
+[2026-05-16 07:26:48,210 INFO] lecarb.estimator.utils: Start loading queryset:base and labels for version original of dataset census13...
+[2026-05-16 07:26:49,641 INFO] lecarb.estimator.utils: Start test estimator on test queries...
+[2026-05-16 07:27:00,481 INFO] lecarb.estimator.utils: 1000 queries finished
+[2026-05-16 07:27:11,165 INFO] lecarb.estimator.utils: 2000 queries finished
+[2026-05-16 07:27:21,318 INFO] lecarb.estimator.utils: 3000 queries finished
+[2026-05-16 07:27:31,296 INFO] lecarb.estimator.utils: 4000 queries finished
+[2026-05-16 07:27:41,627 INFO] lecarb.estimator.utils: 5000 queries finished
+[2026-05-16 07:27:52,310 INFO] lecarb.estimator.utils: 6000 queries finished
+[2026-05-16 07:28:02,734 INFO] lecarb.estimator.utils: 7000 queries finished
+[2026-05-16 07:28:13,194 INFO] lecarb.estimator.utils: 8000 queries finished
+[2026-05-16 07:28:23,739 INFO] lecarb.estimator.utils: 9000 queries finished
+[2026-05-16 07:28:33,861 INFO] lecarb.estimator.utils: 10000 queries finished
+[2026-05-16 07:28:33,861 INFO] lecarb.estimator.utils: Test finished, 10.304555702209473 ms/query in average
+[2026-05-16 07:28:33,867 INFO] lecarb.estimator.utils: {'max': 179.0, '99th': 4.0, '95th': 2.4764315852923415, '90th': 2.0, 'median': 1.1111111111111112, 'mean': 1.3547367005337925, 'gmean': 1.2562001076263491}

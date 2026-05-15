@@ -1,0 +1,1003 @@
+uv run python -m lecarb train -s123 -dcensus13 -voriginal -wbase -emscn --params "{'epochs': 200, 'bs': 1024, 'num_samples': 1000, 'hid_units': 16, 'train_num': 100000}" --sizelimit 0
+Uninstalled 1 package in 1ms
+Installed 1 package in 4ms
+/home/student.unimelb.edu.au/yli16636/Desktop/AreCELearnedYet/.venv/lib/python3.8/site-packages/dask/dataframe/utils.py:15: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+  import pandas.util.testing as tm
+[2026-05-16 07:30:54,386 INFO] lecarb.estimator.mscn.mscn: torch threads: 4
+[2026-05-16 07:30:54,387 INFO] lecarb.estimator.mscn.mscn: params: {'epochs': 200, 'bs': 1024, 'num_samples': 1000, 'hid_units': 16, 'train_num': 100000}
+[2026-05-16 07:30:54,387 INFO] lecarb.dataset.dataset: table exists, load...
+[2026-05-16 07:30:54,390 INFO] lecarb.dataset.dataset: load finished: Table census13_original (48842 rows, 4.84MB, columns:
+Column(age, type=int64, vocab size=74, min=17, max=90, has NaN=False)
+Column(workclass, type=category, vocab size=9, min=?, max=Without-pay, has NaN=False)
+Column(education, type=category, vocab size=16, min=10th, max=Some-college, has NaN=False)
+Column(education_num, type=int64, vocab size=16, min=1, max=16, has NaN=False)
+Column(marital_status, type=category, vocab size=7, min=Divorced, max=Widowed, has NaN=False)
+Column(occupation, type=category, vocab size=15, min=?, max=Transport-moving, has NaN=False)
+Column(relationship, type=category, vocab size=6, min=Husband, max=Wife, has NaN=False)
+Column(race, type=category, vocab size=5, min=Amer-Indian-Eskimo, max=White, has NaN=False)
+Column(sex, type=category, vocab size=2, min=Female, max=Male, has NaN=False)
+Column(capital_gain, type=int64, vocab size=123, min=0, max=99999, has NaN=False)
+Column(capital_loss, type=int64, vocab size=99, min=0, max=4356, has NaN=False)
+Column(hours_per_week, type=int64, vocab size=96, min=1, max=99, has NaN=False)
+Column(native_country, type=category, vocab size=42, min=?, max=Yugoslavia, has NaN=False))
+[2026-05-16 07:30:54,390 INFO] lecarb.estimator.mscn.mscn: Start loading queryset:base and labels for version original of dataset census13...
+[2026-05-16 07:30:55,656 INFO] lecarb.estimator.mscn.mscn: Use 100000 queries for train and 10000 queries for validation
+[2026-05-16 07:30:55,657 INFO] lecarb.estimator.utils: Number of model parameters: 17393 (~= 0.07MB)
+[2026-05-16 07:30:55,657 INFO] lecarb.estimator.utils: SetConv(
+  (sample_mlp1): Linear(in_features=1000, out_features=16, bias=True)
+  (sample_mlp2): Linear(in_features=16, out_features=16, bias=True)
+  (predicate_mlp1): Linear(in_features=17, out_features=16, bias=True)
+  (predicate_mlp2): Linear(in_features=16, out_features=16, bias=True)
+  (out_mlp1): Linear(in_features=32, out_features=16, bias=True)
+  (out_mlp2): Linear(in_features=16, out_features=1, bias=True)
+)
+[2026-05-16 07:30:55,661 INFO] lecarb.estimator.mscn.mscn: Overall MSCN model size + sample size = 0.17MB
+[2026-05-16 07:33:25,118 INFO] lecarb.estimator.mscn.mscn: min log(label): 0.0
+[2026-05-16 07:33:25,118 INFO] lecarb.estimator.mscn.mscn: max log(label): 10.796304928224641
+[2026-05-16 07:33:25,120 INFO] lecarb.estimator.mscn.mscn: Number of training samples: 100000
+[2026-05-16 07:33:25,120 INFO] lecarb.estimator.mscn.mscn: Number of validation samples: 10000
+[2026-05-16 07:33:28,031 DEBUG] lecarb.estimator.mscn.mscn: Sample tensor shape: torch.Size([100000, 1, 1000]), mask shape: torch.Size([100000, 1, 1])
+[2026-05-16 07:33:33,201 DEBUG] lecarb.estimator.mscn.mscn: Predicate tensor shape: torch.Size([100000, 18, 17]), mask shape: torch.Size([100000, 18, 1])
+[2026-05-16 07:33:33,408 DEBUG] lecarb.estimator.mscn.mscn: Sample tensor shape: torch.Size([10000, 1, 1000]), mask shape: torch.Size([10000, 1, 1])
+[2026-05-16 07:33:33,913 DEBUG] lecarb.estimator.mscn.mscn: Predicate tensor shape: torch.Size([10000, 18, 17]), mask shape: torch.Size([10000, 18, 1])
+[2026-05-16 07:33:33,914 INFO] lecarb.estimator.mscn.mscn: start train mscn...
+[2026-05-16 07:33:39,324 INFO] lecarb.estimator.mscn.mscn: Epoch 1, loss: 25.190030482350565, time since start: 0.1 mins
+[2026-05-16 07:33:39,324 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:33:39,432 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:33:39,437 INFO] lecarb.estimator.utils: {'max': 24.214285714285715, '99th': 16.0, '95th': 15.0, '90th': 14.0, 'median': 3.9180602006688963, 'mean': 5.960625417090485, 'gmean': 4.196367644573678}
+[2026-05-16 07:33:39,437 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 5.960625417090485(mean)!
+[2026-05-16 07:33:44,435 INFO] lecarb.estimator.mscn.mscn: Epoch 2, loss: 4.505593861852374, time since start: 0.2 mins
+[2026-05-16 07:33:44,435 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:33:44,547 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:33:44,553 INFO] lecarb.estimator.utils: {'max': 48.42857142857143, '99th': 12.875416666666675, '95th': 7.437847222222217, '90th': 7.0, 'median': 2.3076923076923075, 'mean': 3.5202521430642926, 'gmean': 2.7032680179750046}
+[2026-05-16 07:33:44,553 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 3.5202521430642926(mean)!
+[2026-05-16 07:33:49,200 INFO] lecarb.estimator.mscn.mscn: Epoch 3, loss: 3.094103676932199, time since start: 0.3 mins
+[2026-05-16 07:33:49,200 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:33:49,304 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:33:49,309 INFO] lecarb.estimator.utils: {'max': 67.8, '99th': 14.8, '95th': 6.2, '90th': 5.0, 'median': 1.6312974950745849, 'mean': 2.856089025063476, 'gmean': 2.1554082219307675}
+[2026-05-16 07:33:49,309 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.856089025063476(mean)!
+[2026-05-16 07:33:54,134 INFO] lecarb.estimator.mscn.mscn: Epoch 4, loss: 2.789858779128717, time since start: 0.3 mins
+[2026-05-16 07:33:54,134 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:33:54,256 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:33:54,261 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 17.0, '95th': 6.5, '90th': 5.0, 'median': 1.5, 'mean': 2.702123518899959, 'gmean': 2.0028676993583083}
+[2026-05-16 07:33:54,262 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.702123518899959(mean)!
+[2026-05-16 07:33:58,941 INFO] lecarb.estimator.mscn.mscn: Epoch 5, loss: 2.6934742757252286, time since start: 0.4 mins
+[2026-05-16 07:33:58,941 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:33:59,044 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:33:59,050 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 17.5, '95th': 6.5, '90th': 4.0, 'median': 1.3879951980792318, 'mean': 2.6518964839267833, 'gmean': 1.9400341527521068}
+[2026-05-16 07:33:59,050 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.6518964839267833(mean)!
+[2026-05-16 07:34:03,063 INFO] lecarb.estimator.mscn.mscn: Epoch 6, loss: 2.6504351703488096, time since start: 0.5 mins
+[2026-05-16 07:34:03,063 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:03,870 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:03,875 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 17.802000000000046, '95th': 6.5, '90th': 4.0, 'median': 1.3333333333333333, 'mean': 2.6376686906693614, 'gmean': 1.9141099649361875}
+[2026-05-16 07:34:03,876 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.6376686906693614(mean)!
+[2026-05-16 07:34:07,910 INFO] lecarb.estimator.mscn.mscn: Epoch 7, loss: 2.63185576760039, time since start: 0.6 mins
+[2026-05-16 07:34:07,910 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:08,025 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:08,030 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 18.20050000000001, '95th': 6.5, '90th': 4.0, 'median': 1.3333333333333333, 'mean': 2.6345470966260027, 'gmean': 1.9049021410281064}
+[2026-05-16 07:34:08,030 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.6345470966260027(mean)!
+[2026-05-16 07:34:13,036 INFO] lecarb.estimator.mscn.mscn: Epoch 8, loss: 2.620327818150423, time since start: 0.7 mins
+[2026-05-16 07:34:13,036 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:13,147 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:13,153 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 18.25, '95th': 6.5, '90th': 4.0, 'median': 1.3333333333333333, 'mean': 2.6281851507662295, 'gmean': 1.8961901064751672}
+[2026-05-16 07:34:13,153 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.6281851507662295(mean)!
+[2026-05-16 07:34:18,195 INFO] lecarb.estimator.mscn.mscn: Epoch 9, loss: 2.6114510005834153, time since start: 0.7 mins
+[2026-05-16 07:34:18,195 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:18,302 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:18,307 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 18.25083333333335, '95th': 6.5, '90th': 4.0, 'median': 1.3333333333333333, 'mean': 2.619340232062888, 'gmean': 1.8885137305353967}
+[2026-05-16 07:34:18,308 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.619340232062888(mean)!
+[2026-05-16 07:34:23,394 INFO] lecarb.estimator.mscn.mscn: Epoch 10, loss: 2.6034506437729816, time since start: 0.8 mins
+[2026-05-16 07:34:23,394 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:23,499 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:23,504 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 18.25, '95th': 6.5, '90th': 4.0, 'median': 1.3333333333333333, 'mean': 2.6090696470948314, 'gmean': 1.8840173024334101}
+[2026-05-16 07:34:23,505 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.6090696470948314(mean)!
+[2026-05-16 07:34:28,434 INFO] lecarb.estimator.mscn.mscn: Epoch 11, loss: 2.5970098096497205, time since start: 0.9 mins
+[2026-05-16 07:34:28,435 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:28,541 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:28,546 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 18.20050000000001, '95th': 6.5, '90th': 4.0, 'median': 1.3333333333333333, 'mean': 2.597104083235968, 'gmean': 1.87826237194599}
+[2026-05-16 07:34:28,546 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.597104083235968(mean)!
+[2026-05-16 07:34:33,336 INFO] lecarb.estimator.mscn.mscn: Epoch 12, loss: 2.58983284599927, time since start: 1.0 mins
+[2026-05-16 07:34:33,336 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:33,443 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:33,449 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 18.25, '95th': 6.4, '90th': 4.0, 'median': 1.3333333333333333, 'mean': 2.589602269697032, 'gmean': 1.8735131152923281}
+[2026-05-16 07:34:33,449 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.589602269697032(mean)!
+[2026-05-16 07:34:37,602 INFO] lecarb.estimator.mscn.mscn: Epoch 13, loss: 2.582935158087283, time since start: 1.1 mins
+[2026-05-16 07:34:37,602 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:38,429 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:38,435 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 18.25, '95th': 6.4, '90th': 4.0, 'median': 1.3333333333333333, 'mean': 2.5803295233824683, 'gmean': 1.86767704627036}
+[2026-05-16 07:34:38,435 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.5803295233824683(mean)!
+[2026-05-16 07:34:42,536 INFO] lecarb.estimator.mscn.mscn: Epoch 14, loss: 2.575814123056373, time since start: 1.1 mins
+[2026-05-16 07:34:42,536 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:42,639 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:42,644 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 18.002000000000045, '95th': 6.333333333333333, '90th': 4.0, 'median': 1.3333333333333333, 'mean': 2.5677197678218784, 'gmean': 1.86169762217325}
+[2026-05-16 07:34:42,644 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.5677197678218784(mean)!
+[2026-05-16 07:34:47,482 INFO] lecarb.estimator.mscn.mscn: Epoch 15, loss: 2.570026385540865, time since start: 1.2 mins
+[2026-05-16 07:34:47,482 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:47,588 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:47,593 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 17.802000000000046, '95th': 6.333333333333333, '90th': 4.086956521739131, 'median': 1.3333333333333333, 'mean': 2.5608884209439156, 'gmean': 1.8600199021156174}
+[2026-05-16 07:34:47,593 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.5608884209439156(mean)!
+[2026-05-16 07:34:52,616 INFO] lecarb.estimator.mscn.mscn: Epoch 16, loss: 2.564742416751628, time since start: 1.3 mins
+[2026-05-16 07:34:52,616 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:52,720 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:52,725 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 17.802000000000046, '95th': 6.288095238095203, '90th': 4.2, 'median': 1.3333333333333333, 'mean': 2.5564657566971305, 'gmean': 1.855019730033942}
+[2026-05-16 07:34:52,725 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.5564657566971305(mean)!
+[2026-05-16 07:34:57,663 INFO] lecarb.estimator.mscn.mscn: Epoch 17, loss: 2.5555155982776565, time since start: 1.4 mins
+[2026-05-16 07:34:57,663 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:34:57,765 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:34:57,770 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 17.6, '95th': 6.25, '90th': 4.25, 'median': 1.3333333333333333, 'mean': 2.552935453117943, 'gmean': 1.8506588583205534}
+[2026-05-16 07:34:57,771 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.552935453117943(mean)!
+[2026-05-16 07:35:02,761 INFO] lecarb.estimator.mscn.mscn: Epoch 18, loss: 2.548768320862128, time since start: 1.5 mins
+[2026-05-16 07:35:02,761 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:02,861 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:02,867 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 17.6, '95th': 6.25, '90th': 4.4, 'median': 1.3333333333333333, 'mean': 2.549206854836579, 'gmean': 1.848433079854317}
+[2026-05-16 07:35:02,867 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.549206854836579(mean)!
+[2026-05-16 07:35:07,584 INFO] lecarb.estimator.mscn.mscn: Epoch 19, loss: 2.5434694217175853, time since start: 1.6 mins
+[2026-05-16 07:35:07,584 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:07,686 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:07,692 INFO] lecarb.estimator.utils: {'max': 95.0, '99th': 17.6, '95th': 6.25, '90th': 4.411764705882353, 'median': 1.3333333333333333, 'mean': 2.5516702325579534, 'gmean': 1.8470920160081734}
+[2026-05-16 07:35:11,586 INFO] lecarb.estimator.mscn.mscn: Epoch 20, loss: 2.5387217049696007, time since start: 1.6 mins
+[2026-05-16 07:35:11,586 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:12,412 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:12,417 INFO] lecarb.estimator.utils: {'max': 95.0, '99th': 17.5, '95th': 6.25, '90th': 4.5, 'median': 1.3333333333333333, 'mean': 2.5475900746640554, 'gmean': 1.8423044304351195}
+[2026-05-16 07:35:12,418 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.5475900746640554(mean)!
+[2026-05-16 07:35:16,355 INFO] lecarb.estimator.mscn.mscn: Epoch 21, loss: 2.5345249540951786, time since start: 1.7 mins
+[2026-05-16 07:35:16,355 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:16,458 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:16,464 INFO] lecarb.estimator.utils: {'max': 95.0, '99th': 17.5, '95th': 6.25, '90th': 4.5, 'median': 1.3333333333333333, 'mean': 2.544908290782921, 'gmean': 1.8388871015819437}
+[2026-05-16 07:35:16,464 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.544908290782921(mean)!
+[2026-05-16 07:35:21,364 INFO] lecarb.estimator.mscn.mscn: Epoch 22, loss: 2.529617577183003, time since start: 1.8 mins
+[2026-05-16 07:35:21,365 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:21,468 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:21,473 INFO] lecarb.estimator.utils: {'max': 95.0, '99th': 17.501000000000023, '95th': 6.223611111111091, '90th': 4.5, 'median': 1.3333333333333333, 'mean': 2.540186751146189, 'gmean': 1.8359971845799516}
+[2026-05-16 07:35:21,474 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.540186751146189(mean)!
+[2026-05-16 07:35:26,375 INFO] lecarb.estimator.mscn.mscn: Epoch 23, loss: 2.5256902903926615, time since start: 1.9 mins
+[2026-05-16 07:35:26,375 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:26,485 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:26,491 INFO] lecarb.estimator.utils: {'max': 95.0, '99th': 17.501000000000023, '95th': 6.25, '90th': 4.5, 'median': 1.3333333333333333, 'mean': 2.539123630265295, 'gmean': 1.8367112661252643}
+[2026-05-16 07:35:26,491 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.539123630265295(mean)!
+[2026-05-16 07:35:31,273 INFO] lecarb.estimator.mscn.mscn: Epoch 24, loss: 2.5209982881740647, time since start: 2.0 mins
+[2026-05-16 07:35:31,273 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:31,376 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:31,382 INFO] lecarb.estimator.utils: {'max': 95.0, '99th': 17.5, '95th': 6.2011111111110955, '90th': 4.643277310924371, 'median': 1.3333333333333333, 'mean': 2.532739389716225, 'gmean': 1.830174917909844}
+[2026-05-16 07:35:31,382 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.532739389716225(mean)!
+[2026-05-16 07:35:36,365 INFO] lecarb.estimator.mscn.mscn: Epoch 25, loss: 2.5166191519523156, time since start: 2.0 mins
+[2026-05-16 07:35:36,365 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:36,473 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:36,478 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 17.5, '95th': 6.2, '90th': 4.647058823529412, 'median': 1.3333333333333333, 'mean': 2.522276633299861, 'gmean': 1.827106182930712}
+[2026-05-16 07:35:36,478 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.522276633299861(mean)!
+[2026-05-16 07:35:41,386 INFO] lecarb.estimator.mscn.mscn: Epoch 26, loss: 2.51213023370626, time since start: 2.1 mins
+[2026-05-16 07:35:41,386 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:41,495 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:41,500 INFO] lecarb.estimator.utils: {'max': 84.75, '99th': 17.5, '95th': 6.2, '90th': 4.91401515151517, 'median': 1.3333333333333333, 'mean': 2.5179544819545883, 'gmean': 1.8265732634181524}
+[2026-05-16 07:35:41,501 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.5179544819545883(mean)!
+[2026-05-16 07:35:45,901 INFO] lecarb.estimator.mscn.mscn: Epoch 27, loss: 2.50747059072767, time since start: 2.2 mins
+[2026-05-16 07:35:45,902 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:46,708 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:46,713 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 17.5, '95th': 6.2, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.511610270173547, 'gmean': 1.8216943992656094}
+[2026-05-16 07:35:46,713 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.511610270173547(mean)!
+[2026-05-16 07:35:50,923 INFO] lecarb.estimator.mscn.mscn: Epoch 28, loss: 2.5041186468941823, time since start: 2.3 mins
+[2026-05-16 07:35:50,923 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:51,029 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:51,035 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 17.335000000000036, '95th': 6.112698412698389, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.5090069568424984, 'gmean': 1.824582753753652}
+[2026-05-16 07:35:51,035 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.5090069568424984(mean)!
+[2026-05-16 07:35:55,985 INFO] lecarb.estimator.mscn.mscn: Epoch 29, loss: 2.498428690190218, time since start: 2.4 mins
+[2026-05-16 07:35:55,985 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:35:56,088 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:35:56,094 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 17.335000000000036, '95th': 6.112698412698389, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.5002810740035994, 'gmean': 1.8167903812254083}
+[2026-05-16 07:35:56,094 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.5002810740035994(mean)!
+[2026-05-16 07:36:00,695 INFO] lecarb.estimator.mscn.mscn: Epoch 30, loss: 2.4935575066780555, time since start: 2.4 mins
+[2026-05-16 07:36:00,695 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:00,795 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:00,800 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 17.333333333333332, '95th': 6.053055555555511, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.497746854413455, 'gmean': 1.8163652072023213}
+[2026-05-16 07:36:00,800 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.497746854413455(mean)!
+[2026-05-16 07:36:05,640 INFO] lecarb.estimator.mscn.mscn: Epoch 31, loss: 2.488333524489889, time since start: 2.5 mins
+[2026-05-16 07:36:05,640 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:05,741 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:05,746 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 17.333333333333332, '95th': 6.053055555555511, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.492771161358297, 'gmean': 1.81480876807101}
+[2026-05-16 07:36:05,747 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.492771161358297(mean)!
+[2026-05-16 07:36:10,419 INFO] lecarb.estimator.mscn.mscn: Epoch 32, loss: 2.4826899839907277, time since start: 2.6 mins
+[2026-05-16 07:36:10,420 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:10,523 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:10,529 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 17.25, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.4881348074597134, 'gmean': 1.8131015663296957}
+[2026-05-16 07:36:10,529 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.4881348074597134(mean)!
+[2026-05-16 07:36:15,400 INFO] lecarb.estimator.mscn.mscn: Epoch 33, loss: 2.4764273774867154, time since start: 2.7 mins
+[2026-05-16 07:36:15,400 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:15,505 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:15,511 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 17.200222222222227, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.4832018371208213, 'gmean': 1.8140537441277766}
+[2026-05-16 07:36:15,511 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.4832018371208213(mean)!
+[2026-05-16 07:36:19,807 INFO] lecarb.estimator.mscn.mscn: Epoch 34, loss: 2.470153275801211, time since start: 2.8 mins
+[2026-05-16 07:36:19,807 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:20,622 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:20,627 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 17.16700000000001, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.478607819736396, 'gmean': 1.811235312837343}
+[2026-05-16 07:36:20,627 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.478607819736396(mean)!
+[2026-05-16 07:36:24,797 INFO] lecarb.estimator.mscn.mscn: Epoch 35, loss: 2.4635731249439474, time since start: 2.8 mins
+[2026-05-16 07:36:24,797 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:24,905 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:24,910 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 17.001666666666704, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.4706863577027245, 'gmean': 1.8072995847542743}
+[2026-05-16 07:36:24,910 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.4706863577027245(mean)!
+[2026-05-16 07:36:29,898 INFO] lecarb.estimator.mscn.mscn: Epoch 36, loss: 2.4568062801750337, time since start: 2.9 mins
+[2026-05-16 07:36:29,899 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:30,007 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:30,012 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 17.0, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.4660981045360866, 'gmean': 1.8072063956850435}
+[2026-05-16 07:36:30,012 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.4660981045360866(mean)!
+[2026-05-16 07:36:35,075 INFO] lecarb.estimator.mscn.mscn: Epoch 37, loss: 2.4500950234276906, time since start: 3.0 mins
+[2026-05-16 07:36:35,075 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:35,183 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:35,189 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 16.666666666666668, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.4593265308377203, 'gmean': 1.8053388394181593}
+[2026-05-16 07:36:35,189 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.4593265308377203(mean)!
+[2026-05-16 07:36:40,171 INFO] lecarb.estimator.mscn.mscn: Epoch 38, loss: 2.4433192330963758, time since start: 3.1 mins
+[2026-05-16 07:36:40,171 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:40,278 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:40,283 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 16.402000000000044, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.456080254581187, 'gmean': 1.8034329390632629}
+[2026-05-16 07:36:40,284 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.456080254581187(mean)!
+[2026-05-16 07:36:45,173 INFO] lecarb.estimator.mscn.mscn: Epoch 39, loss: 2.436778209647354, time since start: 3.2 mins
+[2026-05-16 07:36:45,173 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:45,281 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:45,286 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 16.4, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.4496970280180363, 'gmean': 1.8019478421941486}
+[2026-05-16 07:36:45,286 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.4496970280180363(mean)!
+[2026-05-16 07:36:50,316 INFO] lecarb.estimator.mscn.mscn: Epoch 40, loss: 2.4295309319788094, time since start: 3.3 mins
+[2026-05-16 07:36:50,316 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:50,422 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:50,427 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 16.20085714285716, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.443185133991457, 'gmean': 1.7993036710285608}
+[2026-05-16 07:36:50,427 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.443185133991457(mean)!
+[2026-05-16 07:36:54,713 INFO] lecarb.estimator.mscn.mscn: Epoch 41, loss: 2.4225455838806775, time since start: 3.3 mins
+[2026-05-16 07:36:54,714 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:55,536 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:55,542 INFO] lecarb.estimator.utils: {'max': 83.0, '99th': 15.750500000000011, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.436959268341316, 'gmean': 1.7955754041859113}
+[2026-05-16 07:36:55,542 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.436959268341316(mean)!
+[2026-05-16 07:36:59,827 INFO] lecarb.estimator.mscn.mscn: Epoch 42, loss: 2.4163918641148783, time since start: 3.4 mins
+[2026-05-16 07:36:59,827 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:36:59,935 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:36:59,940 INFO] lecarb.estimator.utils: {'max': 83.0, '99th': 16.0, '95th': 6.0, '90th': 5.0, 'median': 1.3333333333333333, 'mean': 2.4298119494780233, 'gmean': 1.7913068069403086}
+[2026-05-16 07:36:59,941 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.4298119494780233(mean)!
+[2026-05-16 07:37:04,969 INFO] lecarb.estimator.mscn.mscn: Epoch 43, loss: 2.409426908103787, time since start: 3.5 mins
+[2026-05-16 07:37:04,969 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:05,076 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:05,081 INFO] lecarb.estimator.utils: {'max': 83.0, '99th': 15.750500000000011, '95th': 6.0, '90th': 5.0, 'median': 1.3169263733892953, 'mean': 2.4168499990395356, 'gmean': 1.7832698834433658}
+[2026-05-16 07:37:05,082 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.4168499990395356(mean)!
+[2026-05-16 07:37:09,779 INFO] lecarb.estimator.mscn.mscn: Epoch 44, loss: 2.4035833271182314, time since start: 3.6 mins
+[2026-05-16 07:37:09,779 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:09,880 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:09,885 INFO] lecarb.estimator.utils: {'max': 83.0, '99th': 15.003750000000082, '95th': 6.0, '90th': 5.0, 'median': 1.3053201506591336, 'mean': 2.4096778448857195, 'gmean': 1.7770612514906945}
+[2026-05-16 07:37:09,886 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.4096778448857195(mean)!
+[2026-05-16 07:37:14,502 INFO] lecarb.estimator.mscn.mscn: Epoch 45, loss: 2.398712399054547, time since start: 3.7 mins
+[2026-05-16 07:37:14,502 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:14,603 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:14,608 INFO] lecarb.estimator.utils: {'max': 83.0, '99th': 15.0, '95th': 6.0, '90th': 5.0, 'median': 1.287737177003366, 'mean': 2.401997114342548, 'gmean': 1.770336137616363}
+[2026-05-16 07:37:14,608 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.401997114342548(mean)!
+[2026-05-16 07:37:19,177 INFO] lecarb.estimator.mscn.mscn: Epoch 46, loss: 2.3938005603089625, time since start: 3.8 mins
+[2026-05-16 07:37:19,177 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:19,280 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:19,285 INFO] lecarb.estimator.utils: {'max': 83.0, '99th': 15.0, '95th': 6.0, '90th': 5.0, 'median': 1.2857142857142858, 'mean': 2.3959271906818222, 'gmean': 1.7652358138453847}
+[2026-05-16 07:37:19,285 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3959271906818222(mean)!
+[2026-05-16 07:37:23,916 INFO] lecarb.estimator.mscn.mscn: Epoch 47, loss: 2.3890746929207625, time since start: 3.8 mins
+[2026-05-16 07:37:23,916 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:24,017 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:24,022 INFO] lecarb.estimator.utils: {'max': 83.0, '99th': 15.003750000000082, '95th': 6.0, '90th': 5.0, 'median': 1.2857142857142858, 'mean': 2.390288528277047, 'gmean': 1.7605081552294082}
+[2026-05-16 07:37:24,023 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.390288528277047(mean)!
+[2026-05-16 07:37:28,211 INFO] lecarb.estimator.mscn.mscn: Epoch 48, loss: 2.384801020427626, time since start: 3.9 mins
+[2026-05-16 07:37:28,211 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:29,057 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:29,062 INFO] lecarb.estimator.utils: {'max': 83.0, '99th': 15.0, '95th': 6.0, '90th': 5.0, 'median': 1.2908793820558526, 'mean': 2.3889835519833715, 'gmean': 1.7600819086257422}
+[2026-05-16 07:37:29,063 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3889835519833715(mean)!
+[2026-05-16 07:37:33,417 INFO] lecarb.estimator.mscn.mscn: Epoch 49, loss: 2.3796631462719975, time since start: 4.0 mins
+[2026-05-16 07:37:33,417 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:33,523 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:33,528 INFO] lecarb.estimator.utils: {'max': 83.0, '99th': 15.0, '95th': 6.0, '90th': 4.862337662337681, 'median': 1.291953371313634, 'mean': 2.38557233001658, 'gmean': 1.7590674760245315}
+[2026-05-16 07:37:33,528 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.38557233001658(mean)!
+[2026-05-16 07:37:38,695 INFO] lecarb.estimator.mscn.mscn: Epoch 50, loss: 2.3748440864134808, time since start: 4.1 mins
+[2026-05-16 07:37:38,696 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:38,813 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:38,819 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.85857142857146, '95th': 6.0, '90th': 4.849350649350653, 'median': 1.2944700460829492, 'mean': 2.3818757731001674, 'gmean': 1.7561744502130436}
+[2026-05-16 07:37:38,819 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3818757731001674(mean)!
+[2026-05-16 07:37:43,811 INFO] lecarb.estimator.mscn.mscn: Epoch 51, loss: 2.370119960940614, time since start: 4.2 mins
+[2026-05-16 07:37:43,811 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:43,918 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:43,923 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.750500000000011, '95th': 6.0, '90th': 4.8022222222222295, 'median': 1.3039596273291925, 'mean': 2.3804000382962056, 'gmean': 1.7574549441376548}
+[2026-05-16 07:37:43,924 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3804000382962056(mean)!
+[2026-05-16 07:37:48,963 INFO] lecarb.estimator.mscn.mscn: Epoch 52, loss: 2.3657063245773315, time since start: 4.3 mins
+[2026-05-16 07:37:48,963 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:49,070 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:49,075 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.800333333333342, '95th': 6.0, '90th': 4.772307692307704, 'median': 1.3107705174357296, 'mean': 2.378245413807703, 'gmean': 1.7572744989125972}
+[2026-05-16 07:37:49,075 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.378245413807703(mean)!
+[2026-05-16 07:37:54,024 INFO] lecarb.estimator.mscn.mscn: Epoch 53, loss: 2.3612834920688552, time since start: 4.3 mins
+[2026-05-16 07:37:54,025 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:54,138 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:54,144 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.835000000000036, '95th': 6.0, '90th': 4.714596273291926, 'median': 1.301830970190912, 'mean': 2.3709100097062388, 'gmean': 1.751875352059236}
+[2026-05-16 07:37:54,144 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3709100097062388(mean)!
+[2026-05-16 07:37:59,120 INFO] lecarb.estimator.mscn.mscn: Epoch 54, loss: 2.3569109439849854, time since start: 4.4 mins
+[2026-05-16 07:37:59,121 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:37:59,227 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:37:59,232 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.800333333333342, '95th': 6.0, '90th': 4.6066666666666904, 'median': 1.305282197492259, 'mean': 2.3641479320392618, 'gmean': 1.752207943830828}
+[2026-05-16 07:37:59,232 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3641479320392618(mean)!
+[2026-05-16 07:38:03,590 INFO] lecarb.estimator.mscn.mscn: Epoch 55, loss: 2.3537125903732923, time since start: 4.5 mins
+[2026-05-16 07:38:03,590 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:04,414 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:04,419 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.667777777777802, '95th': 6.0, '90th': 4.666666666666667, 'median': 1.3022739018087854, 'mean': 2.360559420333782, 'gmean': 1.7500238473152419}
+[2026-05-16 07:38:04,419 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.360559420333782(mean)!
+[2026-05-16 07:38:08,658 INFO] lecarb.estimator.mscn.mscn: Epoch 56, loss: 2.350171368949267, time since start: 4.6 mins
+[2026-05-16 07:38:08,658 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:08,761 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:08,766 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.800333333333342, '95th': 6.0, '90th': 4.6, 'median': 1.296326956095168, 'mean': 2.3565633686025658, 'gmean': 1.7484915430970234}
+[2026-05-16 07:38:08,766 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3565633686025658(mean)!
+[2026-05-16 07:38:13,819 INFO] lecarb.estimator.mscn.mscn: Epoch 57, loss: 2.347656031044162, time since start: 4.7 mins
+[2026-05-16 07:38:13,819 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:13,927 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:13,932 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.800333333333342, '95th': 6.0, '90th': 4.557142857142862, 'median': 1.2985833661098116, 'mean': 2.3540740579994255, 'gmean': 1.7451365214069616}
+[2026-05-16 07:38:13,932 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3540740579994255(mean)!
+[2026-05-16 07:38:18,544 INFO] lecarb.estimator.mscn.mscn: Epoch 58, loss: 2.344973457102873, time since start: 4.7 mins
+[2026-05-16 07:38:18,545 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:18,650 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:18,655 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.60066666666668, '95th': 6.0, '90th': 4.56008403361345, 'median': 1.300943396226415, 'mean': 2.3519268650503076, 'gmean': 1.7461464853551008}
+[2026-05-16 07:38:18,655 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3519268650503076(mean)!
+[2026-05-16 07:38:23,354 INFO] lecarb.estimator.mscn.mscn: Epoch 59, loss: 2.341783635470332, time since start: 4.8 mins
+[2026-05-16 07:38:23,354 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:23,460 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:23,465 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.501000000000023, '95th': 6.0, '90th': 4.5, 'median': 1.296333632019116, 'mean': 2.351659942466725, 'gmean': 1.7434234898575118}
+[2026-05-16 07:38:23,466 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.351659942466725(mean)!
+[2026-05-16 07:38:28,465 INFO] lecarb.estimator.mscn.mscn: Epoch 60, loss: 2.339012956132694, time since start: 4.9 mins
+[2026-05-16 07:38:28,465 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:28,578 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:28,583 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.666666666666666, '95th': 6.0, '90th': 4.5, 'median': 1.2923976608187135, 'mean': 2.353725667305776, 'gmean': 1.7433168024498713}
+[2026-05-16 07:38:33,728 INFO] lecarb.estimator.mscn.mscn: Epoch 61, loss: 2.337758635988041, time since start: 5.0 mins
+[2026-05-16 07:38:33,728 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:33,833 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:33,839 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.60066666666668, '95th': 6.0, '90th': 4.5, 'median': 1.2924953095684804, 'mean': 2.3491031823323505, 'gmean': 1.7395423003810557}
+[2026-05-16 07:38:33,839 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3491031823323505(mean)!
+[2026-05-16 07:38:38,147 INFO] lecarb.estimator.mscn.mscn: Epoch 62, loss: 2.334554029970753, time since start: 5.1 mins
+[2026-05-16 07:38:38,147 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:38,966 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:38,972 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.5, '95th': 6.0, '90th': 4.5, 'median': 1.2777777777777777, 'mean': 2.341994797334615, 'gmean': 1.7313257095285168}
+[2026-05-16 07:38:38,972 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.341994797334615(mean)!
+[2026-05-16 07:38:43,189 INFO] lecarb.estimator.mscn.mscn: Epoch 63, loss: 2.3323668776726234, time since start: 5.2 mins
+[2026-05-16 07:38:43,189 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:43,296 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:43,302 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.501000000000023, '95th': 6.0, '90th': 4.5, 'median': 1.2857142857142858, 'mean': 2.3493713281553705, 'gmean': 1.7344702469728197}
+[2026-05-16 07:38:48,651 INFO] lecarb.estimator.mscn.mscn: Epoch 64, loss: 2.3296562992796606, time since start: 5.2 mins
+[2026-05-16 07:38:48,651 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:48,757 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:48,762 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.5, '95th': 6.0, '90th': 4.5, 'median': 1.2855736782902136, 'mean': 2.345874718752663, 'gmean': 1.7317154196117988}
+[2026-05-16 07:38:54,033 INFO] lecarb.estimator.mscn.mscn: Epoch 65, loss: 2.32746684551239, time since start: 5.3 mins
+[2026-05-16 07:38:54,033 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:54,152 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:54,158 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.60066666666668, '95th': 6.0, '90th': 4.448837209302342, 'median': 1.2857142857142858, 'mean': 2.3475251569031794, 'gmean': 1.7336026100105268}
+[2026-05-16 07:38:59,168 INFO] lecarb.estimator.mscn.mscn: Epoch 66, loss: 2.3263514820410283, time since start: 5.4 mins
+[2026-05-16 07:38:59,168 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:38:59,271 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:38:59,276 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.335000000000036, '95th': 6.068888888888856, '90th': 4.444444444444445, 'median': 1.288596966413868, 'mean': 2.3449628453571294, 'gmean': 1.7338319192291562}
+[2026-05-16 07:39:04,215 INFO] lecarb.estimator.mscn.mscn: Epoch 67, loss: 2.324787135026893, time since start: 5.5 mins
+[2026-05-16 07:39:04,215 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:04,320 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:04,326 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.335000000000036, '95th': 6.125416666666661, '90th': 4.338461538461557, 'median': 1.2933732933732935, 'mean': 2.341268919199973, 'gmean': 1.7328027283867538}
+[2026-05-16 07:39:04,326 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.341268919199973(mean)!
+[2026-05-16 07:39:09,297 INFO] lecarb.estimator.mscn.mscn: Epoch 68, loss: 2.3215764469029954, time since start: 5.6 mins
+[2026-05-16 07:39:09,297 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:09,399 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:09,404 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.333333333333334, '95th': 6.112698412698389, '90th': 4.300434782608697, 'median': 1.3006973734662577, 'mean': 2.337866342047057, 'gmean': 1.7327330998383805}
+[2026-05-16 07:39:09,404 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.337866342047057(mean)!
+[2026-05-16 07:39:13,715 INFO] lecarb.estimator.mscn.mscn: Epoch 69, loss: 2.319959888652879, time since start: 5.7 mins
+[2026-05-16 07:39:13,715 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:14,526 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:14,533 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.286190476190487, '95th': 6.112222222222206, '90th': 4.3136824324324365, 'median': 1.3005354662963358, 'mean': 2.340603124282513, 'gmean': 1.7318703412972922}
+[2026-05-16 07:39:18,847 INFO] lecarb.estimator.mscn.mscn: Epoch 70, loss: 2.318391349850869, time since start: 5.7 mins
+[2026-05-16 07:39:18,847 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:18,952 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:18,957 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.335000000000036, '95th': 6.133333333333334, '90th': 4.306250000000002, 'median': 1.3021061869240895, 'mean': 2.3397460486405617, 'gmean': 1.7316708528968725}
+[2026-05-16 07:39:24,028 INFO] lecarb.estimator.mscn.mscn: Epoch 71, loss: 2.3163725162039, time since start: 5.8 mins
+[2026-05-16 07:39:24,028 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:24,133 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:24,138 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.501000000000023, '95th': 6.133809523809517, '90th': 4.253571428571441, 'median': 1.2965499746321663, 'mean': 2.3367054576271338, 'gmean': 1.729095566172809}
+[2026-05-16 07:39:24,139 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3367054576271338(mean)!
+[2026-05-16 07:39:29,242 INFO] lecarb.estimator.mscn.mscn: Epoch 72, loss: 2.3145519567995656, time since start: 5.9 mins
+[2026-05-16 07:39:29,242 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:29,347 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:29,353 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.501000000000023, '95th': 6.133809523809517, '90th': 4.25, 'median': 1.303750586029067, 'mean': 2.3360707022769507, 'gmean': 1.7333474948300496}
+[2026-05-16 07:39:29,353 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3360707022769507(mean)!
+[2026-05-16 07:39:34,262 INFO] lecarb.estimator.mscn.mscn: Epoch 73, loss: 2.313482771114427, time since start: 6.0 mins
+[2026-05-16 07:39:34,262 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:34,364 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:34,369 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.60066666666668, '95th': 6.166666666666667, '90th': 4.222222222222222, 'median': 1.3, 'mean': 2.332341625486284, 'gmean': 1.7293217009491144}
+[2026-05-16 07:39:34,370 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.332341625486284(mean)!
+[2026-05-16 07:39:39,384 INFO] lecarb.estimator.mscn.mscn: Epoch 74, loss: 2.3125164946731256, time since start: 6.1 mins
+[2026-05-16 07:39:39,384 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:39,491 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:39,496 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.66800000000003, '95th': 6.166666666666667, '90th': 4.222222222222222, 'median': 1.2901612903225805, 'mean': 2.331643821858744, 'gmean': 1.7244609930381574}
+[2026-05-16 07:39:39,497 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.331643821858744(mean)!
+[2026-05-16 07:39:44,580 INFO] lecarb.estimator.mscn.mscn: Epoch 75, loss: 2.3096018664690914, time since start: 6.2 mins
+[2026-05-16 07:39:44,580 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:44,681 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:44,687 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.800333333333342, '95th': 6.125892857142844, '90th': 4.2, 'median': 1.294266945356823, 'mean': 2.328169982687367, 'gmean': 1.7265074113316634}
+[2026-05-16 07:39:44,687 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.328169982687367(mean)!
+[2026-05-16 07:39:48,911 INFO] lecarb.estimator.mscn.mscn: Epoch 76, loss: 2.309473220182925, time since start: 6.2 mins
+[2026-05-16 07:39:48,911 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:49,730 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:49,735 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.800333333333342, '95th': 6.166666666666667, '90th': 4.1902702702702745, 'median': 1.293248047812241, 'mean': 2.3314289957453904, 'gmean': 1.724906967938986}
+[2026-05-16 07:39:53,843 INFO] lecarb.estimator.mscn.mscn: Epoch 77, loss: 2.3062877655029297, time since start: 6.3 mins
+[2026-05-16 07:39:53,843 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:53,946 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:53,951 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.166666666666667, '90th': 4.15512820512821, 'median': 1.294976881042455, 'mean': 2.3299281899347033, 'gmean': 1.725866035653723}
+[2026-05-16 07:39:58,677 INFO] lecarb.estimator.mscn.mscn: Epoch 78, loss: 2.3055270326380826, time since start: 6.4 mins
+[2026-05-16 07:39:58,677 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:39:58,778 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:39:58,783 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.835000000000036, '95th': 6.166666666666667, '90th': 4.166666666666667, 'median': 1.2916666666666667, 'mean': 2.3263946510866815, 'gmean': 1.7221250731192475}
+[2026-05-16 07:39:58,784 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3263946510866815(mean)!
+[2026-05-16 07:40:03,736 INFO] lecarb.estimator.mscn.mscn: Epoch 79, loss: 2.304969398342833, time since start: 6.5 mins
+[2026-05-16 07:40:03,736 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:03,847 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:03,852 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 14.800333333333342, '95th': 6.2, '90th': 4.13701298701299, 'median': 1.2838672005338672, 'mean': 2.3257328085694504, 'gmean': 1.7212353603722046}
+[2026-05-16 07:40:03,853 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3257328085694504(mean)!
+[2026-05-16 07:40:08,871 INFO] lecarb.estimator.mscn.mscn: Epoch 80, loss: 2.3014900976297805, time since start: 6.6 mins
+[2026-05-16 07:40:08,871 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:08,976 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:08,981 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.2, '90th': 4.143956043956049, 'median': 1.2803823107435228, 'mean': 2.3215191866050517, 'gmean': 1.7157229095021245}
+[2026-05-16 07:40:08,982 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3215191866050517(mean)!
+[2026-05-16 07:40:13,636 INFO] lecarb.estimator.mscn.mscn: Epoch 81, loss: 2.2995323088704325, time since start: 6.7 mins
+[2026-05-16 07:40:13,636 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:13,742 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:13,747 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.127083333333303, '90th': 4.112500000000004, 'median': 1.2684438621245717, 'mean': 2.322247714561855, 'gmean': 1.7139520657698692}
+[2026-05-16 07:40:18,521 INFO] lecarb.estimator.mscn.mscn: Epoch 82, loss: 2.2970804268000076, time since start: 6.7 mins
+[2026-05-16 07:40:18,522 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:18,626 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:18,632 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.112222222222206, '90th': 4.125833333333336, 'median': 1.2621888822869214, 'mean': 2.3191243543421685, 'gmean': 1.7107000829457142}
+[2026-05-16 07:40:18,632 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3191243543421685(mean)!
+[2026-05-16 07:40:23,013 INFO] lecarb.estimator.mscn.mscn: Epoch 83, loss: 2.2954172990760027, time since start: 6.8 mins
+[2026-05-16 07:40:23,013 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:23,837 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:23,843 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.003846153846098, '90th': 4.069090909090918, 'median': 1.25768722882475, 'mean': 2.314406045712427, 'gmean': 1.707004967750025}
+[2026-05-16 07:40:23,843 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.314406045712427(mean)!
+[2026-05-16 07:40:28,029 INFO] lecarb.estimator.mscn.mscn: Epoch 84, loss: 2.291020865343055, time since start: 6.9 mins
+[2026-05-16 07:40:28,029 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:28,136 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:28,141 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.134999999999976, '90th': 4.059392789373816, 'median': 1.2669781931464175, 'mean': 2.3113483676998827, 'gmean': 1.7073451534368145}
+[2026-05-16 07:40:28,141 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3113483676998827(mean)!
+[2026-05-16 07:40:33,096 INFO] lecarb.estimator.mscn.mscn: Epoch 85, loss: 2.28647451011502, time since start: 7.0 mins
+[2026-05-16 07:40:33,096 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:33,211 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:33,216 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.076983173076922, '90th': 4.0, 'median': 1.2542925571112749, 'mean': 2.3089200013340694, 'gmean': 1.7038222213493968}
+[2026-05-16 07:40:33,217 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3089200013340694(mean)!
+[2026-05-16 07:40:38,318 INFO] lecarb.estimator.mscn.mscn: Epoch 86, loss: 2.2838825960548554, time since start: 7.1 mins
+[2026-05-16 07:40:38,318 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:38,428 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:38,433 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.134999999999976, '90th': 4.0, 'median': 1.2595129733978223, 'mean': 2.315602533885929, 'gmean': 1.7152207374621373}
+[2026-05-16 07:40:43,493 INFO] lecarb.estimator.mscn.mscn: Epoch 87, loss: 2.279012249440563, time since start: 7.2 mins
+[2026-05-16 07:40:43,493 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:43,598 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:43,603 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.077764423076911, '90th': 4.0, 'median': 1.25, 'mean': 2.302087785677364, 'gmean': 1.6987003410111334}
+[2026-05-16 07:40:43,604 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.302087785677364(mean)!
+[2026-05-16 07:40:48,585 INFO] lecarb.estimator.mscn.mscn: Epoch 88, loss: 2.273724684909898, time since start: 7.2 mins
+[2026-05-16 07:40:48,585 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:48,696 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:48,701 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.078076923076906, '90th': 4.0, 'median': 1.25, 'mean': 2.3037689898528013, 'gmean': 1.6984035393596106}
+[2026-05-16 07:40:53,776 INFO] lecarb.estimator.mscn.mscn: Epoch 89, loss: 2.2691671459042295, time since start: 7.3 mins
+[2026-05-16 07:40:53,777 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:53,885 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:53,890 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.027675675675667, '90th': 4.0, 'median': 1.25, 'mean': 2.303958290786466, 'gmean': 1.703315548774311}
+[2026-05-16 07:40:57,797 INFO] lecarb.estimator.mscn.mscn: Epoch 90, loss: 2.265695095062256, time since start: 7.4 mins
+[2026-05-16 07:40:57,797 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:40:58,608 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:40:58,613 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.667142857142867, '95th': 6.027675675675667, '90th': 4.0, 'median': 1.25, 'mean': 2.3055057365426803, 'gmean': 1.7023644908588917}
+[2026-05-16 07:41:03,172 INFO] lecarb.estimator.mscn.mscn: Epoch 91, loss: 2.2602150221260224, time since start: 7.5 mins
+[2026-05-16 07:41:03,172 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:03,278 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:03,283 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.714642857142865, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.3018966343295695, 'gmean': 1.6972656761304727}
+[2026-05-16 07:41:03,283 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.3018966343295695(mean)!
+[2026-05-16 07:41:08,478 INFO] lecarb.estimator.mscn.mscn: Epoch 92, loss: 2.255320738772957, time since start: 7.6 mins
+[2026-05-16 07:41:08,478 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:08,580 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:08,586 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.111111111111111, '90th': 4.0, 'median': 1.25, 'mean': 2.301574409900072, 'gmean': 1.6985014891533559}
+[2026-05-16 07:41:08,586 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.301574409900072(mean)!
+[2026-05-16 07:41:13,673 INFO] lecarb.estimator.mscn.mscn: Epoch 93, loss: 2.251415573820776, time since start: 7.7 mins
+[2026-05-16 07:41:13,673 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:13,779 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:13,785 INFO] lecarb.estimator.utils: {'max': 109.0, '99th': 15.0, '95th': 6.042999999999957, '90th': 4.0, 'median': 1.25, 'mean': 2.300580695833603, 'gmean': 1.701231820328255}
+[2026-05-16 07:41:13,785 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.300580695833603(mean)!
+[2026-05-16 07:41:19,028 INFO] lecarb.estimator.mscn.mscn: Epoch 94, loss: 2.2477196211717567, time since start: 7.8 mins
+[2026-05-16 07:41:19,028 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:19,130 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:19,135 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 15.0, '95th': 6.125416666666661, '90th': 4.0, 'median': 1.25, 'mean': 2.2891169924072834, 'gmean': 1.6923647305727287}
+[2026-05-16 07:41:19,136 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2891169924072834(mean)!
+[2026-05-16 07:41:24,071 INFO] lecarb.estimator.mscn.mscn: Epoch 95, loss: 2.2410498346601213, time since start: 7.8 mins
+[2026-05-16 07:41:24,072 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:24,175 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:24,180 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 15.0, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2854016158254415, 'gmean': 1.6922276604412754}
+[2026-05-16 07:41:24,180 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2854016158254415(mean)!
+[2026-05-16 07:41:29,634 INFO] lecarb.estimator.mscn.mscn: Epoch 96, loss: 2.2328586712175484, time since start: 7.9 mins
+[2026-05-16 07:41:29,634 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:29,737 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:29,742 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.60114285714288, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2808862377174446, 'gmean': 1.689580612179977}
+[2026-05-16 07:41:29,742 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2808862377174446(mean)!
+[2026-05-16 07:41:34,019 INFO] lecarb.estimator.mscn.mscn: Epoch 97, loss: 2.228606126746353, time since start: 8.0 mins
+[2026-05-16 07:41:34,019 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:34,846 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:34,851 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 15.0, '95th': 6.0, '90th': 4.0, 'median': 1.2528174773981693, 'mean': 2.28330615580108, 'gmean': 1.6955815593976507}
+[2026-05-16 07:41:39,262 INFO] lecarb.estimator.mscn.mscn: Epoch 98, loss: 2.2238387854731814, time since start: 8.1 mins
+[2026-05-16 07:41:39,262 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:39,370 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:39,375 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 15.0, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.272663424731747, 'gmean': 1.6855190962242055}
+[2026-05-16 07:41:39,376 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.272663424731747(mean)!
+[2026-05-16 07:41:44,589 INFO] lecarb.estimator.mscn.mscn: Epoch 99, loss: 2.2174809173661836, time since start: 8.2 mins
+[2026-05-16 07:41:44,589 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:44,695 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:44,701 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.835000000000036, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.269121902750013, 'gmean': 1.6863960166681033}
+[2026-05-16 07:41:44,701 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.269121902750013(mean)!
+[2026-05-16 07:41:49,997 INFO] lecarb.estimator.mscn.mscn: Epoch 100, loss: 2.2123834843538246, time since start: 8.3 mins
+[2026-05-16 07:41:49,997 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:50,103 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:50,108 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.502142857142903, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.262931534472693, 'gmean': 1.6842040089755812}
+[2026-05-16 07:41:50,109 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.262931534472693(mean)!
+[2026-05-16 07:41:55,145 INFO] lecarb.estimator.mscn.mscn: Epoch 101, loss: 2.210228311772249, time since start: 8.4 mins
+[2026-05-16 07:41:55,145 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:41:55,251 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:41:55,256 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.5, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.256884460142115, 'gmean': 1.6808293889656354}
+[2026-05-16 07:41:55,256 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.256884460142115(mean)!
+[2026-05-16 07:42:00,466 INFO] lecarb.estimator.mscn.mscn: Epoch 102, loss: 2.2054757536674034, time since start: 8.4 mins
+[2026-05-16 07:42:00,466 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:00,571 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:00,577 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.5, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2550600794336337, 'gmean': 1.682034412311752}
+[2026-05-16 07:42:00,577 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2550600794336337(mean)!
+[2026-05-16 07:42:06,043 INFO] lecarb.estimator.mscn.mscn: Epoch 103, loss: 2.2027781982811128, time since start: 8.5 mins
+[2026-05-16 07:42:06,043 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:06,146 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:06,151 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.5, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.252480949749674, 'gmean': 1.6793946167572973}
+[2026-05-16 07:42:06,151 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.252480949749674(mean)!
+[2026-05-16 07:42:10,465 INFO] lecarb.estimator.mscn.mscn: Epoch 104, loss: 2.199447232849744, time since start: 8.6 mins
+[2026-05-16 07:42:10,465 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:11,283 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:11,289 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.5, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.248122864491954, 'gmean': 1.6785098713322317}
+[2026-05-16 07:42:11,289 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.248122864491954(mean)!
+[2026-05-16 07:42:15,691 INFO] lecarb.estimator.mscn.mscn: Epoch 105, loss: 2.1971756013072268, time since start: 8.7 mins
+[2026-05-16 07:42:15,691 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:15,795 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:15,800 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.335000000000036, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2504096336798405, 'gmean': 1.6826834047521924}
+[2026-05-16 07:42:20,759 INFO] lecarb.estimator.mscn.mscn: Epoch 106, loss: 2.1941633115009385, time since start: 8.8 mins
+[2026-05-16 07:42:20,760 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:20,863 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:20,869 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.5, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.252756811559216, 'gmean': 1.6871284385759344}
+[2026-05-16 07:42:25,843 INFO] lecarb.estimator.mscn.mscn: Epoch 107, loss: 2.1916881179323, time since start: 8.9 mins
+[2026-05-16 07:42:25,843 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:25,947 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:25,953 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.250833333333352, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2454421394071526, 'gmean': 1.6788175117800888}
+[2026-05-16 07:42:25,953 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2454421394071526(mean)!
+[2026-05-16 07:42:31,067 INFO] lecarb.estimator.mscn.mscn: Epoch 108, loss: 2.1875034984277217, time since start: 9.0 mins
+[2026-05-16 07:42:31,068 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:31,177 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:31,183 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.134500000000026, '95th': 6.0, '90th': 4.0, 'median': 1.2513245398603714, 'mean': 2.2470079011198925, 'gmean': 1.6854399305420829}
+[2026-05-16 07:42:36,237 INFO] lecarb.estimator.mscn.mscn: Epoch 109, loss: 2.1845269920874615, time since start: 9.0 mins
+[2026-05-16 07:42:36,237 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:36,344 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:36,349 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.5, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2420432257978353, 'gmean': 1.6779427249469714}
+[2026-05-16 07:42:36,350 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2420432257978353(mean)!
+[2026-05-16 07:42:41,027 INFO] lecarb.estimator.mscn.mscn: Epoch 110, loss: 2.1830236437369366, time since start: 9.1 mins
+[2026-05-16 07:42:41,027 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:41,135 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:41,141 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.286190476190487, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2432202619273625, 'gmean': 1.6829954567443206}
+[2026-05-16 07:42:45,440 INFO] lecarb.estimator.mscn.mscn: Epoch 111, loss: 2.1797691364677583, time since start: 9.2 mins
+[2026-05-16 07:42:45,440 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:46,290 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:46,295 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.095619047619055, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.238371252042246, 'gmean': 1.6801775224041269}
+[2026-05-16 07:42:46,296 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.238371252042246(mean)!
+[2026-05-16 07:42:50,518 INFO] lecarb.estimator.mscn.mscn: Epoch 112, loss: 2.1769846191211624, time since start: 9.3 mins
+[2026-05-16 07:42:50,518 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:50,624 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:50,629 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.002500000000055, '95th': 6.0, '90th': 4.0, 'median': 1.2521208210863384, 'mean': 2.2370166729686956, 'gmean': 1.6813176349669292}
+[2026-05-16 07:42:50,630 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2370166729686956(mean)!
+[2026-05-16 07:42:55,745 INFO] lecarb.estimator.mscn.mscn: Epoch 113, loss: 2.172098088021181, time since start: 9.4 mins
+[2026-05-16 07:42:55,745 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:42:55,853 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:42:55,858 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.234096483137285, 'gmean': 1.6799204057613069}
+[2026-05-16 07:42:55,858 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.234096483137285(mean)!
+[2026-05-16 07:43:01,037 INFO] lecarb.estimator.mscn.mscn: Epoch 114, loss: 2.1711547642338034, time since start: 9.5 mins
+[2026-05-16 07:43:01,037 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:01,143 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:01,149 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.232507910546585, 'gmean': 1.6802552038957788}
+[2026-05-16 07:43:01,149 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.232507910546585(mean)!
+[2026-05-16 07:43:06,342 INFO] lecarb.estimator.mscn.mscn: Epoch 115, loss: 2.1665573862134195, time since start: 9.5 mins
+[2026-05-16 07:43:06,342 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:06,466 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:06,471 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.229900813434074, 'gmean': 1.6790846927060146}
+[2026-05-16 07:43:06,471 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.229900813434074(mean)!
+[2026-05-16 07:43:11,731 INFO] lecarb.estimator.mscn.mscn: Epoch 116, loss: 2.164157582789051, time since start: 9.6 mins
+[2026-05-16 07:43:11,731 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:11,831 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:11,836 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.2511958753581984, 'mean': 2.2288566251643855, 'gmean': 1.6788036308690173}
+[2026-05-16 07:43:11,836 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2288566251643855(mean)!
+[2026-05-16 07:43:17,012 INFO] lecarb.estimator.mscn.mscn: Epoch 117, loss: 2.160893954792801, time since start: 9.7 mins
+[2026-05-16 07:43:17,012 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:17,121 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:17,126 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.226177854822454, 'gmean': 1.67196823600246}
+[2026-05-16 07:43:17,126 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.226177854822454(mean)!
+[2026-05-16 07:43:21,112 INFO] lecarb.estimator.mscn.mscn: Epoch 118, loss: 2.158448164560357, time since start: 9.8 mins
+[2026-05-16 07:43:21,113 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:21,927 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:21,933 INFO] lecarb.estimator.utils: {'max': 72.66666666666667, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2241531701776256, 'gmean': 1.6737034113163478}
+[2026-05-16 07:43:21,933 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2241531701776256(mean)!
+[2026-05-16 07:43:26,314 INFO] lecarb.estimator.mscn.mscn: Epoch 119, loss: 2.156215100872273, time since start: 9.9 mins
+[2026-05-16 07:43:26,314 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:26,420 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:26,426 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.333333333333334, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2298718799264106, 'gmean': 1.6808542365111903}
+[2026-05-16 07:43:31,456 INFO] lecarb.estimator.mscn.mscn: Epoch 120, loss: 2.1551670870002435, time since start: 10.0 mins
+[2026-05-16 07:43:31,457 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:31,566 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:31,571 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.133666666666674, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2256937214666768, 'gmean': 1.6737394984702167}
+[2026-05-16 07:43:37,189 INFO] lecarb.estimator.mscn.mscn: Epoch 121, loss: 2.154568829098526, time since start: 10.1 mins
+[2026-05-16 07:43:37,189 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:37,320 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:37,325 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.134500000000026, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2226762920446355, 'gmean': 1.6791659409085795}
+[2026-05-16 07:43:37,326 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2226762920446355(mean)!
+[2026-05-16 07:43:42,778 INFO] lecarb.estimator.mscn.mscn: Epoch 122, loss: 2.149915020076596, time since start: 10.1 mins
+[2026-05-16 07:43:42,778 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:42,885 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:42,890 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.134500000000026, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.223231085667293, 'gmean': 1.675805122086278}
+[2026-05-16 07:43:47,793 INFO] lecarb.estimator.mscn.mscn: Epoch 123, loss: 2.148751884090657, time since start: 10.2 mins
+[2026-05-16 07:43:47,793 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:47,893 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:47,898 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.134500000000026, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2189656911485502, 'gmean': 1.674606178285009}
+[2026-05-16 07:43:47,899 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2189656911485502(mean)!
+[2026-05-16 07:43:52,709 INFO] lecarb.estimator.mscn.mscn: Epoch 124, loss: 2.147064831792092, time since start: 10.3 mins
+[2026-05-16 07:43:52,709 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:52,814 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:52,820 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.250357142857151, '95th': 6.0, '90th': 4.0, 'median': 1.2489246632616844, 'mean': 2.2141837919703575, 'gmean': 1.6683361300592061}
+[2026-05-16 07:43:52,820 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2141837919703575(mean)!
+[2026-05-16 07:43:56,875 INFO] lecarb.estimator.mscn.mscn: Epoch 125, loss: 2.1429232918486303, time since start: 10.4 mins
+[2026-05-16 07:43:56,875 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:43:57,693 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:43:57,699 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.134500000000026, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.211914421907815, 'gmean': 1.6666825005248371}
+[2026-05-16 07:43:57,699 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.211914421907815(mean)!
+[2026-05-16 07:44:01,782 INFO] lecarb.estimator.mscn.mscn: Epoch 126, loss: 2.140831610377954, time since start: 10.5 mins
+[2026-05-16 07:44:01,783 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:01,891 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:01,897 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.250357142857151, '95th': 6.0, '90th': 4.0, 'median': 1.25, 'mean': 2.2138661583070514, 'gmean': 1.6688250075677045}
+[2026-05-16 07:44:07,001 INFO] lecarb.estimator.mscn.mscn: Epoch 127, loss: 2.1389345161768856, time since start: 10.6 mins
+[2026-05-16 07:44:07,001 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:07,108 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:07,113 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.001333333333362, '95th': 6.0, '90th': 4.0, 'median': 1.2432316087072866, 'mean': 2.208827763639475, 'gmean': 1.6625272150989638}
+[2026-05-16 07:44:07,113 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.208827763639475(mean)!
+[2026-05-16 07:44:12,170 INFO] lecarb.estimator.mscn.mscn: Epoch 128, loss: 2.136653479264707, time since start: 10.6 mins
+[2026-05-16 07:44:12,170 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:12,274 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:12,279 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.2413793103448276, 'mean': 2.2039928413062335, 'gmean': 1.660453701659178}
+[2026-05-16 07:44:12,280 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.2039928413062335(mean)!
+[2026-05-16 07:44:17,504 INFO] lecarb.estimator.mscn.mscn: Epoch 129, loss: 2.1337993643721758, time since start: 10.7 mins
+[2026-05-16 07:44:17,504 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:17,612 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:17,617 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.2405361834248865, 'mean': 2.20507248154005, 'gmean': 1.6613147864505338}
+[2026-05-16 07:44:22,643 INFO] lecarb.estimator.mscn.mscn: Epoch 130, loss: 2.132522379865452, time since start: 10.8 mins
+[2026-05-16 07:44:22,643 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:22,750 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:22,755 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.250357142857151, '95th': 6.0, '90th': 4.0, 'median': 1.237280194525991, 'mean': 2.1997798136392857, 'gmean': 1.6587949102437507}
+[2026-05-16 07:44:22,756 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1997798136392857(mean)!
+[2026-05-16 07:44:27,768 INFO] lecarb.estimator.mscn.mscn: Epoch 131, loss: 2.129585159068205, time since start: 10.9 mins
+[2026-05-16 07:44:27,768 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:27,870 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:27,875 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.001333333333362, '95th': 6.0, '90th': 4.0, 'median': 1.2371477564333166, 'mean': 2.207313639933687, 'gmean': 1.6722694236516555}
+[2026-05-16 07:44:31,824 INFO] lecarb.estimator.mscn.mscn: Epoch 132, loss: 2.127250827088648, time since start: 11.0 mins
+[2026-05-16 07:44:31,824 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:32,638 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:32,644 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.001333333333362, '95th': 6.0, '90th': 4.0, 'median': 1.2330900243309002, 'mean': 2.1955521019353834, 'gmean': 1.6565946645971215}
+[2026-05-16 07:44:32,644 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1955521019353834(mean)!
+[2026-05-16 07:44:37,039 INFO] lecarb.estimator.mscn.mscn: Epoch 133, loss: 2.1240531035831998, time since start: 11.1 mins
+[2026-05-16 07:44:37,039 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:37,145 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:37,150 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.2356504868584817, 'mean': 2.19749306375719, 'gmean': 1.6564338219275887}
+[2026-05-16 07:44:42,232 INFO] lecarb.estimator.mscn.mscn: Epoch 134, loss: 2.1229547262191772, time since start: 11.1 mins
+[2026-05-16 07:44:42,232 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:42,337 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:42,343 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.2378070744182696, 'mean': 2.195485955640154, 'gmean': 1.657143120428526}
+[2026-05-16 07:44:42,343 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.195485955640154(mean)!
+[2026-05-16 07:44:47,331 INFO] lecarb.estimator.mscn.mscn: Epoch 135, loss: 2.1201376708186404, time since start: 11.2 mins
+[2026-05-16 07:44:47,332 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:47,437 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:47,442 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.2425713445130921, 'mean': 2.1953842642973194, 'gmean': 1.6605809432840726}
+[2026-05-16 07:44:47,442 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1953842642973194(mean)!
+[2026-05-16 07:44:52,401 INFO] lecarb.estimator.mscn.mscn: Epoch 136, loss: 2.1200844572514903, time since start: 11.3 mins
+[2026-05-16 07:44:52,401 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:52,507 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:52,512 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.239980879541109, 'mean': 2.1910635544639945, 'gmean': 1.6537290346217537}
+[2026-05-16 07:44:52,512 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1910635544639945(mean)!
+[2026-05-16 07:44:57,566 INFO] lecarb.estimator.mscn.mscn: Epoch 137, loss: 2.1159377779279436, time since start: 11.4 mins
+[2026-05-16 07:44:57,567 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:44:57,676 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:44:57,681 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.2378816997651079, 'mean': 2.190334113296935, 'gmean': 1.652094161278623}
+[2026-05-16 07:44:57,681 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.190334113296935(mean)!
+[2026-05-16 07:45:02,935 INFO] lecarb.estimator.mscn.mscn: Epoch 138, loss: 2.113068242462314, time since start: 11.5 mins
+[2026-05-16 07:45:02,935 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:03,052 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:03,058 INFO] lecarb.estimator.utils: {'max': 51.5, '99th': 14.0, '95th': 6.0, '90th': 4.0, 'median': 1.2350938673341676, 'mean': 2.1880630638832628, 'gmean': 1.6515962390837586}
+[2026-05-16 07:45:03,059 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1880630638832628(mean)!
+[2026-05-16 07:45:07,521 INFO] lecarb.estimator.mscn.mscn: Epoch 139, loss: 2.110520753325248, time since start: 11.6 mins
+[2026-05-16 07:45:07,521 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:08,343 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:08,348 INFO] lecarb.estimator.utils: {'max': 51.5, '99th': 13.752500000000055, '95th': 6.0, '90th': 4.0, 'median': 1.239366134751773, 'mean': 2.186020089777821, 'gmean': 1.6544297846128613}
+[2026-05-16 07:45:08,349 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.186020089777821(mean)!
+[2026-05-16 07:45:12,599 INFO] lecarb.estimator.mscn.mscn: Epoch 140, loss: 2.1077383197083766, time since start: 11.6 mins
+[2026-05-16 07:45:12,599 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:12,701 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:12,706 INFO] lecarb.estimator.utils: {'max': 51.5, '99th': 13.714642857142865, '95th': 6.0, '90th': 4.0, 'median': 1.2417542587894164, 'mean': 2.182849975614208, 'gmean': 1.6542837386780673}
+[2026-05-16 07:45:12,707 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.182849975614208(mean)!
+[2026-05-16 07:45:17,713 INFO] lecarb.estimator.mscn.mscn: Epoch 141, loss: 2.105071038615947, time since start: 11.7 mins
+[2026-05-16 07:45:17,713 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:17,822 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:17,827 INFO] lecarb.estimator.utils: {'max': 51.5, '99th': 13.667142857142867, '95th': 6.0, '90th': 4.0, 'median': 1.2352941176470589, 'mean': 2.179370842863898, 'gmean': 1.6494989274774816}
+[2026-05-16 07:45:17,827 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.179370842863898(mean)!
+[2026-05-16 07:45:22,894 INFO] lecarb.estimator.mscn.mscn: Epoch 142, loss: 2.1015190968708115, time since start: 11.8 mins
+[2026-05-16 07:45:22,894 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:22,999 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:23,004 INFO] lecarb.estimator.utils: {'max': 51.5, '99th': 13.752500000000055, '95th': 6.0, '90th': 4.0, 'median': 1.229814323607427, 'mean': 2.1775222631226545, 'gmean': 1.6435449789832353}
+[2026-05-16 07:45:23,004 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1775222631226545(mean)!
+[2026-05-16 07:45:28,044 INFO] lecarb.estimator.mscn.mscn: Epoch 143, loss: 2.0987883112868486, time since start: 11.9 mins
+[2026-05-16 07:45:28,044 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:28,146 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:28,151 INFO] lecarb.estimator.utils: {'max': 53.333333333333336, '99th': 13.714642857142865, '95th': 6.0, '90th': 4.0, 'median': 1.2257298291318675, 'mean': 2.1738247623620133, 'gmean': 1.6414888342940606}
+[2026-05-16 07:45:28,152 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1738247623620133(mean)!
+[2026-05-16 07:45:33,026 INFO] lecarb.estimator.mscn.mscn: Epoch 144, loss: 2.096215913490373, time since start: 12.0 mins
+[2026-05-16 07:45:33,026 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:33,128 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:33,133 INFO] lecarb.estimator.utils: {'max': 53.333333333333336, '99th': 13.401000000000023, '95th': 6.0, '90th': 4.0, 'median': 1.2290474543043302, 'mean': 2.1692991180899632, 'gmean': 1.6411323595870424}
+[2026-05-16 07:45:33,134 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1692991180899632(mean)!
+[2026-05-16 07:45:38,117 INFO] lecarb.estimator.mscn.mscn: Epoch 145, loss: 2.092379709895776, time since start: 12.1 mins
+[2026-05-16 07:45:38,117 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:38,225 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:38,230 INFO] lecarb.estimator.utils: {'max': 56.5, '99th': 13.501666666666702, '95th': 6.0, '90th': 4.0, 'median': 1.227038425492034, 'mean': 2.169036651549403, 'gmean': 1.6410543254777412}
+[2026-05-16 07:45:38,230 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.169036651549403(mean)!
+[2026-05-16 07:45:42,568 INFO] lecarb.estimator.mscn.mscn: Epoch 146, loss: 2.0910781974695167, time since start: 12.1 mins
+[2026-05-16 07:45:42,568 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:43,394 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:43,399 INFO] lecarb.estimator.utils: {'max': 53.333333333333336, '99th': 13.002500000000055, '95th': 6.0, '90th': 4.0, 'median': 1.2406370629674555, 'mean': 2.1677226891271317, 'gmean': 1.6483335923351143}
+[2026-05-16 07:45:43,400 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1677226891271317(mean)!
+[2026-05-16 07:45:47,804 INFO] lecarb.estimator.mscn.mscn: Epoch 147, loss: 2.0875553549552452, time since start: 12.2 mins
+[2026-05-16 07:45:47,804 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:47,906 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:47,912 INFO] lecarb.estimator.utils: {'max': 56.5, '99th': 13.312708333333338, '95th': 6.0, '90th': 4.0, 'median': 1.2303905266408532, 'mean': 2.164786502210867, 'gmean': 1.6408367577772425}
+[2026-05-16 07:45:47,912 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.164786502210867(mean)!
+[2026-05-16 07:45:52,996 INFO] lecarb.estimator.mscn.mscn: Epoch 148, loss: 2.0830868652888705, time since start: 12.3 mins
+[2026-05-16 07:45:52,996 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:53,100 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:53,105 INFO] lecarb.estimator.utils: {'max': 56.5, '99th': 13.250625000000014, '95th': 6.0, '90th': 4.0, 'median': 1.2272727272727273, 'mean': 2.1601322685262314, 'gmean': 1.639148059593524}
+[2026-05-16 07:45:53,106 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1601322685262314(mean)!
+[2026-05-16 07:45:58,114 INFO] lecarb.estimator.mscn.mscn: Epoch 149, loss: 2.0815470632241695, time since start: 12.4 mins
+[2026-05-16 07:45:58,114 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:45:58,220 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:45:58,225 INFO] lecarb.estimator.utils: {'max': 53.333333333333336, '99th': 13.0, '95th': 6.0, '90th': 4.0, 'median': 1.2280168506372315, 'mean': 2.159569858914534, 'gmean': 1.6440468787764198}
+[2026-05-16 07:45:58,226 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.159569858914534(mean)!
+[2026-05-16 07:46:03,220 INFO] lecarb.estimator.mscn.mscn: Epoch 150, loss: 2.077864196835732, time since start: 12.5 mins
+[2026-05-16 07:46:03,220 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:03,328 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:03,334 INFO] lecarb.estimator.utils: {'max': 53.333333333333336, '99th': 13.0, '95th': 6.0, '90th': 4.0, 'median': 1.2260394005317865, 'mean': 2.152143454378149, 'gmean': 1.6402882582429346}
+[2026-05-16 07:46:03,334 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.152143454378149(mean)!
+[2026-05-16 07:46:08,354 INFO] lecarb.estimator.mscn.mscn: Epoch 151, loss: 2.074433374161623, time since start: 12.6 mins
+[2026-05-16 07:46:08,354 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:08,461 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:08,466 INFO] lecarb.estimator.utils: {'max': 56.5, '99th': 13.0, '95th': 6.0, '90th': 4.0, 'median': 1.2222222222222223, 'mean': 2.150323792973945, 'gmean': 1.6325176371665977}
+[2026-05-16 07:46:08,467 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.150323792973945(mean)!
+[2026-05-16 07:46:13,399 INFO] lecarb.estimator.mscn.mscn: Epoch 152, loss: 2.0701801424123802, time since start: 12.7 mins
+[2026-05-16 07:46:13,399 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:13,506 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:13,511 INFO] lecarb.estimator.utils: {'max': 53.333333333333336, '99th': 13.0, '95th': 6.0, '90th': 4.0, 'median': 1.2240908234407386, 'mean': 2.1464087700544927, 'gmean': 1.6315392240169542}
+[2026-05-16 07:46:13,512 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1464087700544927(mean)!
+[2026-05-16 07:46:17,860 INFO] lecarb.estimator.mscn.mscn: Epoch 153, loss: 2.066655562848461, time since start: 12.7 mins
+[2026-05-16 07:46:17,860 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:18,697 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:18,702 INFO] lecarb.estimator.utils: {'max': 56.5, '99th': 13.0, '95th': 6.0, '90th': 4.0, 'median': 1.2222222222222223, 'mean': 2.1474308646561915, 'gmean': 1.6337633416347468}
+[2026-05-16 07:46:22,738 INFO] lecarb.estimator.mscn.mscn: Epoch 154, loss: 2.065083018371037, time since start: 12.8 mins
+[2026-05-16 07:46:22,738 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:22,842 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:22,848 INFO] lecarb.estimator.utils: {'max': 53.333333333333336, '99th': 13.002500000000055, '95th': 6.0, '90th': 4.0, 'median': 1.2222222222222223, 'mean': 2.149415890519636, 'gmean': 1.6358414783331403}
+[2026-05-16 07:46:27,670 INFO] lecarb.estimator.mscn.mscn: Epoch 155, loss: 2.0595898518756943, time since start: 12.9 mins
+[2026-05-16 07:46:27,670 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:27,772 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:27,777 INFO] lecarb.estimator.utils: {'max': 56.5, '99th': 13.250625000000014, '95th': 6.0, '90th': 4.0, 'median': 1.2226486174054485, 'mean': 2.1440395481648036, 'gmean': 1.6298729563646153}
+[2026-05-16 07:46:27,778 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1440395481648036(mean)!
+[2026-05-16 07:46:32,742 INFO] lecarb.estimator.mscn.mscn: Epoch 156, loss: 2.05621716076014, time since start: 13.0 mins
+[2026-05-16 07:46:32,742 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:32,849 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:32,854 INFO] lecarb.estimator.utils: {'max': 56.5, '99th': 13.0, '95th': 6.0, '90th': 4.0, 'median': 1.2232069743632772, 'mean': 2.1403295912051954, 'gmean': 1.6271278265413345}
+[2026-05-16 07:46:32,854 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1403295912051954(mean)!
+[2026-05-16 07:46:37,848 INFO] lecarb.estimator.mscn.mscn: Epoch 157, loss: 2.0527011192574793, time since start: 13.1 mins
+[2026-05-16 07:46:37,848 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:37,956 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:37,962 INFO] lecarb.estimator.utils: {'max': 56.5, '99th': 13.0, '95th': 5.875, '90th': 4.0, 'median': 1.2222222222222223, 'mean': 2.137220904025194, 'gmean': 1.6327612480473273}
+[2026-05-16 07:46:37,962 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.137220904025194(mean)!
+[2026-05-16 07:46:42,938 INFO] lecarb.estimator.mscn.mscn: Epoch 158, loss: 2.050229526295954, time since start: 13.2 mins
+[2026-05-16 07:46:42,938 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:43,041 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:43,047 INFO] lecarb.estimator.utils: {'max': 53.333333333333336, '99th': 13.0, '95th': 5.875, '90th': 4.0, 'median': 1.2240204648292883, 'mean': 2.125424632331315, 'gmean': 1.6246948361431077}
+[2026-05-16 07:46:43,047 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.125424632331315(mean)!
+[2026-05-16 07:46:48,040 INFO] lecarb.estimator.mscn.mscn: Epoch 159, loss: 2.04449562272247, time since start: 13.2 mins
+[2026-05-16 07:46:48,040 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:48,143 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:48,149 INFO] lecarb.estimator.utils: {'max': 53.333333333333336, '99th': 12.876250000000027, '95th': 5.827873563218387, '90th': 4.0, 'median': 1.228, 'mean': 2.1210676727151183, 'gmean': 1.6233249422547373}
+[2026-05-16 07:46:48,149 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1210676727151183(mean)!
+[2026-05-16 07:46:52,451 INFO] lecarb.estimator.mscn.mscn: Epoch 160, loss: 2.0404621472164077, time since start: 13.3 mins
+[2026-05-16 07:46:52,451 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:53,282 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:53,288 INFO] lecarb.estimator.utils: {'max': 53.333333333333336, '99th': 12.667142857142867, '95th': 5.778888888888873, '90th': 4.0, 'median': 1.230367653928805, 'mean': 2.1168161760387196, 'gmean': 1.6284987402701698}
+[2026-05-16 07:46:53,288 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1168161760387196(mean)!
+[2026-05-16 07:46:57,509 INFO] lecarb.estimator.mscn.mscn: Epoch 161, loss: 2.0344886645978812, time since start: 13.4 mins
+[2026-05-16 07:46:57,509 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:46:57,619 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:46:57,625 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.60066666666668, '95th': 5.8, '90th': 4.0, 'median': 1.2249260355029588, 'mean': 2.1088011958138564, 'gmean': 1.6213579182906088}
+[2026-05-16 07:46:57,625 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1088011958138564(mean)!
+[2026-05-16 07:47:02,789 INFO] lecarb.estimator.mscn.mscn: Epoch 162, loss: 2.027711356172756, time since start: 13.5 mins
+[2026-05-16 07:47:02,789 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:02,896 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:02,901 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.60066666666668, '95th': 5.7934482758620645, '90th': 4.0, 'median': 1.230471656003571, 'mean': 2.1061122390841245, 'gmean': 1.6206196412654867}
+[2026-05-16 07:47:02,902 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.1061122390841245(mean)!
+[2026-05-16 07:47:07,636 INFO] lecarb.estimator.mscn.mscn: Epoch 163, loss: 2.023650209514462, time since start: 13.6 mins
+[2026-05-16 07:47:07,636 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:07,741 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:07,746 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.204000000000088, '95th': 5.73749999999999, '90th': 4.0, 'median': 1.2283016910467892, 'mean': 2.105255636525614, 'gmean': 1.6229826823722933}
+[2026-05-16 07:47:07,746 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.105255636525614(mean)!
+[2026-05-16 07:47:12,602 INFO] lecarb.estimator.mscn.mscn: Epoch 164, loss: 2.021384117554645, time since start: 13.6 mins
+[2026-05-16 07:47:12,602 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:12,707 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:12,712 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.75, '90th': 4.0, 'median': 1.228879518771397, 'mean': 2.0990663376207466, 'gmean': 1.6174158936612595}
+[2026-05-16 07:47:12,713 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0990663376207466(mean)!
+[2026-05-16 07:47:17,867 INFO] lecarb.estimator.mscn.mscn: Epoch 165, loss: 2.017148573787845, time since start: 13.7 mins
+[2026-05-16 07:47:17,867 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:17,975 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:17,980 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.728409090909075, '90th': 4.0, 'median': 1.2279997747176932, 'mean': 2.0954454735650607, 'gmean': 1.613046345762938}
+[2026-05-16 07:47:17,981 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0954454735650607(mean)!
+[2026-05-16 07:47:22,967 INFO] lecarb.estimator.mscn.mscn: Epoch 166, loss: 2.013870207630858, time since start: 13.8 mins
+[2026-05-16 07:47:22,967 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:23,071 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:23,077 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.002000000000043, '95th': 5.666666666666667, '90th': 4.0, 'median': 1.2327711758870339, 'mean': 2.0940407951154154, 'gmean': 1.612810811049243}
+[2026-05-16 07:47:23,077 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0940407951154154(mean)!
+[2026-05-16 07:47:27,373 INFO] lecarb.estimator.mscn.mscn: Epoch 167, loss: 2.010575933115823, time since start: 13.9 mins
+[2026-05-16 07:47:27,373 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:28,204 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:28,210 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.666666666666667, '90th': 4.0, 'median': 1.2285714285714286, 'mean': 2.0953840577694622, 'gmean': 1.6163839256595682}
+[2026-05-16 07:47:32,515 INFO] lecarb.estimator.mscn.mscn: Epoch 168, loss: 2.006490348553171, time since start: 14.0 mins
+[2026-05-16 07:47:32,515 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:32,629 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:32,636 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.666666666666667, '90th': 4.0, 'median': 1.2271115409413282, 'mean': 2.0922613405738395, 'gmean': 1.614950789846839}
+[2026-05-16 07:47:32,637 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0922613405738395(mean)!
+[2026-05-16 07:47:37,719 INFO] lecarb.estimator.mscn.mscn: Epoch 169, loss: 2.005619394535921, time since start: 14.1 mins
+[2026-05-16 07:47:37,719 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:37,824 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:37,829 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.61794871794868, '90th': 4.0, 'median': 1.2267025544665076, 'mean': 2.089917255159928, 'gmean': 1.6110239120581447}
+[2026-05-16 07:47:37,829 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.089917255159928(mean)!
+[2026-05-16 07:47:42,929 INFO] lecarb.estimator.mscn.mscn: Epoch 170, loss: 2.000181280836767, time since start: 14.2 mins
+[2026-05-16 07:47:42,929 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:43,043 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:43,049 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.6, '90th': 4.0, 'median': 1.2259679963939598, 'mean': 2.086747467714991, 'gmean': 1.6104289508903131}
+[2026-05-16 07:47:43,049 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.086747467714991(mean)!
+[2026-05-16 07:47:48,115 INFO] lecarb.estimator.mscn.mscn: Epoch 171, loss: 1.9976942502722448, time since start: 14.2 mins
+[2026-05-16 07:47:48,115 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:48,219 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:48,224 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.6, '90th': 4.0, 'median': 1.2305865156221452, 'mean': 2.0866770153092835, 'gmean': 1.6112578558549968}
+[2026-05-16 07:47:48,224 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0866770153092835(mean)!
+[2026-05-16 07:47:53,254 INFO] lecarb.estimator.mscn.mscn: Epoch 172, loss: 1.9954786495286592, time since start: 14.3 mins
+[2026-05-16 07:47:53,254 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:53,364 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:53,370 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.6, '90th': 4.0, 'median': 1.228899557825017, 'mean': 2.0815002553552295, 'gmean': 1.6065009825653396}
+[2026-05-16 07:47:53,370 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0815002553552295(mean)!
+[2026-05-16 07:47:58,506 INFO] lecarb.estimator.mscn.mscn: Epoch 173, loss: 1.9913585149511999, time since start: 14.4 mins
+[2026-05-16 07:47:58,506 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:47:58,612 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:47:58,617 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.6, '90th': 4.0, 'median': 1.2259410150662593, 'mean': 2.0795621301284624, 'gmean': 1.605515731486607}
+[2026-05-16 07:47:58,618 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0795621301284624(mean)!
+[2026-05-16 07:48:03,040 INFO] lecarb.estimator.mscn.mscn: Epoch 174, loss: 1.9886514945906035, time since start: 14.5 mins
+[2026-05-16 07:48:03,040 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:03,881 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:03,887 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.571428571428571, '90th': 4.0, 'median': 1.2258064516129032, 'mean': 2.076296105471373, 'gmean': 1.6025054285998028}
+[2026-05-16 07:48:03,887 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.076296105471373(mean)!
+[2026-05-16 07:48:07,818 INFO] lecarb.estimator.mscn.mscn: Epoch 175, loss: 1.9866025739786577, time since start: 14.6 mins
+[2026-05-16 07:48:07,818 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:07,927 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:07,933 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 4.0, 'median': 1.2263204043655866, 'mean': 2.0763722262674746, 'gmean': 1.6093575674658507}
+[2026-05-16 07:48:12,863 INFO] lecarb.estimator.mscn.mscn: Epoch 176, loss: 1.9849408597362286, time since start: 14.6 mins
+[2026-05-16 07:48:12,863 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:12,971 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:12,977 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 4.0, 'median': 1.2269759158751696, 'mean': 2.0700132608646697, 'gmean': 1.6011060170312021}
+[2026-05-16 07:48:12,977 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0700132608646697(mean)!
+[2026-05-16 07:48:18,067 INFO] lecarb.estimator.mscn.mscn: Epoch 177, loss: 1.9803615674680592, time since start: 14.7 mins
+[2026-05-16 07:48:18,067 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:18,187 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:18,193 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 4.0, 'median': 1.2264455401165397, 'mean': 2.0711978143075123, 'gmean': 1.5990503532318112}
+[2026-05-16 07:48:23,042 INFO] lecarb.estimator.mscn.mscn: Epoch 178, loss: 1.9781068855402422, time since start: 14.8 mins
+[2026-05-16 07:48:23,042 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:23,146 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:23,151 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.565527950310554, '90th': 4.0, 'median': 1.2246281464530893, 'mean': 2.0727293809049923, 'gmean': 1.6019854034471888}
+[2026-05-16 07:48:28,019 INFO] lecarb.estimator.mscn.mscn: Epoch 179, loss: 1.9757967092552964, time since start: 14.9 mins
+[2026-05-16 07:48:28,019 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:28,125 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:28,131 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 4.0, 'median': 1.223653128885205, 'mean': 2.068265467735483, 'gmean': 1.601126676497127}
+[2026-05-16 07:48:28,131 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.068265467735483(mean)!
+[2026-05-16 07:48:33,137 INFO] lecarb.estimator.mscn.mscn: Epoch 180, loss: 1.9736007634474306, time since start: 15.0 mins
+[2026-05-16 07:48:33,137 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:33,237 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:33,242 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.6, '90th': 4.0, 'median': 1.2222222222222223, 'mean': 2.073538474431928, 'gmean': 1.6007406504121957}
+[2026-05-16 07:48:37,205 INFO] lecarb.estimator.mscn.mscn: Epoch 181, loss: 1.9714966014939912, time since start: 15.1 mins
+[2026-05-16 07:48:37,205 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:38,040 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:38,045 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.572857142857122, '90th': 3.9865671641791103, 'median': 1.2227406532775422, 'mean': 2.068508292680721, 'gmean': 1.5967247723507898}
+[2026-05-16 07:48:42,233 INFO] lecarb.estimator.mscn.mscn: Epoch 182, loss: 1.9696783265288995, time since start: 15.1 mins
+[2026-05-16 07:48:42,233 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:42,349 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:42,354 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.9553872053872086, 'median': 1.2194240140044679, 'mean': 2.06566114416291, 'gmean': 1.5946886693710274}
+[2026-05-16 07:48:42,354 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.06566114416291(mean)!
+[2026-05-16 07:48:47,308 INFO] lecarb.estimator.mscn.mscn: Epoch 183, loss: 1.9665737176428035, time since start: 15.2 mins
+[2026-05-16 07:48:47,308 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:47,435 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:47,441 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.9744840525328335, 'median': 1.2171794924780954, 'mean': 2.0636349747775546, 'gmean': 1.596399022568372}
+[2026-05-16 07:48:47,441 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0636349747775546(mean)!
+[2026-05-16 07:48:52,276 INFO] lecarb.estimator.mscn.mscn: Epoch 184, loss: 1.9651274632434457, time since start: 15.3 mins
+[2026-05-16 07:48:52,276 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:52,380 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:52,386 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.002000000000043, '95th': 5.539663461538444, '90th': 3.888888888888889, 'median': 1.2207883245230982, 'mean': 2.0627594251900474, 'gmean': 1.59210834162283}
+[2026-05-16 07:48:52,386 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0627594251900474(mean)!
+[2026-05-16 07:48:57,443 INFO] lecarb.estimator.mscn.mscn: Epoch 185, loss: 1.9633284247651392, time since start: 15.4 mins
+[2026-05-16 07:48:57,443 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:48:57,547 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:48:57,552 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.203000000000065, '95th': 5.500714285714276, '90th': 3.9173076923076944, 'median': 1.209642203127201, 'mean': 2.0645274239348796, 'gmean': 1.5937320769562993}
+[2026-05-16 07:49:02,522 INFO] lecarb.estimator.mscn.mscn: Epoch 186, loss: 1.9618861152201283, time since start: 15.5 mins
+[2026-05-16 07:49:02,522 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:02,623 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:02,629 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.002000000000043, '95th': 5.5, '90th': 3.976263066202093, 'median': 1.2121791529057302, 'mean': 2.06275486547091, 'gmean': 1.5941938578041706}
+[2026-05-16 07:49:02,629 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.06275486547091(mean)!
+[2026-05-16 07:49:07,403 INFO] lecarb.estimator.mscn.mscn: Epoch 187, loss: 1.9595820611836958, time since start: 15.6 mins
+[2026-05-16 07:49:07,404 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:07,515 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:07,521 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.8721153846153857, 'median': 1.2126810241418484, 'mean': 2.061948847834992, 'gmean': 1.5935790891580908}
+[2026-05-16 07:49:07,521 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.061948847834992(mean)!
+[2026-05-16 07:49:11,587 INFO] lecarb.estimator.mscn.mscn: Epoch 188, loss: 1.9580490966232456, time since start: 15.6 mins
+[2026-05-16 07:49:11,587 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:12,448 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:12,454 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.9272325976230937, 'median': 1.2099611026551667, 'mean': 2.0563568460677035, 'gmean': 1.5963049675115755}
+[2026-05-16 07:49:12,454 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0563568460677035(mean)!
+[2026-05-16 07:49:16,770 INFO] lecarb.estimator.mscn.mscn: Epoch 189, loss: 1.9583216151412652, time since start: 15.7 mins
+[2026-05-16 07:49:16,770 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:16,878 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:16,884 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.876388888888894, 'median': 1.2088731241102582, 'mean': 2.056132813243155, 'gmean': 1.5899635058823673}
+[2026-05-16 07:49:16,884 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.056132813243155(mean)!
+[2026-05-16 07:49:21,848 INFO] lecarb.estimator.mscn.mscn: Epoch 190, loss: 1.9554109755827456, time since start: 15.8 mins
+[2026-05-16 07:49:21,848 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:21,952 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:21,958 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.8721153846153857, 'median': 1.2083333333333333, 'mean': 2.0541794828554876, 'gmean': 1.5864903906921184}
+[2026-05-16 07:49:21,958 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0541794828554876(mean)!
+[2026-05-16 07:49:26,960 INFO] lecarb.estimator.mscn.mscn: Epoch 191, loss: 1.9534279898721345, time since start: 15.9 mins
+[2026-05-16 07:49:26,960 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:27,071 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:27,076 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.463461538461511, '90th': 3.9423076923077156, 'median': 1.2138893884892088, 'mean': 2.056014940021134, 'gmean': 1.6015079103186187}
+[2026-05-16 07:49:32,165 INFO] lecarb.estimator.mscn.mscn: Epoch 192, loss: 1.9528944017935772, time since start: 16.0 mins
+[2026-05-16 07:49:32,165 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:32,271 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:32,277 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 11.814375000000041, '95th': 5.5, '90th': 3.9122994652406535, 'median': 1.2107976096399011, 'mean': 2.047836032381146, 'gmean': 1.5916288643983265}
+[2026-05-16 07:49:32,277 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.047836032381146(mean)!
+[2026-05-16 07:49:37,272 INFO] lecarb.estimator.mscn.mscn: Epoch 193, loss: 1.9491817574111783, time since start: 16.1 mins
+[2026-05-16 07:49:37,272 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:37,382 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:37,388 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.857582417582419, 'median': 1.2089099603852551, 'mean': 2.044396779235516, 'gmean': 1.5854644487538794}
+[2026-05-16 07:49:37,388 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.044396779235516(mean)!
+[2026-05-16 07:49:42,344 INFO] lecarb.estimator.mscn.mscn: Epoch 194, loss: 1.947772510197698, time since start: 16.1 mins
+[2026-05-16 07:49:42,344 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:42,451 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:42,456 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 11.814375000000041, '95th': 5.5, '90th': 3.909090909090909, 'median': 1.208844581873389, 'mean': 2.048603272189489, 'gmean': 1.5929463550302048}
+[2026-05-16 07:49:46,715 INFO] lecarb.estimator.mscn.mscn: Epoch 195, loss: 1.9470612394566438, time since start: 16.2 mins
+[2026-05-16 07:49:46,715 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:47,534 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:47,539 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.8333333333333335, 'median': 1.2095758977095314, 'mean': 2.049974784634828, 'gmean': 1.5961045632499202}
+[2026-05-16 07:49:51,722 INFO] lecarb.estimator.mscn.mscn: Epoch 196, loss: 1.9442106607008953, time since start: 16.3 mins
+[2026-05-16 07:49:51,722 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:51,827 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:51,832 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.881762005649719, 'median': 1.2054801501479107, 'mean': 2.049511285286809, 'gmean': 1.5922180257699172}
+[2026-05-16 07:49:56,753 INFO] lecarb.estimator.mscn.mscn: Epoch 197, loss: 1.9423611419541496, time since start: 16.4 mins
+[2026-05-16 07:49:56,753 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:49:56,857 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:49:56,862 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.866666666666667, 'median': 1.2079749945797498, 'mean': 2.051789851421885, 'gmean': 1.5983860720905978}
+[2026-05-16 07:50:01,983 INFO] lecarb.estimator.mscn.mscn: Epoch 198, loss: 1.9406304067494917, time since start: 16.5 mins
+[2026-05-16 07:50:01,983 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:50:02,093 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:50:02,098 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.858095238095242, 'median': 1.2012744707237133, 'mean': 2.042431898414716, 'gmean': 1.5857847292467786}
+[2026-05-16 07:50:02,098 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.042431898414716(mean)!
+[2026-05-16 07:50:07,081 INFO] lecarb.estimator.mscn.mscn: Epoch 199, loss: 1.939238730742007, time since start: 16.6 mins
+[2026-05-16 07:50:07,081 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:50:07,186 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:50:07,191 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.8333333333333335, 'median': 1.2, 'mean': 2.043398412450142, 'gmean': 1.589559960031013}
+[2026-05-16 07:50:11,968 INFO] lecarb.estimator.mscn.mscn: Epoch 200, loss: 1.9389594829812342, time since start: 16.6 mins
+[2026-05-16 07:50:11,968 INFO] lecarb.estimator.mscn.mscn: Test on valid set...
+[2026-05-16 07:50:12,075 INFO] lecarb.estimator.mscn.mscn: Q-Error on validation set:
+[2026-05-16 07:50:12,081 INFO] lecarb.estimator.utils: {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.8357142857142947, 'median': 1.2, 'mean': 2.0394832334798343, 'gmean': 1.5813661611708263}
+[2026-05-16 07:50:12,081 INFO] lecarb.estimator.mscn.mscn: best valid loss for now: 2.0394832334798343(mean)!
+[2026-05-16 07:50:12,083 INFO] lecarb.estimator.mscn.mscn: Training finished! Time spent since start: 16.64 mins
+[2026-05-16 07:50:12,083 INFO] lecarb.estimator.mscn.mscn: Model saved to output/model/census13/original_base-mscn_hid16_sample1000_ep200_bs1024_100k-123.pt, best valid: {'base': {'max': 54.5, '99th': 12.0, '95th': 5.5, '90th': 3.8357142857142947, 'median': 1.2, 'mean': 2.0394832334798343, 'gmean': 1.5813661611708263}}

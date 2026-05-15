@@ -64,6 +64,7 @@
 5. **`spflow` 包名 ≠ 模块名** —— 装的是 `spflow==0.0.34`，但 `import` 用 `spn`（不要找 `import spflow`）
 6. **MHist 慢** —— `num_bins=30000` 在 13 列 census 上跑 5+ 分钟仍未出结果（user 中断过一次）；测试时可降低 num_bins 或跑别的 estimator 先
 7. **BayesNet 极慢** —— Census 10K test queries 实测 ~30 queries/min，全跑完 ~5 小时（pomegranate progressive sampling + ray 并行）。Day 1 想凑数：降 `samples` 从 200 到 50（速度 4x，精度下降）；或直接换 Postgres 当第 3 个 estimator
+8. **test-naru/test-deepdb/... 的 model 参数**：只传文件名主干，去掉路径前缀和 `.pt` 扩展名。Lecarb 内部 path = `output/model/{ds}/{model_arg}.pt`，多传任何前缀/后缀会叠加报 `No such file`。带逗号的文件名（如 `resmade_hid32,32,32,32_...`）记得加单引号
 
 ---
 

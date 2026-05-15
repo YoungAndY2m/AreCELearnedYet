@@ -197,7 +197,9 @@ just train-lw-nn census13 original base 128_64_32 200 10000 32 0 123 2>&1 | tee 
 just test-lw-nn <model_filename> census13 original base True 123 2>&1 | tee logs/lw-nn-test.log
 ```
 
-> `<model_filename>` 替换为 `output/model/census13/` 下生成的实际文件名（不含路径前缀），可以用 `ls -lt output/model/census13/ | head` 看最新的。
+> ⚠️ `<model_filename>` 要点：**只传文件名主干**，去掉路径前缀（`output/model/{ds}/`）和扩展名（`.pt`）。Lecarb 内部会拼成 `output/model/{ds}/{model}.pt`，你多传 → 它叠加 → 报 `No such file: output/model/census13/output/model/census13/...pt.pt`。
+> 文件名带逗号时（如 Naru 的 `resmade_hid32,32,32,32_...`）**必须用单引号**包起来防 shell 误处理。
+> 看实际可用 model：`ls output/model/census13/ | sed 's/\.pt$//'`
 
 ### 2.4 收集 q-error
 

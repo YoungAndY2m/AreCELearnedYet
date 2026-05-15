@@ -1,0 +1,37 @@
+uv run python -m lecarb test -s123 -dcensus13 -voriginal -wbase -edeepdb --params "{'model': 'original-spn_sample48842_rdc0.3_ms0.01-123'}" --overwrite
+Uninstalled 1 package in 1ms
+Installed 1 package in 4ms
+/home/student.unimelb.edu.au/yli16636/Desktop/AreCELearnedYet/.venv/lib/python3.8/site-packages/dask/dataframe/utils.py:15: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+  import pandas.util.testing as tm
+[2026-05-16 08:51:47,229 INFO] lecarb.estimator.deepdb.deepdb: load model from output/model/census13/original-spn_sample48842_rdc0.3_ms0.01-123.pkl ...
+[2026-05-16 08:51:47,238 INFO] lecarb.estimator.deepdb.deepdb: Get SPN: {'nodes': 1502, 'edges': 1171, 'layers': 19, 'count_per_type': {<class 'aqp_spn.aqp_leaves.Sum'>: 104, <class 'spn.structure.Base.Product'>: 330, <class 'aqp_spn.aqp_leaves.IdentityNumericLeaf'>: 158, <class 'aqp_spn.aqp_leaves.Categorical'>: 910}}
+[2026-05-16 08:51:47,238 INFO] lecarb.dataset.dataset: table exists, load...
+[2026-05-16 08:51:47,241 INFO] lecarb.dataset.dataset: load finished: Table census13_original (48842 rows, 4.84MB, columns:
+Column(age, type=int64, vocab size=74, min=17, max=90, has NaN=False)
+Column(workclass, type=category, vocab size=9, min=?, max=Without-pay, has NaN=False)
+Column(education, type=category, vocab size=16, min=10th, max=Some-college, has NaN=False)
+Column(education_num, type=int64, vocab size=16, min=1, max=16, has NaN=False)
+Column(marital_status, type=category, vocab size=7, min=Divorced, max=Widowed, has NaN=False)
+Column(occupation, type=category, vocab size=15, min=?, max=Transport-moving, has NaN=False)
+Column(relationship, type=category, vocab size=6, min=Husband, max=Wife, has NaN=False)
+Column(race, type=category, vocab size=5, min=Amer-Indian-Eskimo, max=White, has NaN=False)
+Column(sex, type=category, vocab size=2, min=Female, max=Male, has NaN=False)
+Column(capital_gain, type=int64, vocab size=123, min=0, max=99999, has NaN=False)
+Column(capital_loss, type=int64, vocab size=99, min=0, max=4356, has NaN=False)
+Column(hours_per_week, type=int64, vocab size=96, min=1, max=99, has NaN=False)
+Column(native_country, type=category, vocab size=42, min=?, max=Yugoslavia, has NaN=False))
+[2026-05-16 08:51:47,241 INFO] lecarb.estimator.utils: torch threads: 16
+[2026-05-16 08:51:47,241 INFO] lecarb.estimator.utils: Start loading queryset:base and labels for version original of dataset census13...
+[2026-05-16 08:51:48,992 INFO] lecarb.estimator.utils: Start test estimator on test queries...
+[2026-05-16 08:51:54,815 INFO] lecarb.estimator.utils: 1000 queries finished
+[2026-05-16 08:52:00,520 INFO] lecarb.estimator.utils: 2000 queries finished
+[2026-05-16 08:52:06,541 INFO] lecarb.estimator.utils: 3000 queries finished
+[2026-05-16 08:52:12,446 INFO] lecarb.estimator.utils: 4000 queries finished
+[2026-05-16 08:52:18,261 INFO] lecarb.estimator.utils: 5000 queries finished
+[2026-05-16 08:52:24,374 INFO] lecarb.estimator.utils: 6000 queries finished
+[2026-05-16 08:52:30,193 INFO] lecarb.estimator.utils: 7000 queries finished
+[2026-05-16 08:52:35,911 INFO] lecarb.estimator.utils: 8000 queries finished
+[2026-05-16 08:52:41,609 INFO] lecarb.estimator.utils: 9000 queries finished
+[2026-05-16 08:52:47,122 INFO] lecarb.estimator.utils: 10000 queries finished
+[2026-05-16 08:52:47,123 INFO] lecarb.estimator.utils: Test finished, 4.423177361488342 ms/query in average
+[2026-05-16 08:52:47,128 INFO] lecarb.estimator.utils: {'max': 595.0, '99th': 7.0, '95th': 3.5, '90th': 2.5, 'median': 1.0880521495998359, 'mean': 1.721525078631651, 'gmean': 1.3425417472605434}

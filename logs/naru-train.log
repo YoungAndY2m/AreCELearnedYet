@@ -1,0 +1,196 @@
+uv run python -m lecarb train -s123 -dcensus13 -voriginal -wbase -enaru --params "{'epochs': 100, 'input_encoding': 'embed', 'output_encoding': 'embed', 'embed_size': 4, 'layers': 4, 'fc_hiddens': 32, 'residual': True, 'warmups': 0}" --sizelimit 0
+Uninstalled 1 package in 1ms
+Installed 1 package in 4ms
+/home/student.unimelb.edu.au/yli16636/Desktop/AreCELearnedYet/.venv/lib/python3.8/site-packages/dask/dataframe/utils.py:15: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+  import pandas.util.testing as tm
+[2026-05-16 07:20:54,566 INFO] lecarb.estimator.naru.naru: torch threads: 16
+[2026-05-16 07:20:54,567 INFO] lecarb.dataset.dataset: table exists, load...
+[2026-05-16 07:20:54,571 INFO] lecarb.dataset.dataset: load finished: Table census13_original (48842 rows, 4.84MB, columns:
+Column(age, type=int64, vocab size=74, min=17, max=90, has NaN=False)
+Column(workclass, type=category, vocab size=9, min=?, max=Without-pay, has NaN=False)
+Column(education, type=category, vocab size=16, min=10th, max=Some-college, has NaN=False)
+Column(education_num, type=int64, vocab size=16, min=1, max=16, has NaN=False)
+Column(marital_status, type=category, vocab size=7, min=Divorced, max=Widowed, has NaN=False)
+Column(occupation, type=category, vocab size=15, min=?, max=Transport-moving, has NaN=False)
+Column(relationship, type=category, vocab size=6, min=Husband, max=Wife, has NaN=False)
+Column(race, type=category, vocab size=5, min=Amer-Indian-Eskimo, max=White, has NaN=False)
+Column(sex, type=category, vocab size=2, min=Female, max=Male, has NaN=False)
+Column(capital_gain, type=int64, vocab size=123, min=0, max=99999, has NaN=False)
+Column(capital_loss, type=int64, vocab size=99, min=0, max=4356, has NaN=False)
+Column(hours_per_week, type=int64, vocab size=96, min=1, max=99, has NaN=False)
+Column(native_country, type=category, vocab size=42, min=?, max=Yugoslavia, has NaN=False))
+[2026-05-16 07:20:55,962 INFO] lecarb.estimator.naru.naru: params: {'epochs': 100, 'input_encoding': 'embed', 'output_encoding': 'embed', 'embed_size': 4, 'layers': 4, 'fc_hiddens': 32, 'residual': True, 'warmups': 0}
+[2026-05-16 07:20:55,962 INFO] lecarb.estimator.naru.made: fixed_ordering: None, seed: 0, natural_ordering: True
+[2026-05-16 07:20:55,963 INFO] lecarb.estimator.naru.made: encoded_bins (output): [4, 4, 4, 4, 4, 4, 4, 4, 2, 4, 4, 4, 4]
+[2026-05-16 07:20:55,963 INFO] lecarb.estimator.naru.made: encoded_bins (input): [4, 4, 4, 4, 4, 4, 4, 4, 2, 4, 4, 4, 4]
+[2026-05-16 07:20:55,966 INFO] lecarb.estimator.utils: Number of model parameters: 14250 (~= 0.05MB)
+[2026-05-16 07:20:55,966 INFO] lecarb.estimator.utils: MADE(
+  (net): Sequential(
+    (0): MaskedLinear(in_features=50, out_features=32, bias=True)
+    (1): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=32, out_features=32, bias=True)
+        (1): MaskedLinear(in_features=32, out_features=32, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (2): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=32, out_features=32, bias=True)
+        (1): MaskedLinear(in_features=32, out_features=32, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (3): MaskedResidualBlock(
+      (layers): ModuleList(
+        (0): MaskedLinear(in_features=32, out_features=32, bias=True)
+        (1): MaskedLinear(in_features=32, out_features=32, bias=True)
+      )
+      (activation): ReLU()
+    )
+    (4): MaskedLinear(in_features=32, out_features=50, bias=True)
+  )
+  (embeddings): ModuleList(
+    (0): Embedding(74, 4)
+    (1): Embedding(9, 4)
+    (2): Embedding(16, 4)
+    (3): Embedding(16, 4)
+    (4): Embedding(7, 4)
+    (5): Embedding(15, 4)
+    (6): Embedding(6, 4)
+    (7): Embedding(5, 4)
+    (8): None
+    (9): Embedding(123, 4)
+    (10): Embedding(99, 4)
+    (11): Embedding(96, 4)
+    (12): Embedding(42, 4)
+  )
+  (unk_embeddings): ParameterList(
+      (0): Parameter containing: [torch.FloatTensor of size 1x4]
+      (1): Parameter containing: [torch.FloatTensor of size 1x4]
+      (2): Parameter containing: [torch.FloatTensor of size 1x4]
+      (3): Parameter containing: [torch.FloatTensor of size 1x4]
+      (4): Parameter containing: [torch.FloatTensor of size 1x4]
+      (5): Parameter containing: [torch.FloatTensor of size 1x4]
+      (6): Parameter containing: [torch.FloatTensor of size 1x4]
+      (7): Parameter containing: [torch.FloatTensor of size 1x4]
+      (8): Parameter containing: [torch.FloatTensor of size 1x2]
+      (9): Parameter containing: [torch.FloatTensor of size 1x4]
+      (10): Parameter containing: [torch.FloatTensor of size 1x4]
+      (11): Parameter containing: [torch.FloatTensor of size 1x4]
+      (12): Parameter containing: [torch.FloatTensor of size 1x4]
+  )
+  (direct_io_layer): MaskedLinear(in_features=50, out_features=50, bias=True)
+)
+[2026-05-16 07:20:55,966 INFO] lecarb.estimator.naru.naru: Applying InitWeight()
+[2026-05-16 07:20:55,966 INFO] lecarb.estimator.naru.naru: start building naru dataset for table census13_original...
+[2026-05-16 07:20:55,971 INFO] lecarb.estimator.naru.naru: dataset build finished
+[2026-05-16 07:20:55,971 INFO] lecarb.estimator.naru.naru: calculate table entropy...
+[2026-05-16 07:20:55,983 INFO] lecarb.estimator.naru.naru: Entropy of census13_original: 15.1618 bits
+[2026-05-16 07:20:57,684 INFO] lecarb.estimator.naru.naru: epoch 1 train loss 29.3419 nats / 42.3315 bits, time since start: 0.0 mins
+[2026-05-16 07:20:59,197 INFO] lecarb.estimator.naru.naru: epoch 2 train loss 20.1093 nats / 29.0116 bits, time since start: 0.1 mins
+[2026-05-16 07:21:00,722 INFO] lecarb.estimator.naru.naru: epoch 3 train loss 19.4973 nats / 28.1287 bits, time since start: 0.1 mins
+[2026-05-16 07:21:02,306 INFO] lecarb.estimator.naru.naru: epoch 4 train loss 19.3295 nats / 27.8865 bits, time since start: 0.1 mins
+[2026-05-16 07:21:03,871 INFO] lecarb.estimator.naru.naru: epoch 5 train loss 19.1862 nats / 27.6799 bits, time since start: 0.1 mins
+[2026-05-16 07:21:05,390 INFO] lecarb.estimator.naru.naru: epoch 6 train loss 18.9649 nats / 27.3605 bits, time since start: 0.2 mins
+[2026-05-16 07:21:06,880 INFO] lecarb.estimator.naru.naru: epoch 7 train loss 18.5205 nats / 26.7195 bits, time since start: 0.2 mins
+[2026-05-16 07:21:08,406 INFO] lecarb.estimator.naru.naru: epoch 8 train loss 18.1435 nats / 26.1755 bits, time since start: 0.2 mins
+[2026-05-16 07:21:09,938 INFO] lecarb.estimator.naru.naru: epoch 9 train loss 18.1752 nats / 26.2213 bits, time since start: 0.2 mins
+[2026-05-16 07:21:11,445 INFO] lecarb.estimator.naru.naru: epoch 10 train loss 18.0751 nats / 26.0768 bits, time since start: 0.3 mins
+[2026-05-16 07:21:12,958 INFO] lecarb.estimator.naru.naru: epoch 11 train loss 17.9239 nats / 25.8587 bits, time since start: 0.3 mins
+[2026-05-16 07:21:14,448 INFO] lecarb.estimator.naru.naru: epoch 12 train loss 17.9637 nats / 25.9161 bits, time since start: 0.3 mins
+[2026-05-16 07:21:15,963 INFO] lecarb.estimator.naru.naru: epoch 13 train loss 17.8025 nats / 25.6835 bits, time since start: 0.3 mins
+[2026-05-16 07:21:17,454 INFO] lecarb.estimator.naru.naru: epoch 14 train loss 17.7192 nats / 25.5635 bits, time since start: 0.4 mins
+[2026-05-16 07:21:18,935 INFO] lecarb.estimator.naru.naru: epoch 15 train loss 17.5103 nats / 25.2620 bits, time since start: 0.4 mins
+[2026-05-16 07:21:20,413 INFO] lecarb.estimator.naru.naru: epoch 16 train loss 17.4058 nats / 25.1112 bits, time since start: 0.4 mins
+[2026-05-16 07:21:21,939 INFO] lecarb.estimator.naru.naru: epoch 17 train loss 17.4115 nats / 25.1195 bits, time since start: 0.4 mins
+[2026-05-16 07:21:23,484 INFO] lecarb.estimator.naru.naru: epoch 18 train loss 17.1791 nats / 24.7842 bits, time since start: 0.5 mins
+[2026-05-16 07:21:24,974 INFO] lecarb.estimator.naru.naru: epoch 19 train loss 17.2249 nats / 24.8503 bits, time since start: 0.5 mins
+[2026-05-16 07:21:26,501 INFO] lecarb.estimator.naru.naru: epoch 20 train loss 17.2403 nats / 24.8725 bits, time since start: 0.5 mins
+[2026-05-16 07:21:28,013 INFO] lecarb.estimator.naru.naru: epoch 21 train loss 17.3630 nats / 25.0495 bits, time since start: 0.5 mins
+[2026-05-16 07:21:29,516 INFO] lecarb.estimator.naru.naru: epoch 22 train loss 17.0502 nats / 24.5983 bits, time since start: 0.6 mins
+[2026-05-16 07:21:31,047 INFO] lecarb.estimator.naru.naru: epoch 23 train loss 17.2218 nats / 24.8458 bits, time since start: 0.6 mins
+[2026-05-16 07:21:32,620 INFO] lecarb.estimator.naru.naru: epoch 24 train loss 16.8277 nats / 24.2773 bits, time since start: 0.6 mins
+[2026-05-16 07:21:34,115 INFO] lecarb.estimator.naru.naru: epoch 25 train loss 17.1095 nats / 24.6838 bits, time since start: 0.6 mins
+[2026-05-16 07:21:35,572 INFO] lecarb.estimator.naru.naru: epoch 26 train loss 17.1790 nats / 24.7840 bits, time since start: 0.7 mins
+[2026-05-16 07:21:37,058 INFO] lecarb.estimator.naru.naru: epoch 27 train loss 16.8256 nats / 24.2742 bits, time since start: 0.7 mins
+[2026-05-16 07:21:38,507 INFO] lecarb.estimator.naru.naru: epoch 28 train loss 17.1307 nats / 24.7144 bits, time since start: 0.7 mins
+[2026-05-16 07:21:39,995 INFO] lecarb.estimator.naru.naru: epoch 29 train loss 16.7090 nats / 24.1060 bits, time since start: 0.7 mins
+[2026-05-16 07:21:41,529 INFO] lecarb.estimator.naru.naru: epoch 30 train loss 16.9636 nats / 24.4734 bits, time since start: 0.8 mins
+[2026-05-16 07:21:43,016 INFO] lecarb.estimator.naru.naru: epoch 31 train loss 16.9028 nats / 24.3855 bits, time since start: 0.8 mins
+[2026-05-16 07:21:44,564 INFO] lecarb.estimator.naru.naru: epoch 32 train loss 16.9098 nats / 24.3957 bits, time since start: 0.8 mins
+[2026-05-16 07:21:46,070 INFO] lecarb.estimator.naru.naru: epoch 33 train loss 16.9983 nats / 24.5234 bits, time since start: 0.8 mins
+[2026-05-16 07:21:47,599 INFO] lecarb.estimator.naru.naru: epoch 34 train loss 16.9587 nats / 24.4662 bits, time since start: 0.9 mins
+[2026-05-16 07:21:49,068 INFO] lecarb.estimator.naru.naru: epoch 35 train loss 17.2192 nats / 24.8420 bits, time since start: 0.9 mins
+[2026-05-16 07:21:50,545 INFO] lecarb.estimator.naru.naru: epoch 36 train loss 16.8696 nats / 24.3376 bits, time since start: 0.9 mins
+[2026-05-16 07:21:52,002 INFO] lecarb.estimator.naru.naru: epoch 37 train loss 17.0524 nats / 24.6014 bits, time since start: 0.9 mins
+[2026-05-16 07:21:53,543 INFO] lecarb.estimator.naru.naru: epoch 38 train loss 17.1705 nats / 24.7718 bits, time since start: 1.0 mins
+[2026-05-16 07:21:55,008 INFO] lecarb.estimator.naru.naru: epoch 39 train loss 16.7488 nats / 24.1634 bits, time since start: 1.0 mins
+[2026-05-16 07:21:56,456 INFO] lecarb.estimator.naru.naru: epoch 40 train loss 16.9234 nats / 24.4153 bits, time since start: 1.0 mins
+[2026-05-16 07:21:57,895 INFO] lecarb.estimator.naru.naru: epoch 41 train loss 17.0006 nats / 24.5267 bits, time since start: 1.0 mins
+[2026-05-16 07:21:59,407 INFO] lecarb.estimator.naru.naru: epoch 42 train loss 16.9455 nats / 24.4471 bits, time since start: 1.1 mins
+[2026-05-16 07:22:00,935 INFO] lecarb.estimator.naru.naru: epoch 43 train loss 16.6051 nats / 23.9561 bits, time since start: 1.1 mins
+[2026-05-16 07:22:02,442 INFO] lecarb.estimator.naru.naru: epoch 44 train loss 16.8669 nats / 24.3338 bits, time since start: 1.1 mins
+[2026-05-16 07:22:03,890 INFO] lecarb.estimator.naru.naru: epoch 45 train loss 16.6517 nats / 24.0233 bits, time since start: 1.1 mins
+[2026-05-16 07:22:05,323 INFO] lecarb.estimator.naru.naru: epoch 46 train loss 16.9731 nats / 24.4871 bits, time since start: 1.2 mins
+[2026-05-16 07:22:06,802 INFO] lecarb.estimator.naru.naru: epoch 47 train loss 16.9566 nats / 24.4632 bits, time since start: 1.2 mins
+[2026-05-16 07:22:08,300 INFO] lecarb.estimator.naru.naru: epoch 48 train loss 16.8374 nats / 24.2912 bits, time since start: 1.2 mins
+[2026-05-16 07:22:09,745 INFO] lecarb.estimator.naru.naru: epoch 49 train loss 16.9168 nats / 24.4058 bits, time since start: 1.2 mins
+[2026-05-16 07:22:11,176 INFO] lecarb.estimator.naru.naru: epoch 50 train loss 16.8707 nats / 24.3393 bits, time since start: 1.3 mins
+[2026-05-16 07:22:12,610 INFO] lecarb.estimator.naru.naru: epoch 51 train loss 16.9485 nats / 24.4515 bits, time since start: 1.3 mins
+[2026-05-16 07:22:14,096 INFO] lecarb.estimator.naru.naru: epoch 52 train loss 16.8417 nats / 24.2974 bits, time since start: 1.3 mins
+[2026-05-16 07:22:15,634 INFO] lecarb.estimator.naru.naru: epoch 53 train loss 16.8932 nats / 24.3718 bits, time since start: 1.3 mins
+[2026-05-16 07:22:17,079 INFO] lecarb.estimator.naru.naru: epoch 54 train loss 16.8012 nats / 24.2389 bits, time since start: 1.4 mins
+[2026-05-16 07:22:18,537 INFO] lecarb.estimator.naru.naru: epoch 55 train loss 17.0705 nats / 24.6276 bits, time since start: 1.4 mins
+[2026-05-16 07:22:20,093 INFO] lecarb.estimator.naru.naru: epoch 56 train loss 16.6900 nats / 24.0786 bits, time since start: 1.4 mins
+[2026-05-16 07:22:21,671 INFO] lecarb.estimator.naru.naru: epoch 57 train loss 16.8216 nats / 24.2684 bits, time since start: 1.4 mins
+[2026-05-16 07:22:23,222 INFO] lecarb.estimator.naru.naru: epoch 58 train loss 16.9699 nats / 24.4824 bits, time since start: 1.5 mins
+[2026-05-16 07:22:24,769 INFO] lecarb.estimator.naru.naru: epoch 59 train loss 16.8166 nats / 24.2613 bits, time since start: 1.5 mins
+[2026-05-16 07:22:26,342 INFO] lecarb.estimator.naru.naru: epoch 60 train loss 16.9045 nats / 24.3881 bits, time since start: 1.5 mins
+[2026-05-16 07:22:27,871 INFO] lecarb.estimator.naru.naru: epoch 61 train loss 16.6045 nats / 23.9553 bits, time since start: 1.5 mins
+[2026-05-16 07:22:29,357 INFO] lecarb.estimator.naru.naru: epoch 62 train loss 16.7671 nats / 24.1898 bits, time since start: 1.6 mins
+[2026-05-16 07:22:30,831 INFO] lecarb.estimator.naru.naru: epoch 63 train loss 16.9214 nats / 24.4125 bits, time since start: 1.6 mins
+[2026-05-16 07:22:32,357 INFO] lecarb.estimator.naru.naru: epoch 64 train loss 16.8544 nats / 24.3157 bits, time since start: 1.6 mins
+[2026-05-16 07:22:33,788 INFO] lecarb.estimator.naru.naru: epoch 65 train loss 16.8285 nats / 24.2784 bits, time since start: 1.6 mins
+[2026-05-16 07:22:35,271 INFO] lecarb.estimator.naru.naru: epoch 66 train loss 16.7705 nats / 24.1947 bits, time since start: 1.7 mins
+[2026-05-16 07:22:36,817 INFO] lecarb.estimator.naru.naru: epoch 67 train loss 17.1156 nats / 24.6926 bits, time since start: 1.7 mins
+[2026-05-16 07:22:38,295 INFO] lecarb.estimator.naru.naru: epoch 68 train loss 16.7821 nats / 24.2114 bits, time since start: 1.7 mins
+[2026-05-16 07:22:39,771 INFO] lecarb.estimator.naru.naru: epoch 69 train loss 16.9140 nats / 24.4018 bits, time since start: 1.7 mins
+[2026-05-16 07:22:41,306 INFO] lecarb.estimator.naru.naru: epoch 70 train loss 16.9731 nats / 24.4870 bits, time since start: 1.8 mins
+[2026-05-16 07:22:42,806 INFO] lecarb.estimator.naru.naru: epoch 71 train loss 16.8722 nats / 24.3414 bits, time since start: 1.8 mins
+[2026-05-16 07:22:44,308 INFO] lecarb.estimator.naru.naru: epoch 72 train loss 17.0051 nats / 24.5332 bits, time since start: 1.8 mins
+[2026-05-16 07:22:45,762 INFO] lecarb.estimator.naru.naru: epoch 73 train loss 16.8393 nats / 24.2940 bits, time since start: 1.8 mins
+[2026-05-16 07:22:47,323 INFO] lecarb.estimator.naru.naru: epoch 74 train loss 16.9499 nats / 24.4535 bits, time since start: 1.9 mins
+[2026-05-16 07:22:48,755 INFO] lecarb.estimator.naru.naru: epoch 75 train loss 16.6724 nats / 24.0531 bits, time since start: 1.9 mins
+[2026-05-16 07:22:50,204 INFO] lecarb.estimator.naru.naru: epoch 76 train loss 16.7697 nats / 24.1936 bits, time since start: 1.9 mins
+[2026-05-16 07:22:51,697 INFO] lecarb.estimator.naru.naru: epoch 77 train loss 16.8564 nats / 24.3186 bits, time since start: 1.9 mins
+[2026-05-16 07:22:53,238 INFO] lecarb.estimator.naru.naru: epoch 78 train loss 16.8062 nats / 24.2462 bits, time since start: 2.0 mins
+[2026-05-16 07:22:54,738 INFO] lecarb.estimator.naru.naru: epoch 79 train loss 17.0566 nats / 24.6074 bits, time since start: 2.0 mins
+[2026-05-16 07:22:56,226 INFO] lecarb.estimator.naru.naru: epoch 80 train loss 16.8064 nats / 24.2465 bits, time since start: 2.0 mins
+[2026-05-16 07:22:57,745 INFO] lecarb.estimator.naru.naru: epoch 81 train loss 16.7125 nats / 24.1110 bits, time since start: 2.0 mins
+[2026-05-16 07:22:59,261 INFO] lecarb.estimator.naru.naru: epoch 82 train loss 16.6542 nats / 24.0269 bits, time since start: 2.1 mins
+[2026-05-16 07:23:00,785 INFO] lecarb.estimator.naru.naru: epoch 83 train loss 16.6495 nats / 24.0202 bits, time since start: 2.1 mins
+[2026-05-16 07:23:02,424 INFO] lecarb.estimator.naru.naru: epoch 84 train loss 16.8873 nats / 24.3633 bits, time since start: 2.1 mins
+[2026-05-16 07:23:04,068 INFO] lecarb.estimator.naru.naru: epoch 85 train loss 16.5022 nats / 23.8076 bits, time since start: 2.1 mins
+[2026-05-16 07:23:05,667 INFO] lecarb.estimator.naru.naru: epoch 86 train loss 16.8484 nats / 24.3071 bits, time since start: 2.2 mins
+[2026-05-16 07:23:07,202 INFO] lecarb.estimator.naru.naru: epoch 87 train loss 16.6386 nats / 24.0045 bits, time since start: 2.2 mins
+[2026-05-16 07:23:08,733 INFO] lecarb.estimator.naru.naru: epoch 88 train loss 16.6806 nats / 24.0650 bits, time since start: 2.2 mins
+[2026-05-16 07:23:10,297 INFO] lecarb.estimator.naru.naru: epoch 89 train loss 17.0427 nats / 24.5875 bits, time since start: 2.2 mins
+[2026-05-16 07:23:11,784 INFO] lecarb.estimator.naru.naru: epoch 90 train loss 16.8223 nats / 24.2694 bits, time since start: 2.3 mins
+[2026-05-16 07:23:13,275 INFO] lecarb.estimator.naru.naru: epoch 91 train loss 16.9140 nats / 24.4017 bits, time since start: 2.3 mins
+[2026-05-16 07:23:14,750 INFO] lecarb.estimator.naru.naru: epoch 92 train loss 16.8376 nats / 24.2915 bits, time since start: 2.3 mins
+[2026-05-16 07:23:16,279 INFO] lecarb.estimator.naru.naru: epoch 93 train loss 16.7615 nats / 24.1817 bits, time since start: 2.3 mins
+[2026-05-16 07:23:17,857 INFO] lecarb.estimator.naru.naru: epoch 94 train loss 16.6641 nats / 24.0412 bits, time since start: 2.4 mins
+[2026-05-16 07:23:19,394 INFO] lecarb.estimator.naru.naru: epoch 95 train loss 16.9071 nats / 24.3917 bits, time since start: 2.4 mins
+[2026-05-16 07:23:21,034 INFO] lecarb.estimator.naru.naru: epoch 96 train loss 16.9543 nats / 24.4599 bits, time since start: 2.4 mins
+[2026-05-16 07:23:22,594 INFO] lecarb.estimator.naru.naru: epoch 97 train loss 16.5540 nats / 23.8824 bits, time since start: 2.4 mins
+[2026-05-16 07:23:24,128 INFO] lecarb.estimator.naru.naru: epoch 98 train loss 16.9014 nats / 24.3836 bits, time since start: 2.5 mins
+[2026-05-16 07:23:25,590 INFO] lecarb.estimator.naru.naru: epoch 99 train loss 16.7539 nats / 24.1708 bits, time since start: 2.5 mins
+[2026-05-16 07:23:27,043 INFO] lecarb.estimator.naru.naru: epoch 100 train loss 16.7710 nats / 24.1955 bits, time since start: 2.5 mins
+[2026-05-16 07:23:27,043 INFO] lecarb.estimator.naru.naru: Training finished! Time spent since start: 2.5 mins
+[2026-05-16 07:23:27,043 INFO] lecarb.estimator.naru.naru: Evaluating likelihood on full data...
+[2026-05-16 07:23:27,386 INFO] lecarb.estimator.naru.naru: Evaluating on valid set with 100 queries...
+[2026-05-16 07:23:27,387 INFO] lecarb.estimator.naru.naru: Setting masked_weight in MADE, do not retrain!
+[2026-05-16 07:23:27,387 INFO] lecarb.estimator.naru.naru: Setting masked_weight in MADE, do not retrain!
+[2026-05-16 07:23:30,531 INFO] lecarb.estimator.utils: {'max': 3.5, '99th': 2.881250000000003, '95th': 2.0, '90th': 2.0, 'median': 1.144412813172687, 'mean': 1.3137084711608766, 'gmean': 1.2617377664263365}
+[2026-05-16 07:23:30,534 INFO] lecarb.estimator.naru.naru: model saved to:output/model/census13/original-resmade_hid32,32,32,32_emb4_ep100_embedInembedOut_warm0-123.pt

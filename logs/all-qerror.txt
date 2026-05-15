@@ -1,0 +1,9 @@
+=== original-base-bayes-version=original;samples=200;discretize=100.csv ===
+=== original-base-deepdb-model=original-spn_sample48842_rdc0.3_ms0.01-123.csv ===
+=== original-base-lwnn-model=original_base-lwnn_hid128_64_32_bin200_ep500_bs32_10k-123.csv ===
+=== original-base-mhist-bins=1000.csv ===
+=== original-base-mhist-bins=30000.csv ===
+=== original-base-mscn-model=original_base-mscn_hid16_sample1000_ep200_bs1024_100k-123.csv ===
+=== original-base-naru-model=original-resmade_hid32,32,32,32_emb4_ep100_embedInembedOut_warm0-123;psample=2000.csv ===
+=== original-base-postgres-version=original;stat=10000;seed=123.csv ===
+=== original-base-sampling-version=original;ratio=0.015;seed=123.csv ===
