@@ -107,7 +107,7 @@ ls data/census13/  # 应有 original.csv 和 workload/
 # 检查当前 .env 中 DATABASE_URL 的端口
 grep "^DATABASE_URL" .env
 
-# Lankadinee 默认 6667，但本机 PostgreSQL 装在 5432 → 改成 5432
+# 上游 fork 默认 6667，但本机 PostgreSQL 装在 5432 → 改成 5432
 sed -i 's|@localhost:6667/card|@localhost:5432/card|' .env
 
 # 确认
@@ -170,7 +170,10 @@ just census2postgres original census13              # 加载数据
 just test-postgres census13 original base 10000 original 123 2>&1 | tee logs/postgres.log
 ```
 
-### 2.3 三个 learned estimator（先训练再 test）
+### 2.3 五个 learned estimator（论文配置 · census13）
+
+> **所有参数严格对齐 [hyper-params.md "Selected Models"](hyper-params.md#L41-L160) 中 census 那一档**。
+> Justfile target 的 default 值是 dmv/forest 量级、不是 census13 的论文配置 —— 早期版本误抄了 default，2026-05-16 已修正。
 
 ```bash
 # --- BayesNet (**实测慢**：~30 queries/min on Census, 10K queries ≈ 5h. 建议进 tmux 后台跑，或降 samples=50 加速 4x) ---
@@ -179,27 +182,82 @@ just test-bayesnet census13 original base 200 100 50 original 123 2>&1 | tee log
 # Day 1 快通版（精度下降，~1h）：
 just test-bayesnet census13 original base 50 100 50 original 123 2>&1 | tee logs/bayesnet-s50.log
 
-# --- Naru (训练慢，CPU 上 30+min；GPU 推荐) ---
-just train-naru census13 original 4 32 4 embed embed True 0 0 100 base 123 2>&1 | tee logs/naru-train.log
-# 训练完模型名格式如 naru-... 在 output/model/census13/ 下
-just test-naru <model_filename> 2000 census13 original base 123 2>&1 | tee logs/naru-test.log
+# --- Naru (论文 census：layers=4, fc_hiddens=16, embed_size=8) ---
+just train-naru census13 original 4 16 8 embed embed True 0 0 100 base 123 2>&1 | tee logs/naru-train.log
+just test-naru 'original-resmade_hid16,16,16,16_emb8_ep100_embedInembedOut_warm0-123' 2000 census13 original base 123 2>&1 | tee logs/naru-test.log
 
-# --- MSCN (训练 ~10min) ---
-just train-mscn census13 original base 1000 16 200 1024 100000 0 123 2>&1 | tee logs/mscn-train.log
-just test-mscn <model_filename> census13 original base 123 2>&1 | tee logs/mscn-test.log
+# --- MSCN (论文 census：num_samples=500, hid_units=8, epochs=100, bs=256, train_num=100000) ---
+just train-mscn census13 original base 500 8 100 256 100000 0 123 2>&1 | tee logs/mscn-train.log
+just test-mscn 'original_base-mscn_hid8_sample500_ep100_bs256_100k-123' census13 original base 123 2>&1 | tee logs/mscn-test.log
 
-# --- DeepDB (训练 ~5-15min) ---
-just train-deepdb census13 original 1000000 0.3 0.01 0 base 123 2>&1 | tee logs/deepdb-train.log
-just test-deepdb <model_filename> census13 original base 123 2>&1 | tee logs/deepdb-test.log
+# --- DeepDB (论文 census：hdf_sample=1M, rdc_threshold=0.4, ratio_min_instance_slice=0.01) ---
+just train-deepdb census13 original 1000000 0.4 0.01 0 base 123 2>&1 | tee logs/deepdb-train.log
+just test-deepdb 'original-spn_sample48842_rdc0.4_ms0.01-123' census13 original base 123 2>&1 | tee logs/deepdb-test.log
 
-# --- LW-NN (训练 ~10min) ---
-just train-lw-nn census13 original base 128_64_32 200 10000 32 0 123 2>&1 | tee logs/lw-nn-train.log
-just test-lw-nn <model_filename> census13 original base True 123 2>&1 | tee logs/lw-nn-test.log
+# --- LW-NN (论文 census：hid_units=64_64_64, bins=200, train_num=100000, bs=128, epochs=500) ---
+just train-lw-nn census13 original base 64_64_64 200 100000 128 0 123 2>&1 | tee logs/lwnn-train.log
+just test-lw-nn 'original_base-lwnn_hid64_64_64_bin200_ep500_bs128_100k-123' census13 original base True 123 2>&1 | tee logs/lwnn-test.log
 ```
 
 > ⚠️ `<model_filename>` 要点：**只传文件名主干**，去掉路径前缀（`output/model/{ds}/`）和扩展名（`.pt`）。Lecarb 内部会拼成 `output/model/{ds}/{model}.pt`，你多传 → 它叠加 → 报 `No such file: output/model/census13/output/model/census13/...pt.pt`。
-> 文件名带逗号时（如 Naru 的 `resmade_hid32,32,32,32_...`）**必须用单引号**包起来防 shell 误处理。
+> 文件名带逗号时（如 Naru 的 `resmade_hid16,16,16,16_...`）**必须用单引号**包起来防 shell 误处理。
 > 看实际可用 model：`ls output/model/census13/ | sed 's/\.pt$//'`
+
+### 2.5 一键并行：4 个 learned estimator 同时跑（tmux）
+
+> 适用场景：BayesNet 单独长跑期间，把 Naru / MSCN / DeepDB / LW-NN 4 个训练 + 测试 推到 4 个 tmux window 并行。本机 16 核 / 62 GB 足够；GPU 没有也行（CPU 即可）。
+
+```bash
+cd ~/Desktop/AreCELearnedYet
+mkdir -p logs
+
+# 创建 session + 4 个 window
+tmux new-session -d -s arely -n naru
+tmux new-window  -t arely -n mscn
+tmux new-window  -t arely -n deepdb
+tmux new-window  -t arely -n lwnn
+
+# 公共前置：每窗口都要 cd + source（tmux 不继承当前 shell 的 venv）
+INIT='cd ~/Desktop/AreCELearnedYet && export PATH=~/.local/bin:$PATH && source .venv/bin/activate && source export_env.sh'
+
+# Naru: train → test
+tmux send-keys -t arely:naru "$INIT && \
+  just train-naru census13 original 4 16 8 embed embed True 0 0 100 base 123 2>&1 | tee logs/naru-train.log && \
+  just test-naru 'original-resmade_hid16,16,16,16_emb8_ep100_embedInembedOut_warm0-123' 2000 census13 original base 123 2>&1 | tee logs/naru-test.log" C-m
+
+# MSCN: train → test
+tmux send-keys -t arely:mscn "$INIT && \
+  just train-mscn census13 original base 500 8 100 256 100000 0 123 2>&1 | tee logs/mscn-train.log && \
+  just test-mscn 'original_base-mscn_hid8_sample500_ep100_bs256_100k-123' census13 original base 123 2>&1 | tee logs/mscn-test.log" C-m
+
+# DeepDB: train → test
+tmux send-keys -t arely:deepdb "$INIT && \
+  just train-deepdb census13 original 1000000 0.4 0.01 0 base 123 2>&1 | tee logs/deepdb-train.log && \
+  just test-deepdb 'original-spn_sample48842_rdc0.4_ms0.01-123' census13 original base 123 2>&1 | tee logs/deepdb-test.log" C-m
+
+# LW-NN: train → test
+tmux send-keys -t arely:lwnn "$INIT && \
+  just train-lw-nn census13 original base 64_64_64 200 100000 128 0 123 2>&1 | tee logs/lwnn-train.log && \
+  just test-lw-nn 'original_base-lwnn_hid64_64_64_bin200_ep500_bs128_100k-123' census13 original base True 123 2>&1 | tee logs/lwnn-test.log" C-m
+
+# 进入观察
+tmux attach -t arely
+```
+
+**tmux 操作速查**
+
+| 操作 | 快捷键 / 命令 |
+|------|--------------|
+| 切到下一/上一 window | `Ctrl-b n` / `Ctrl-b p` |
+| 切到指定 window | `Ctrl-b 0/1/2/3` |
+| 列出所有 window | `Ctrl-b w` |
+| 脱离 session（任务继续跑） | `Ctrl-b d` |
+| 重新 attach | `tmux attach -t arely` |
+| 查看 session 列表 | `tmux ls` |
+| 杀掉整个 session | `tmux kill-session -t arely` |
+| 不进 tmux 看进度 | `tail -f logs/naru-train.log`（任一 log） |
+
+**完成判断**：每个 window 看到 prompt 回来 = train+test 都跑完，结果 csv 已落 `output/result/census13/`。再回 §2.4 用 `report-error` 收 q-error。
 
 ### 2.4 收集 q-error
 

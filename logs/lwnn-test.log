@@ -1,0 +1,80 @@
+uv run python -m lecarb test -s123 -dcensus13 -voriginal -wbase -elw_nn --params "{'model': 'original_base-lwnn_hid64_64_64_bin200_ep500_bs128_100k-123', 'use_cache': True}"
+Uninstalled 1 package in 31ms
+Installed 1 package in 26ms
+/home/student.unimelb.edu.au/yli16636/Desktop/AreCELearnedYet/.venv/lib/python3.8/site-packages/dask/dataframe/utils.py:15: FutureWarning: pandas.util.testing is deprecated. Use the functions in the public API at pandas.testing instead.
+  import pandas.util.testing as tm
+[2026-05-16 10:12:56,989 INFO] lecarb.estimator.lw.lw_nn: Torch threads: 16
+[2026-05-16 10:12:56,989 INFO] lecarb.estimator.lw.lw_nn: Load model from output/model/census13/original_base-lwnn_hid64_64_64_bin200_ep500_bs128_100k-123.pt ...
+[2026-05-16 10:12:56,990 INFO] lecarb.dataset.dataset: table exists, load...
+[2026-05-16 10:12:56,993 INFO] lecarb.dataset.dataset: load finished: Table census13_original (48842 rows, 4.84MB, columns:
+Column(age, type=int64, vocab size=74, min=17, max=90, has NaN=False)
+Column(workclass, type=category, vocab size=9, min=?, max=Without-pay, has NaN=False)
+Column(education, type=category, vocab size=16, min=10th, max=Some-college, has NaN=False)
+Column(education_num, type=int64, vocab size=16, min=1, max=16, has NaN=False)
+Column(marital_status, type=category, vocab size=7, min=Divorced, max=Widowed, has NaN=False)
+Column(occupation, type=category, vocab size=15, min=?, max=Transport-moving, has NaN=False)
+Column(relationship, type=category, vocab size=6, min=Husband, max=Wife, has NaN=False)
+Column(race, type=category, vocab size=5, min=Amer-Indian-Eskimo, max=White, has NaN=False)
+Column(sex, type=category, vocab size=2, min=Female, max=Male, has NaN=False)
+Column(capital_gain, type=int64, vocab size=123, min=0, max=99999, has NaN=False)
+Column(capital_loss, type=int64, vocab size=99, min=0, max=4356, has NaN=False)
+Column(hours_per_week, type=int64, vocab size=96, min=1, max=99, has NaN=False)
+Column(native_country, type=category, vocab size=42, min=?, max=Yugoslavia, has NaN=False))
+[2026-05-16 10:12:56,994 INFO] lecarb.estimator.utils: Number of model parameters: 10305 (~= 0.04MB)
+[2026-05-16 10:12:56,994 INFO] lecarb.estimator.utils: LWNNModel(
+  (hid_layers): Sequential(
+    (layer_0): LWNNLayer(
+      (layer): Sequential(
+        (0): Linear(in_features=29, out_features=64, bias=True)
+        (1): ReLU(inplace=True)
+      )
+    )
+    (layer_1): LWNNLayer(
+      (layer): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU(inplace=True)
+      )
+    )
+    (layer_2): LWNNLayer(
+      (layer): Sequential(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+        (1): ReLU(inplace=True)
+      )
+    )
+  )
+  (final): Linear(in_features=64, out_features=1, bias=True)
+)
+[2026-05-16 10:12:56,994 INFO] lecarb.estimator.lw.lw_nn: Overall LWNN model size = 0.04MB
+[2026-05-16 10:12:56,995 INFO] lecarb.estimator.lw.lw_nn: Load and build lw(nn) estimator: lwnn-model=original_base-lwnn_hid64_64_64_bin200_ep500_bs128_100k-123
+[2026-05-16 10:12:56,995 INFO] lecarb.dataset.dataset: table exists, load...
+[2026-05-16 10:12:56,997 INFO] lecarb.dataset.dataset: load finished: Table census13_original (48842 rows, 4.84MB, columns:
+Column(age, type=int64, vocab size=74, min=17, max=90, has NaN=False)
+Column(workclass, type=category, vocab size=9, min=?, max=Without-pay, has NaN=False)
+Column(education, type=category, vocab size=16, min=10th, max=Some-college, has NaN=False)
+Column(education_num, type=int64, vocab size=16, min=1, max=16, has NaN=False)
+Column(marital_status, type=category, vocab size=7, min=Divorced, max=Widowed, has NaN=False)
+Column(occupation, type=category, vocab size=15, min=?, max=Transport-moving, has NaN=False)
+Column(relationship, type=category, vocab size=6, min=Husband, max=Wife, has NaN=False)
+Column(race, type=category, vocab size=5, min=Amer-Indian-Eskimo, max=White, has NaN=False)
+Column(sex, type=category, vocab size=2, min=Female, max=Male, has NaN=False)
+Column(capital_gain, type=int64, vocab size=123, min=0, max=99999, has NaN=False)
+Column(capital_loss, type=int64, vocab size=99, min=0, max=4356, has NaN=False)
+Column(hours_per_week, type=int64, vocab size=96, min=1, max=99, has NaN=False)
+Column(native_country, type=category, vocab size=42, min=?, max=Yugoslavia, has NaN=False))
+[2026-05-16 10:12:56,997 INFO] lecarb.estimator.lw.common: features already built in file data/census13/lw/original_base_200_123.pkl
+[2026-05-16 10:12:57,053 INFO] lecarb.estimator.utils: torch threads: 16
+[2026-05-16 10:12:57,053 INFO] lecarb.estimator.utils: Start loading queryset:base and labels for version original of dataset census13...
+[2026-05-16 10:12:58,345 INFO] lecarb.estimator.utils: Hack for LW's method, use processed vector instead of raw query
+[2026-05-16 10:12:58,358 INFO] lecarb.estimator.utils: Start test estimator on test queries...
+[2026-05-16 10:12:58,431 INFO] lecarb.estimator.utils: 1000 queries finished
+[2026-05-16 10:12:58,503 INFO] lecarb.estimator.utils: 2000 queries finished
+[2026-05-16 10:12:58,576 INFO] lecarb.estimator.utils: 3000 queries finished
+[2026-05-16 10:12:58,649 INFO] lecarb.estimator.utils: 4000 queries finished
+[2026-05-16 10:12:58,722 INFO] lecarb.estimator.utils: 5000 queries finished
+[2026-05-16 10:12:58,794 INFO] lecarb.estimator.utils: 6000 queries finished
+[2026-05-16 10:12:58,866 INFO] lecarb.estimator.utils: 7000 queries finished
+[2026-05-16 10:12:58,940 INFO] lecarb.estimator.utils: 8000 queries finished
+[2026-05-16 10:12:59,012 INFO] lecarb.estimator.utils: 9000 queries finished
+[2026-05-16 10:12:59,084 INFO] lecarb.estimator.utils: 10000 queries finished
+[2026-05-16 10:12:59,084 INFO] lecarb.estimator.utils: Test finished, 0.05598855018615723 ms/query in average
+[2026-05-16 10:12:59,088 INFO] lecarb.estimator.utils: {'max': 723.0, '99th': 6.0, '95th': 3.0, '90th': 2.0584897025171642, 'median': 1.1428571428571428, 'mean': 1.6202190158013163, 'gmean': 1.3347884216207566}

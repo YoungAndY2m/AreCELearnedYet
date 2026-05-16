@@ -56,6 +56,7 @@ from .estimator.mscn.mscn import train_mscn, test_mscn
 from .estimator.lw.lw_nn import train_lw_nn, test_lw_nn
 from .estimator.lw.lw_tree import train_lw_tree, test_lw_tree
 from .estimator.deepdb.deepdb import train_deepdb, test_deepdb, update_deepdb
+from .estimator.colse import train_colse, test_colse
 from .workload.workload import dump_sqls
 
 if __name__ == "__main__":
@@ -163,6 +164,8 @@ if __name__ == "__main__":
             train_lw_nn(seed, dataset, version ,workload, params, sizelimit)
         elif args["--estimator"] == "lw_tree":
             train_lw_tree(seed, dataset, version ,workload, params, sizelimit)
+        elif args["--estimator"] == "colse":
+            train_colse(seed, dataset, version, workload, params, sizelimit)
         else:
             raise NotImplementedError
         exit(0)
@@ -196,6 +199,8 @@ if __name__ == "__main__":
             test_lw_nn(dataset, version, workload, params, overwrite)
         elif args["--estimator"] == "lw_tree":
             test_lw_tree(dataset, version, workload, params, overwrite)
+        elif args["--estimator"] == "colse":
+            test_colse(dataset, version, workload, params, overwrite)
         else:
             raise NotImplementedError
         exit(0)

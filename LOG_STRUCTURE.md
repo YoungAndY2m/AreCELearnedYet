@@ -271,6 +271,45 @@ Justfile target: `append-data-{ind|cor|skew}`。
 > Regression 思路（Fig 1a）：query → featurize → learned regressor → cardinality。需要 (query, true_card) 训练对。
 > Joint Distribution 思路（Fig 1b）：data → learned density model；inference 时 query 转一组对模型的概率请求。不需要 query training data。
 
+### 6.0.1 代码出处与改编状态（Attribution）
+
+> 此表回答："lecarb 里这堆 estimator 是 ARELY 团队改编自上游，还是从论文自己实现？"
+> 来源：[README §"Code References"](README.md#code-references) + 各子目录的 `README.md`（`lecarb/estimator/{naru,mscn,deepdb,lw}/README.md`）+ paper §2-§3。
+
+| Estimator | 类型 | Paper 出处 | 上游公开代码 | ARELY 内状态 | 详细位置 |
+|-----------|------|-----------|------------|------------|---------|
+| **Naru** | Learned (autoregressive) | Yang VLDB 2020 [95] | [naru-project/naru](https://github.com/naru-project/naru) | 改编自上游 ✅ | §6.5 `naru/` |
+| **BayesNet** | Learned (PGM + progressive sampling) | Tzoumas 2013 [13]，**实现 bundled 在 naru repo 内** | [naru-project/naru](https://github.com/naru-project/naru) | 改编自 naru repo ✅ | §6.5 `bayesnet.py` |
+| **MSCN** | Learned (set-conv / Deep Sets) | Kipf CIDR 2019 [34] | [andreaskipf/learnedcardinalities](https://github.com/andreaskipf/learnedcardinalities) | 改编自上游 ✅ | §6.4 `mscn/` |
+| **DeepDB** | Learned (SPN) | Hilprecht VLDB 2020 [30] | [DataManagementLab/deepdb-public](https://github.com/DataManagementLab/deepdb-public) | 改编自上游 ✅ | §6.5 `deepdb/` |
+| **LW-NN** | Learned (regression on CE features) | Dutt VLDB 2019 [18] | **❌ 无公开代码** | **ARELY 团队从论文自实现** ⚠️ | §6.4 `lw/lw_nn.py` |
+| **LW-XGB** | Learned (xgboost on CE features) | Dutt VLDB 2019 [18] | **❌ 无公开代码** | **同上，自实现** ⚠️ | §6.4 `lw/lw_tree.py` |
+| **QuickSel** | Traditional (query-driven uniform mix) | Park SIGMOD 2020 [66] | [illinoisdata/quicksel](https://github.com/illinoisdata/quicksel)（Java） | **sfu-db 自己 fork** → [sfu-db/quicksel](https://github.com/sfu-db/quicksel)（加 test class） | **不在 lecarb/** —— 是独立 Java repo |
+| **KDE-FB** | Traditional (KDE + query feedback) | Kiefer SIGMOD 2017 | [martinkiefer/feedback-kde](https://github.com/martinkiefer/feedback-kde) | **sfu-db 自己 fork** → [sfu-db/feedback-kde](https://github.com/sfu-db/feedback-kde)（列数限制 10→15） | §6.3 `feedback_kde.py`（wrapper），实际计算走 Postgres KDE 扩展（外部 repo） |
+| **MHIST (MHIST-2)** | Traditional (multi-dim histogram, Maxdiff) | Poosala SIGMOD 1996 [73] | **❌ 无公开代码** | **ARELY 团队从论文自实现** ⚠️ | §6.3 `mhist.py` |
+| **Sample-A / Sample-B** | Traditional baseline | classic | n/a | 原创（uniform random sampling，两个 ratio 变种） | §6.3 `sample.py` |
+| **Postgres** | Native DB estimator | n/a | n/a | wrapper（调 `EXPLAIN`） | §6.3 `postgres.py` |
+| **MySQL** | Native DB estimator | n/a | n/a | wrapper | §6.3 `mysql.py` |
+| **DBMS-A** | Native（匿名商业 DB） | n/a | n/a | **不在此 repo 代码内** —— paper 外部跑的，作者匿名化未透露 | n/a |
+| ~~DQM-D~~ | Learned (autoregressive) | Hasan SIGMOD 2020 [28] | ❌ 无公开代码 | **❌ 仅 paper §2-§3 提及**（与 Naru "propose similar ideas"），无实现 | n/a |
+| ~~DQM-Q~~ | Learned (regression) | Hasan SIGMOD 2020 [28] | ❌ 无公开代码 | **❌ 仅 paper §2-§3 提及**，无实现，结果表 Table 3+ 不出现 | n/a |
+
+**总结**:
+- **改编自上游（5）**：Naru、BayesNet、MSCN、DeepDB、KDE-FB（KDE-FB 的核心计算在 sfu-db fork 的 PostgreSQL 扩展里）
+- **sfu-db 自己 fork 改造（2）**：QuickSel（加 test class）、KDE-FB（扩列数限制）
+- **从论文自实现（3）**：LW-NN、LW-XGB、MHIST
+- **wrapper 原创（4）**：Postgres、MySQL、Sample-A/B
+- **paper 提及但没实现（2）**：DQM-D（被 Naru 涵盖）、DQM-Q（无公开代码）
+- **不在此 repo（1）**：DBMS-A（匿名商业 DB，外部跑）
+
+**实践启示**:
+1. **想深度改 Naru/MSCN/DeepDB/BayesNet** → 先去上游 repo 理解原始版本，再回 lecarb 看 ARELY 的改造点（典型改造：去掉 join，专做单表；去除 GPU 强依赖；统一 `query()` 接口）
+2. **想改 LW-NN / LW-XGB / MHIST** → 直接改 lecarb 即可，没有跨 repo 同步压力 —— 这是做"semantic injection / 新 estimator 实验"最低摩擦的入口
+3. **想跑 QuickSel / KDE-FB** → 单独 clone `sfu-db/quicksel` 或 `sfu-db/feedback-kde`，**不在 lecarb 内**；KDE-FB 还需要装他们 fork 的 PostgreSQL 扩展
+4. **想加 DQM-D 实现** → 因为 paper §3 明说 "Naru 和 DQM-D propose similar ideas"，可基于 `lecarb/estimator/naru/` 改 featurization（一阶离散化 + 训练 query workload augment）
+
+---
+
 ### 6.1 lecarb/estimator/estimator.py — 抽象基类
 
 **`class Estimator`**:
