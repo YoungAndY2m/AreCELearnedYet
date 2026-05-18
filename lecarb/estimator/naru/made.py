@@ -624,6 +624,49 @@ class MADE(nn.Module):
                 out.scatter_(1, data, 1)
                 return out
 
+    # ================================================================
+    # 教学注释 (annotation pass, L2 diff only) — AutoEncode 是什么
+    # ================================================================
+    # 重要: 名字误导! 这 *不* 是机器学习里的 autoencoder
+    # (= encoder + decoder 学 latent representation 的神经网络)。
+    # 这里 "AutoEncode" 的含义是 *automatic encoding choice* ——
+    # "按列自动挑 encoding 方式"。
+    #
+    # 跟 L0 / L1 的区别
+    # ----------------------------------------------------------------
+    # L0/L1 的 input_encoding 是 "全局选一个" (one_hot / binary / embed),
+    # 所有列共用同一种 encode 方式 (见 [L0 made.py:EncodeInput])。
+    # L2 新加了一个 'auto' 模式: **每列各自挑** (per-column decision):
+    #   - 高基数列 (domain > embed_threshold, 默认 128): 用 Embed
+    #     (= 查可学习的 embedding 表, 输出 embed_size 维)
+    #   - 低基数列 (domain ≤ embed_threshold): 用 ToBinaryAsOneHot
+    #     (= bin_id 的二进制位展开, 输出 ⌈log₂(domain)⌉ 维)
+    #
+    # 为什么要分两种?
+    # ----------------------------------------------------------------
+    # 真实表里列基数差异很大 (e.g. State 50 个值, Color 200 个, Year 数千):
+    #   - 强行全用 Embed: 小列也占 embed_size 维 (浪费; 50 值的列只需 6 个 bit)
+    #   - 强行全用 Binary: 大列丢信息 (没法学到值之间的"相似性",
+    #                       因为 bit 表示完全离散无序)
+    # 折中: 小列省参数走 binary, 大列要表达力走 embed。
+    #
+    # 函数结构 (= "Embed 和 ToBinaryAsOneHot 的拼接 + per-col dispatch")
+    # ----------------------------------------------------------------
+    # 1. data=None → wildcard 信号, 返回 unk_embedding (跟 Embed 一致)
+    # 2. 准备 bin_as_onehot_shifts cache (跟 ToBinaryAsOneHot 一致)
+    # 3. natural_col != None (推理单列):
+    #      domain > threshold → 直接调 self.Embed(...)
+    #      else              → 直接调 self.ToBinaryAsOneHot(...)
+    # 4. natural_col == None (训练整行): 对每列 i 分别走两条分支之一,
+    #    各自处理 column_masking (跟 L0 实现一致), 最后 torch.cat 拼起来
+    #
+    # 总结一句话
+    # ----------------------------------------------------------------
+    # AutoEncode = "hybrid encoder": 大 domain 列查 embedding, 小 domain 列
+    # 用 binary, 一次 forward 同时拼出 [bs, sum(per-col encoded size)] 的
+    # input tensor。这是 L2 lecarb 整合时 ARELY 团队为应对 "实际数据集列基
+    # 数高度不均" 加的优化, paper 没明说但实测对参数效率有帮助。
+    # ================================================================
     def AutoEncode(self, data, natural_col=None, out=None):
         if data is None:
             if out is None:
@@ -718,6 +761,7 @@ class MADE(nn.Module):
         elif self.input_encoding == 'one_hot':
             return self.ToOneHot(data)
         elif self.input_encoding == 'auto':
+            # L2-only mode: 按列自动挑 embed vs binary, 见 AutoEncode 头部教学注释。
             return self.AutoEncode(data, natural_col=natural_col, out=out)
         else:
             assert False, self.input_encoding

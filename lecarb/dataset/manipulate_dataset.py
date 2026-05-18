@@ -1,3 +1,27 @@
+# ================================================================
+# 教学注释 (annotation pass) — manipulate_dataset.py 总览
+# ================================================================
+# Data shift 实验工具: 在已有 dataset 上做 3 种"扰动"派生新版本, 然后 append
+# 到原数据末尾, 给 update_naru / online-learning 实验做"环境变化"测试。
+#
+# 3 种扰动 (对应 paper "data update / drift" 实验)
+# ----------------------------------------------------------------
+#   ind  (Independence): 每列独立 shuffle → 破坏列间 correlation, 列边缘分布不变
+#                        测 estimator 在 "失去相关性" 下的表现
+#   cor  (Correlation):  每列 sort 后再整行 shuffle → 创造极强相关 (Spearman ≈ 1)
+#                        测 estimator 在 "新增超强相关" 下的表现
+#   skew (Skew):         挑全表最 rare 的 sample_ratio 行重复填充 → 数据分布
+#                        高度偏向 rare value, 测 tail-skew 鲁棒性
+#
+# 流程
+# ----------------------------------------------------------------
+#   1. get_xxx_data() 派生新版本 → 存 {version}_{ind|cor|skew}.pkl
+#   2. append_data() 把派生数据的前 batch_ratio 比例追加到 target 末尾
+#      → 存 {version}+{派生}_{ratio}.pkl
+#   3. update_naru 用这个新 version 增量微调 (= 模拟 data drift 后的 online update)
+#
+# 入口: `lecarb update --params "{'type': 'ind', 'batch_ratio': 0.2}"`
+# ================================================================
 import random
 import logging
 import pickle
@@ -13,6 +37,11 @@ from ..constants import DATA_ROOT, PKL_PROTO
 
 L = logging.getLogger(__name__)
 
+# ================================================================
+# get_random_data: 每列独立 shuffle (= "independence" 扰动)
+# ================================================================
+# 列边缘分布保持不变 (= 每列出现频次不变), 但列之间任何相关性都被破坏。
+# 例: 原数据 (gender, name) 有强相关 → shuffle 后变随机配对, "Bob, F" 会出现。
 # Independence data: Random by each column
 def get_random_data(dataset: str, version: str, overwrite=False) -> Tuple[pd.DataFrame, str]:
     rand_version = f"{version}_ind"
@@ -27,6 +56,12 @@ def get_random_data(dataset: str, version: str, overwrite=False) -> Tuple[pd.Dat
     pd.to_pickle(df, random_file, protocol=PKL_PROTO)
     return df, rand_version
 
+# ================================================================
+# get_sorted_data: 每列独立 sort 后整行 shuffle (= "max correlation" 扰动)
+# ================================================================
+# 先把每列单独 sort (= 第 i 行所有列都是各列的第 i 大), 然后整行 shuffle 打乱行顺序。
+# 结果: 所有列的 rank 完全一致 → Spearman 相关系数 = 1 (最大相关)。
+# 跟原数据的 actual correlation 比较, 测 estimator 在"出现新的极端相关"下的表现。
 # Max Spearman correlation data: sort by each column
 def get_sorted_data(dataset: str, version: str, overwrite=False) -> Tuple[pd.DataFrame, str]:
     sort_version = f"{version}_cor"
@@ -41,6 +76,14 @@ def get_sorted_data(dataset: str, version: str, overwrite=False) -> Tuple[pd.Dat
     pd.to_pickle(df, sorted_file, protocol=PKL_PROTO)
     return df, sort_version
 
+# ================================================================
+# get_skew_data: 挑最 rare 的行重复填充 (= "extreme skew" 扰动)
+# ================================================================
+# 算法:
+#   1. 对每行算 "rank_sum" = 各列频次和 (= 该行有多 common; 低 = rare)
+#   2. 挑 rank_sum 最小的 sample_ratio 比例行 (= 最 rare 的 ~0.05%)
+#   3. 把这些 rare 行重复填充, 凑回原表大小
+# 结果: 数据严重偏向 rare value, 测 estimator 在极端 skew 下的鲁棒性。
 # Get skew data by tuple level frequent rank.
 def get_skew_data(dataset: str = 'census', version: str = 'original', sample_ratio=0.0005, overwrite=False) -> Tuple[pd.DataFrame, str]:
     skew_version = f"{version}_skew"
@@ -63,6 +106,13 @@ def get_skew_data(dataset: str = 'census', version: str = 'original', sample_rat
 
 
 
+# ================================================================
+# append_data: 把派生数据的前 interval 比例追加到 target 末尾
+# ================================================================
+# 例: target=original (10000 行) + from=original_ind (10000 行) + interval=0.2
+# → 输出 original+original_ind_0.2.pkl, 长度 12000 (原 + 2000 行扰动数据)。
+# update_naru 用这个新 version 增量微调时, 看到的就是 "原数据基础上多了一批
+# 偏离原分布的行" — 完美模拟 online data drift。
 def append_data(dataset: str, version_target: str, version_from: str, interval=0.2):
     df_target = pd.read_pickle(DATA_ROOT / dataset / f"{version_target}.pkl")
     df_from = pd.read_pickle(DATA_ROOT / dataset / f"{version_from}.pkl")
@@ -81,6 +131,11 @@ def append_data(dataset: str, version_target: str, version_from: str, interval=0
 
 
 
+# ================================================================
+# gen_appended_dataset: CLI entry, 选扰动类型 + 派生 + append
+# ================================================================
+# `lecarb update --dataset DS --version V --params "{'type': 'ind', 'batch_ratio': 0.2}"`
+# 三种 type (ind/cor/skew) 对应上面三种扰动方法。
 def gen_appended_dataset(
     seed: int, dataset: str, version: str, 
     params: Dict[str, Any], overwrite: bool

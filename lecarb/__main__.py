@@ -32,6 +32,38 @@ Options:
   --sample-ratio <sample-ratio>    Update query set with sample of dataset
   -h, --help                       Show this screen.
 """
+# ================================================================
+# 教学注释 (annotation pass) — __main__.py 总览
+# ================================================================
+# lecarb 的 CLI 入口。`python -m lecarb ...` 或 `lecarb ...` 都跑这。
+# 用 docopt: 顶部 docstring 既是文档又是 grammar (= argparse 的替代方案,
+# 不用手写 add_argument, 维护成本低)。
+#
+# CLI 顶层 verb (= 第一个位置参数, 见 docstring Usage 段)
+# ----------------------------------------------------------------
+#   workload {gen|label|update-label|merge|dump|quicksel}
+#       生成 / 标注 / 合并 workload, 输出 quicksel 格式
+#   dataset  {table|gen|update|dump}
+#       建 / 生成 / 扰动 / dump dataset
+#   train  -e <estimator>     训 estimator (Naru/MSCN/DeepDB/LW/CoLSE)
+#   test   -e <estimator>     测 estimator (= 上述 + Sampling/PG/MySQL/MHist/BN/KDE)
+#   report                    从 result CSV 报 q-error 分位数
+#   report-dynamic            data shift 时间混合 q-error
+#   update-train              增量微调 (= 用 update_naru / update_deepdb)
+#
+# 通用 flag
+# ----------------------------------------------------------------
+#   -s seed / -d dataset / -v version / -w workload / -e estimator
+#   --params: 字符串 dict (literal_eval 解析, 例 "{'epochs': 100}")
+#   --sizelimit: model size / data size 上限比例, 0 关闭
+#   --overwrite: 已有 result 也覆盖
+#
+# Module 加载副作用警告
+# ----------------------------------------------------------------
+# 顶部所有 import 在 lecarb 启动时一次性 import (= 慢, 因为要加载 torch /
+# pomegranate / mysql.connector / ray 等重依赖)。即使你只想跑 sample
+# 也要等所有 import 完。这是 lecarb 工程上的小痛点。
+# ================================================================
 from ast import literal_eval
 from time import time
 
@@ -60,14 +92,18 @@ from .estimator.colse import train_colse, test_colse
 from .workload.workload import dump_sqls
 
 if __name__ == "__main__":
+    # docopt 把 docstring 解析成 args dict, key 是带 -- 的 flag 名或位置 verb。
     args = docopt(__doc__, version="Le Carb 0.1")
 
+    # seed: 没指定就用当前时间戳 (= 不可复现, 但实验脚本通常显式传)。
     seed = args["--seed"]
     if seed is None:
         seed = int(time())
     else:
         seed = int(seed)
 
+    # ========= verb dispatch =========
+    # 每个 verb 一个 if-block, 解析对应参数后调子模块。`exit(0)` 防止 fall-through。
     if args["workload"]:
         if args["gen"]:
             generate_workload(
@@ -147,6 +183,9 @@ if __name__ == "__main__":
             raise NotImplementedError
         exit(0)
 
+    # ========= train: 训练 NN-based estimator =========
+    # 6 个可训练 estimator (naru / mscn / deepdb / lw_nn / lw_tree / colse)。
+    # Sampling / PG / MHist 不需要训练, 只在 test 路径出现。
     if args["train"]:
         dataset = args["--dataset"]
         version = args["--dataset-version"]
@@ -170,6 +209,11 @@ if __name__ == "__main__":
             raise NotImplementedError
         exit(0)
 
+    # ========= test: 全部 12 个 estimator 都支持 =========
+    # 包含传统 baseline (sample/postgres/mysql/mhist/bayesnet/kde) +
+    # NN-based (naru/mscn/deepdb/lw_nn/lw_tree/colse)。
+    # 注意 seed 参数: sample/postgres/mysql/mhist/bayesnet/kde/naru 接收 seed,
+    # 但 mscn/deepdb/lw_*/colse 不传 (因为它们的随机性已经 fix 在 checkpoint 里)。
     if args["test"]:
         dataset = args["--dataset"]
         version = args["--dataset-version"]
@@ -217,6 +261,10 @@ if __name__ == "__main__":
         report_dynamic_errors(dataset, params['old_new_file'], params['new_new_file'], params['T'], params['update_time'])
         exit(0)
 
+    # ========= update-train: 增量微调 (= 不重新训, 从旧 checkpoint 继续) =========
+    # 只有 Naru / DeepDB 实现了 update 入口 (= 它们的 estimator file 里有
+    # update_xxx() 函数加载旧 state_dict + optimizer_state 接着训)。
+    # MSCN / LW / CoLSE 都没实装 — 实测 update naru / deepdb 已经够 paper 用了。
     if args["update-train"]:
         dataset = args["--dataset"]
         version = args["--dataset-version"]

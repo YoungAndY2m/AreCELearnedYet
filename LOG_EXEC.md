@@ -151,7 +151,11 @@ cd ~/Desktop/AreCELearnedYet
 mkdir -p logs
 ```
 
-### 2.2 三个 quick estimator（无需训练，直接 test）
+### 2.2 五个 quick estimator（无需独立 train 阶段，单命令 test）
+
+> "Quick" 在这里指 *没有独立 train 步骤*：sample/mhist/postgres/mysql 都是
+> "construct stats + test 一气呵成"；KDE 严格说有 train_batch 阶段 (用历史 query
+> 调 bandwidth)，但 Just target 把它跟 test 合成一条命令, 用户视角同样是 "单命令"。
 
 ```bash
 # 前置：保证已 source 完毕（见 §0）
@@ -168,7 +172,33 @@ just test-mhist census13 original base 30000 original 123 2>&1 | tee logs/mhist-
 # 注意：test-postgres 需要先把数据加载到 Postgres 表里
 just census2postgres original census13              # 加载数据
 just test-postgres census13 original base 10000 original 123 2>&1 | tee logs/postgres.log
+
+# --- MySQL (依赖 MYSQL_HOST/PORT/DB/USER/PSWD env + MySQL server 在跑) ---
+# 类似 Postgres：先把数据 import 到 MySQL 表 (Justfile 里有 census2mysql 之类的 target)，
+# 然后 ANALYZE TABLE + UPDATE HISTOGRAM 建 N-bucket 直方图后 EXPLAIN 拿估计。
+# 论文配置 bucket=1024（trade-off：256/1024/4096 都常见）
+just census2mysql original census13                 # 加载数据 (一次性)
+just test-mysql census13 original base 1024 original 123 2>&1 | tee logs/mysql.log
+# 参数: dataset version workload bucket train_version seed
+
+# --- Feedback KDE (依赖 KDE-patched PG fork 已编译 + KDE_POSTGRES/KDE_PG_DATA env) ---
+# 注意: Just target 自己会启 KDE-PG (端口 5432)、跑完 kill 掉。
+# 如果你的普通 PG 也占 5432, 先 `sudo systemctl stop postgresql` 再跑。
+# 论文 census 配置: ratio=0.015 (sample 比例), train_num=10000 (feedback query 数)
+just test-kde census13 original base 0.015 10000 original 123 2>&1 | tee logs/kde.log
+# 参数: dataset version workload ratio train_num train_version seed
+# 训练 + 测试一条龙: feedback collection → bandwidth optimization → ANALYZE → EXPLAIN
 ```
+
+**外部依赖速查 (按 estimator)**:
+
+| Estimator | 需要的服务 / env 变量 | 备注 |
+|-----------|---------------------|------|
+| sample | 无 | 纯 Python, in-memory |
+| mhist | 无 | 纯 Python, 用 pickle cache 直方图 |
+| postgres | PG server + `DATABASE_URL` + table 已 import | Justfile 有 `census2postgres` target |
+| mysql | MySQL server + `MYSQL_HOST/PORT/DB/USER/PSWD` + table 已 import | Justfile 有 `census2mysql` target |
+| kde | KDE-patched PG fork (= [AllModels/KDE/](../AllModels/KDE/) 编译) + `KDE_POSTGRES` (binary 路径) + `KDE_PG_DATA` (PGDATA 路径) + `KDE_DATABASE_URL` | 端口 5432 跟普通 PG 冲突, 别同时开 |
 
 ### 2.3 五个 learned estimator（论文配置 · census13）
 
@@ -273,6 +303,10 @@ just report-error original-base-mhist-bins=1000.csv census13
 just report-error original-base-mhist-bins=30000.csv census13
 just report-error 'original-base-postgres-version=original;stat=10000;seed=123.csv' census13
 just report-error 'original-base-sampling-version=original;ratio=0.015;seed=123.csv' census13
+
+# MySQL / KDE 的结果文件名（参数模板同 postgres / sample, 字段名换成 bucket / ratio+train_num）
+just report-error 'original-base-mysql-version=original;bucket=1024;seed=123.csv' census13
+just report-error 'original-base-feedbackkde-version=original;ratio=0.015;train_num=10000;seed=123.csv' census13
 ```
 
 一次性全跑所有结果文件：
@@ -308,6 +342,10 @@ done | tee logs/all-qerror.txt
 | `Failed to build sklearn==0.0.post12` | 没设环境变量 | `SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True uv sync` |
 | `connection refused on port 6667/5432` | Postgres 没起 / 端口没对齐 | 见 §1.6 + `sudo systemctl start postgresql` |
 | `Cython.Compiler.Errors.CompileError: pomegranate/utils.pyx` | 用 poetry 装老 pomegranate | 必须用 uv（本 repo 已迁移） |
+| `mysql.connector.errors.InterfaceError` (test-mysql) | MySQL server 没起 / env 变量没设 / table 没 import | 启 MySQL + 检查 `MYSQL_HOST/PORT/DB/USER/PSWD` + 跑 `just census2mysql` 等 import target |
+| `Table 'census_original' doesn't exist` (test-mysql) | 数据没 import 到 MySQL | 跑对应 `just censusXmysql` / `just dmvXmysql` 之类的 import target |
+| `Address already in use: 5432` (test-kde) | 普通 PG 也占着 5432, 跟 KDE-PG 冲突 | `sudo systemctl stop postgresql` 后再跑 test-kde |
+| `KDE_POSTGRES: unbound variable` (test-kde) | 没设 KDE fork 二进制路径 | export `KDE_POSTGRES=/path/to/kde-pg/bin/postgres` + `KDE_PG_DATA=/path/to/kde-pg-data` |
 | `ImportError: No module named spflow` | spflow 包名是 spn | 改 `import spn` |
 
 ---
