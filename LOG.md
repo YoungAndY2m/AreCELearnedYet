@@ -9,7 +9,7 @@
 - **Fork 来源**: `YoungAndY2m/AreCELearnedYet`（origin），fork 自 `sfu-db/AreCELearnedYet`（upstream）
 - **Clone 时间**: 2026-05-15
 - **初始 commit**: `aa52da7` — "Update README.md"（原 sfu-db 最后 commit）
-- **关联工作计划**: [[UniMelb/Vault/wiki/in-progress/0_workplan/week-3/LOG]], [[week-3/PLAN]], [[week-3/THOUGHT]], [[week-3/week-2-conclude]]
+- **关联工作计划**: [[UniMelb/Vault/Workplan/week-3/LOG]], [[Workplan/week-3/PLAN]], [[Workplan/week-3/THOUGHT]], [[Workplan/week-3/week-2-conclude]]，并参考顶层 [[Workplan/ALL MODELS]]、[[Workplan/THOUGHT]]
 - **uv 配置来源**: 借鉴自 [Lankadinee/AreCELearnedYet](https://github.com/Lankadinee/AreCELearnedYet) 这个 2024 fork（22 commits ahead of sfu-db，把构建系统改为 uv + `==` 精确锁）。曾经在 `Desktop/CoLSE_AreCELearnedYet/` 有本地副本，已于 2026-05-16 删除（所需 5 个 uv 文件已 vendored 进本 repo，副本无再用途）
 
 ---
@@ -214,7 +214,7 @@ PLAN Step 0 检查项：
 - [ ] 跑 learned: Naru → MSCN → DeepDB → LW-NN → BayesNet
 - [ ] 记录 Q-Error 表
 
-Day 1 目标（[LOG.md Day 1 计划](UniMelb/Vault/wiki/in-progress/0_workplan/week-3/LOG.md#L205-L214)）：「ARELY 环境可用 + Census 上至少 3 个 estimator 有 Q-Error 数字」—— 用 MHist + Sample + (PostgreSQL or BayesNet) 即可达标。
+Day 1 目标（[LOG.md Day 1 计划](../UniMelb/Vault/Workplan/week-3/LOG.md#L205-L214)）：「ARELY 环境可用 + Census 上至少 3 个 estimator 有 Q-Error 数字」—— 用 MHist + Sample + (PostgreSQL or BayesNet) 即可达标。
 
 ---
 

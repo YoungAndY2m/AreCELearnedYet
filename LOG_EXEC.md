@@ -2,7 +2,7 @@
 
 > 此文件汇总所有「实际执行」用的命令：环境准备 → 数据 → 实验跑测 → 进度查看 → 结果分析。
 > 配合 [LOG.md](LOG.md) 一起读：LOG.md 解释「为什么/改了什么」，本文件解释「怎么跑」。
-> 所有命令以最新 [week-3 PLAN](../UniMelb/Vault/wiki/in-progress/0_workplan/week-3/PLAN.md) Step 0 为准。
+> 所有命令以最新 [week-3 PLAN](../UniMelb/Vault/Workplan/week-3/PLAN.md) Step 0 为准。
 
 ---
 
@@ -140,7 +140,7 @@ just pkl2table census13 original           # → output/.../census13_original Ta
 
 ## 2. Day 1 实验执行
 
-> 参照 [week-3/LOG.md Day 1 计划](../UniMelb/Vault/wiki/in-progress/0_workplan/week-3/LOG.md#L205-L214)：
+> 参照 [week-3/LOG.md Day 1 计划](../UniMelb/Vault/Workplan/week-3/LOG.md#L205-L214)：
 > 「ARELY 环境可用 + Census 上至少 3 个 estimator 有 Q-Error 数字」
 > 推荐顺序：PostgreSQL → Sample → MHist（quick）→ Naru/MSCN/DeepDB/LW-NN/BayesNet（learned）
 
