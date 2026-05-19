@@ -1,3 +1,11 @@
+# ============================================================================
+# aqp_leaves.py (L2) — leaf 节点扩展, 跟 L0 差异 +1 行
+# ============================================================================
+# (教学注释 by Claude, 不动原代码)
+#
+# 跟 [L0 aqp_leaves.py](../../../../../AllModels/DeepDB/aqp_spn/aqp_leaves.py)
+# 几乎 byte-identical (Δ+1 行). 详 L0 注释 (L0 carryover dead code).
+# ============================================================================
 import numpy as np
 from spn.structure.Base import Node, Leaf
 

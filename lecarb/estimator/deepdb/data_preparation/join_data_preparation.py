@@ -1,3 +1,12 @@
+# ============================================================================
+# join_data_preparation.py (L2) — Stage B join 路径采样, Δ-3 行 vs L0
+# ============================================================================
+# (教学注释 by Claude, 不动原代码)
+#
+# 跟 [L0 join_data_preparation.py](../../../../../AllModels/DeepDB/data_preparation/join_data_preparation.py)
+# 几乎一致 (-3 行小调整). 算法本身 paper §4.3 fanout-aware sampling 完全一致.
+# 详 L0 注释 (L0 carryover dead code).
+# ============================================================================
 import copy
 import logging
 import pickle

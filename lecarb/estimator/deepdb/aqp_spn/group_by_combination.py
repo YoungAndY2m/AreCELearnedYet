@@ -1,3 +1,12 @@
+# ============================================================================
+# group_by_combination.py (L2) — GROUP BY 处理, Δ+14 行 (RSPN imports 替换)
+# ============================================================================
+# (教学注释 by Claude, 不动原代码)
+#
+# 跟 [L0 group_by_combination.py](../../../../../AllModels/DeepDB/aqp_spn/group_by_combination.py)
+# 差异: L2 用 aqp_spn 版的 Sum / Prune / is_valid (因为 rspn/ 被删); L0 用 rspn/* 路径.
+# 算法本身完全一致. 详 L0 注释 (L0 carryover dead code).
+# ============================================================================
 import copy
 import logging
 

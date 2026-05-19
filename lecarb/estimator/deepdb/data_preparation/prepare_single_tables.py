@@ -1,3 +1,12 @@
+# ============================================================================
+# prepare_single_tables.py (L2) — Stage A csv→HDF5, Δ-4 行 vs L0
+# ============================================================================
+# (教学注释 by Claude, 不动原代码)
+#
+# 跟 [L0 prepare_single_tables.py](../../../../../AllModels/DeepDB/data_preparation/prepare_single_tables.py)
+# 几乎一致 (-4 行小调整, 主要去掉 L0 schemas/ 相关代码).
+# 详 L0 注释 (L0 carryover dead code).
+# ============================================================================
 import logging
 import pickle
 from time import perf_counter

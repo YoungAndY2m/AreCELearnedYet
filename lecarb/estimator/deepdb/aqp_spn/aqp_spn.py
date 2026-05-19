@@ -1,3 +1,25 @@
+# ============================================================================
+# aqp_spn.py (L2) — AQPSPN 单继承 + RSPN inline (paper §4, LOG_STRUCTURE.md §10.2.1)
+# ============================================================================
+# (教学注释 by Claude, 不动原代码)
+#
+# 跟 [L0 aqp_spn.py](../../../../../AllModels/DeepDB/aqp_spn/aqp_spn.py) 的差异 (最大 L2 改造):
+#
+#   - **L0**: `class AQPSPN(CombineSPN, RSPN)` 双继承, 610 行
+#   - **L2 (本文件)**: `class AQPSPN(CombineSPN)` 单继承, RSPN 整个 inline 进来,
+#     1026 行 (+416 行 = 整个 [rspn/rspn.py](../../../../../AllModels/DeepDB/rspn/rspn.py) 移植过来).
+#
+# 具体 inline 内容:
+#   1. `build_ds_context(...)`: 从 rspn/rspn.py 移到本文件 module-level
+#   2. `__init__` 移除 RSPN super() 调用, 直接初始化 meta_types/null_values 等字段
+#   3. `learn(...)` / `_indicator_expectation(...)` / `expectation(...)` 等
+#      RSPN 方法 inline 成 AQPSPN method
+#   4. 新增 `insert_dataset` / `adapt_weights` / `projection` etc.
+#
+# 算法本身未变 — paper §4 行为完全一致, 仅 *组织结构* 简化.
+# 详细算法注释见 [L0 aqp_spn.py](../../../../../AllModels/DeepDB/aqp_spn/aqp_spn.py)
+# + [L0 rspn/rspn.py](../../../../../AllModels/DeepDB/rspn/rspn.py) (L0 carryover dead code).
+# ============================================================================
 import copy
 import logging
 import time
@@ -16,6 +38,7 @@ from aqp_spn.custom_spflow.custom_learning import learn_mspn
 from aqp_spn.expectations import expectation
 from aqp_spn.group_by_combination import group_by_combinations
 from aqp_spn.ranges import NominalRange, NumericRange
+# 注意: L0 这里 import RSPN, L2 已删 (RSPN inline 进本文件)
 from ensemble_compilation.spn_ensemble import CombineSPN
 
 logger = logging.getLogger(__name__)

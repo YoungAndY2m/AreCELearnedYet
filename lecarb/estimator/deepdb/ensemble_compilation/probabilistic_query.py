@@ -1,3 +1,12 @@
+# ============================================================================
+# probabilistic_query.py (L2) — Query factor 表示, Δ0 行 但 bytes differ
+# ============================================================================
+# (教学注释 by Claude, 不动原代码)
+#
+# 跟 [L0 probabilistic_query.py](../../../../../AllModels/DeepDB/ensemble_compilation/probabilistic_query.py)
+# 行数相同 (Δ0) 但 bytes 有微小差异 (可能是 trailing whitespace).
+# 详 L0 注释 (L0 carryover dead code).
+# ============================================================================
 from enum import Enum
 
 from ensemble_compilation.utils import print_conditions

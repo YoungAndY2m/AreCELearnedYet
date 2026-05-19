@@ -1,3 +1,15 @@
+# ============================================================================
+# spn_ensemble.py (L2) — SPNEnsemble + CombineSPN, Δ+1 行 vs L0
+# ============================================================================
+# (教学注释 by Claude, 不动原代码)
+#
+# 跟 [L0 spn_ensemble.py](../../../../../AllModels/DeepDB/ensemble_compilation/spn_ensemble.py)
+# 几乎完全一致 (Δ+1 行). L2 加了 `SPNEnsemble.state` dict 字段 (LOG_STRUCTURE.md §10.2.7)
+# 用来塞 (train_time / model_size / args / version / valid_error) metadata,
+# `read_ensemble` 加 `build_reverse_dict=True` 参数选项.
+#
+# 详细算法注释见 [L0 spn_ensemble.py](../../../../../AllModels/DeepDB/ensemble_compilation/spn_ensemble.py).
+# ============================================================================
 import copy
 import itertools
 import logging
